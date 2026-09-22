@@ -1,0 +1,1210 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    background:
+        #f5eee2;
+
+    color:
+        #3b3024;
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.guest-page {
+
+    min-height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.guest-page::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(
+                185,
+                150,
+                89,
+                0.13
+            ),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(
+                185,
+                150,
+                89,
+                0.10
+            ),
+            transparent 30%
+        );
+
+    pointer-events: none;
+
+}
+
+
+.background-decoration {
+
+    position: fixed;
+
+    border:
+        1px solid
+        rgba(
+            154,
+            120,
+            64,
+            0.15
+        );
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+}
+
+
+.decoration-one {
+
+    width: 400px;
+
+    height: 400px;
+
+    top: -200px;
+
+    right: -150px;
+
+}
+
+
+.decoration-two {
+
+    width: 500px;
+
+    height: 500px;
+
+    bottom: -280px;
+
+    left: -220px;
+
+}
+
+
+/* =========================================================
+   ENVELOPE SCREEN
+========================================================= */
+
+.envelope-screen {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    position: relative;
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+
+}
+
+
+.envelope-screen.hidden {
+
+    opacity: 0;
+
+    transform:
+        scale(1.08);
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+   ENVELOPE TEXT
+========================================================= */
+
+.envelope-small-text {
+
+    font-family:
+        Georgia,
+        serif;
+
+    color:
+        #a07a3d;
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 35px;
+
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope {
+
+    width: min(
+        390px,
+        90vw
+    );
+
+    height: 265px;
+
+    position: relative;
+
+    perspective: 1200px;
+
+    filter:
+        drop-shadow(
+            0 30px 35px
+            rgba(
+                60,
+                45,
+                28,
+                0.18
+            )
+        );
+
+}
+
+
+/* BACK */
+
+.envelope-back {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e8d7b9,
+            #c6a46d
+        );
+
+    border-radius: 5px;
+
+}
+
+
+/* PAPER */
+
+.envelope-paper {
+
+    position: absolute;
+
+    left: 7%;
+
+    right: 7%;
+
+    top: 7%;
+
+    height: 85%;
+
+    background:
+        #fffdf8;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    z-index: 2;
+
+    transition:
+        transform 1s ease;
+
+}
+
+
+.envelope-paper p {
+
+    color:
+        #a17c43;
+
+    font-family:
+        Georgia,
+        serif;
+
+    margin-bottom: 12px;
+
+}
+
+
+.envelope-paper h1 {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 34px;
+
+    font-weight: 400;
+
+    color:
+        #4b3b29;
+
+    margin-bottom: 10px;
+
+}
+
+
+.envelope-paper span {
+
+    color:
+        #8d8172;
+
+    font-size: 13px;
+
+}
+
+
+/* FLAP */
+
+.envelope-flap {
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 0;
+
+    height: 0;
+
+    border-left:
+        195px solid transparent;
+
+    border-right:
+        195px solid transparent;
+
+    border-top:
+        135px solid #dbc29a;
+
+    transform-origin:
+        top center;
+
+    transition:
+        transform 1s ease;
+
+    z-index: 5;
+
+}
+
+
+/* FRONT */
+
+.envelope-front {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            32deg,
+            transparent 49%,
+            rgba(
+                119,
+                88,
+                45,
+                0.13
+            ) 50%,
+            transparent 51%
+        );
+
+}
+
+
+/* =========================================================
+   OPEN ANIMATION
+========================================================= */
+
+.envelope.open
+.envelope-flap {
+
+    transform:
+        rotateX(180deg);
+
+    z-index: 1;
+
+}
+
+
+.envelope.open
+.envelope-paper {
+
+    transform:
+        translateY(-90px);
+
+}
+
+
+/* =========================================================
+   WAX SEAL
+========================================================= */
+
+.wax-seal {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #bd9453,
+            #8a642e
+        );
+
+    color: #fff8e9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 5px 12px
+        rgba(
+            71,
+            46,
+            19,
+            0.25
+        );
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
+
+}
+
+
+.envelope.open
+.wax-seal {
+
+    opacity: 0;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        )
+        scale(0.7);
+
+}
+
+
+/* =========================================================
+   RECIPIENT
+========================================================= */
+
+.recipient {
+
+    text-align: center;
+
+    margin-top: 35px;
+
+}
+
+
+.recipient span {
+
+    display: block;
+
+    color:
+        #9c8567;
+
+    font-size: 13px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.recipient h2 {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 27px;
+
+    font-weight: 400;
+
+    color:
+        #4b3b29;
+
+}
+
+
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
+
+.open-button {
+
+    margin-top: 28px;
+
+    border:
+        1px solid
+        #b08b4f;
+
+    background:
+        transparent;
+
+    color:
+        #8d6937;
+
+    padding:
+        13px 35px;
+
+    border-radius: 30px;
+
+    font-family:
+        inherit;
+
+    cursor: pointer;
+
+    transition:
+        0.3s ease;
+
+}
+
+
+.open-button:hover {
+
+    background:
+        #a98249;
+
+    color:
+        white;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   MAIN INVITATION
+========================================================= */
+
+.main-invitation {
+
+    display: none;
+
+    min-height: 100vh;
+
+    padding:
+        70px 20px;
+
+    animation:
+        invitationReveal 1.2s ease;
+
+}
+
+
+.main-invitation.visible {
+
+    display: block;
+
+}
+
+
+@keyframes invitationReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   INVITATION INNER
+========================================================= */
+
+.invitation-inner {
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    background:
+        rgba(
+            255,
+            253,
+            248,
+            0.96
+        );
+
+    border:
+        1px solid
+        #ddceb7;
+
+    padding:
+        70px 45px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 80px
+        rgba(
+            65,
+            49,
+            29,
+            0.10
+        );
+
+    position: relative;
+
+}
+
+
+/* =========================================================
+   INVITATION DECORATION
+========================================================= */
+
+.invitation-inner::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 15px;
+
+    border:
+        1px solid
+        rgba(
+            167,
+            131,
+            73,
+            0.22
+        );
+
+    pointer-events: none;
+
+}
+
+
+.invitation-label {
+
+    font-family:
+        Georgia,
+        serif;
+
+    color:
+        #987440;
+
+    font-size: 14px;
+
+    margin-bottom: 28px;
+
+}
+
+
+.ornament {
+
+    color:
+        #ae884d;
+
+    font-size: 22px;
+
+    margin:
+        22px 0;
+
+}
+
+
+/* =========================================================
+   COUPLE
+========================================================= */
+
+.invitation-intro {
+
+    color:
+        #887c6e;
+
+    margin-bottom: 15px;
+
+}
+
+
+.couple-names {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(
+            40px,
+            8vw,
+            65px
+        );
+
+    font-weight: 400;
+
+    color:
+        #423427;
+
+    line-height: 1.2;
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.invitation-title {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 400;
+
+    color:
+        #554535;
+
+    margin:
+        30px auto 18px;
+
+    max-width: 600px;
+
+    line-height: 1.7;
+
+}
+
+
+.invitation-message {
+
+    color:
+        #83786b;
+
+    line-height: 2;
+
+    max-width: 550px;
+
+    margin:
+        0 auto 45px;
+
+}
+
+
+/* =========================================================
+   EVENT DETAILS
+========================================================= */
+
+.event-details {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    gap: 18px;
+
+    max-width: 600px;
+
+    margin:
+        0 auto 45px;
+
+}
+
+
+.detail {
+
+    border:
+        1px solid
+        #e3d9c8;
+
+    padding:
+        22px 15px;
+
+    background:
+        #fffaf2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+.detail-icon {
+
+    font-size: 22px;
+
+    color:
+        #ac8448;
+
+    margin-bottom: 9px;
+
+}
+
+
+.detail-label {
+
+    color:
+        #9a8c7b;
+
+    font-size: 12px;
+
+    margin-bottom: 6px;
+
+}
+
+
+.detail strong {
+
+    color:
+        #514436;
+
+    font-size: 15px;
+
+}
+
+
+.detail small {
+
+    color:
+        #9a8c7b;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   GUEST MESSAGE
+========================================================= */
+
+.guest-message {
+
+    padding:
+        35px 20px;
+
+    margin:
+        0 auto 30px;
+
+    border-top:
+        1px solid #e3d8c5;
+
+    border-bottom:
+        1px solid #e3d8c5;
+
+}
+
+
+.guest-message p {
+
+    color:
+        #918271;
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.guest-message h2 {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    color:
+        #9a743d;
+
+    margin-bottom: 10px;
+
+}
+
+
+.guest-message span {
+
+    color:
+        #8b7d6c;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.map-button {
+
+    display: inline-block;
+
+    text-decoration: none;
+
+    color: white;
+
+    background:
+        #9a753f;
+
+    padding:
+        13px 28px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition:
+        0.3s ease;
+
+}
+
+
+.map-button:hover {
+
+    background:
+        #76552c;
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   RSVP
+========================================================= */
+
+.rsvp-section {
+
+    margin-top: 55px;
+
+    padding-top: 40px;
+
+    border-top:
+        1px solid #e3d8c5;
+
+}
+
+
+.rsvp-section h2 {
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 400;
+
+    margin-bottom: 8px;
+
+}
+
+
+.rsvp-section p {
+
+    color:
+        #918576;
+
+    margin-bottom: 25px;
+
+}
+
+
+.rsvp-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.rsvp-buttons button {
+
+    border: none;
+
+    padding:
+        12px 25px;
+
+    border-radius: 8px;
+
+    font-family:
+        inherit;
+
+    cursor: pointer;
+
+    transition:
+        0.25s ease;
+
+}
+
+
+.rsvp-yes {
+
+    background:
+        #9a753f;
+
+    color: white;
+
+}
+
+
+.rsvp-no {
+
+    background:
+        #eee6da;
+
+    color:
+        #766958;
+
+}
+
+
+.rsvp-buttons button:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.rsvp-result {
+
+    margin-top: 18px;
+
+    color:
+        #92713f;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   CLOSING
+========================================================= */
+
+.closing {
+
+    font-family:
+        Georgia,
+        serif;
+
+    color:
+        #80633b;
+
+    margin-top: 55px;
+
+    line-height: 1.8;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    margin-top: 30px;
+
+    color:
+        #a29788;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (
+    max-width: 600px
+) {
+
+    .envelope {
+
+        width:
+            330px;
+
+        height:
+            225px;
+
+    }
+
+
+    .envelope-flap {
+
+        border-left-width:
+            165px;
+
+        border-right-width:
+            165px;
+
+        border-top-width:
+            115px;
+
+    }
+
+
+    .invitation-inner {
+
+        padding:
+            55px 22px;
+
+    }
+
+
+    .event-details {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .couple-names {
+
+        font-size:
+            43px;
+
+    }
+
+
+    .invitation-title {
+
+        font-size:
+            21px;
+
+    }
+
+
+    .recipient h2 {
+
+        font-size:
+            24px;
+
+    }
+
+}
