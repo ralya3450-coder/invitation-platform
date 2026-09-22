@@ -1,135 +1,65 @@
 /* =========================================================
-   RESET
+   GLOBAL
 ========================================================= */
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
-
 
 html {
     scroll-behavior: smooth;
 }
 
-
 body {
-
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
-
+    margin: 0;
     background:
-        #f5eee2;
+        radial-gradient(
+            circle at top,
+            #fffaf1 0%,
+            #f5eadc 45%,
+            #eadbc9 100%
+        );
+    color: #70543d;
+    font-family:
+        "Noto Naskh Arabic",
+        "Amiri",
+        Georgia,
+        serif;
+}
 
-    color:
-        #3b3024;
+button,
+a {
+    font-family: inherit;
+}
 
-    min-height: 100vh;
-
+button {
+    cursor: pointer;
 }
 
 
 /* =========================================================
-   PAGE
+   THREAD TEXTURE
 ========================================================= */
 
-.guest-page {
-
-    min-height: 100vh;
-
-    position: relative;
-
-    overflow: hidden;
-
-}
-
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
-.guest-page::before {
-
+body::before {
     content: "";
-
     position: fixed;
-
     inset: 0;
 
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(
-                185,
-                150,
-                89,
-                0.13
-            ),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(
-                185,
-                150,
-                89,
-                0.10
-            ),
-            transparent 30%
-        );
-
     pointer-events: none;
 
-}
+    opacity: 0.14;
 
-
-.background-decoration {
-
-    position: fixed;
-
-    border:
-        1px solid
-        rgba(
-            154,
-            120,
-            64,
-            0.15
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            rgba(120, 88, 60, 0.15) 0,
+            rgba(120, 88, 60, 0.15) 1px,
+            transparent 1px,
+            transparent 5px
         );
 
-    border-radius: 50%;
-
-    pointer-events: none;
-
-}
-
-
-.decoration-one {
-
-    width: 400px;
-
-    height: 400px;
-
-    top: -200px;
-
-    right: -150px;
-
-}
-
-
-.decoration-two {
-
-    width: 500px;
-
-    height: 500px;
-
-    bottom: -280px;
-
-    left: -220px;
-
+    mix-blend-mode: multiply;
 }
 
 
@@ -138,59 +68,63 @@ body {
 ========================================================= */
 
 .envelope-screen {
-
     min-height: 100vh;
 
     display: flex;
-
     flex-direction: column;
 
-    align-items: center;
-
     justify-content: center;
+    align-items: center;
 
     padding: 40px 20px;
 
     position: relative;
 
-    transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
+    overflow: hidden;
 
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #fffdf8,
+            #f5e7d6 65%,
+            #ead6c1
+        );
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
 }
 
-
 .envelope-screen.hidden {
-
     opacity: 0;
-
-    transform:
-        scale(1.08);
-
+    visibility: hidden;
     pointer-events: none;
-
 }
 
 
 /* =========================================================
-   ENVELOPE TEXT
+   FLOATING THREAD
 ========================================================= */
 
-.envelope-small-text {
+.floating-thread {
+    position: absolute;
 
-    font-family:
-        Georgia,
-        serif;
+    width: 180px;
+    height: 180px;
 
-    color:
-        #a07a3d;
+    border: 2px dashed rgba(166, 113, 78, 0.35);
 
-    font-size: 14px;
+    border-radius: 50%;
+}
 
-    letter-spacing: 2px;
+.thread-one {
+    top: -90px;
+    left: -80px;
+}
 
-    margin-bottom: 35px;
-
+.thread-two {
+    right: -90px;
+    bottom: -80px;
 }
 
 
@@ -198,14 +132,13 @@ body {
    ENVELOPE
 ========================================================= */
 
+.envelope-area {
+    width: min(520px, 92vw);
+}
+
 .envelope {
-
-    width: min(
-        390px,
-        90vw
-    );
-
-    height: 265px;
+    width: 100%;
+    aspect-ratio: 1.5;
 
     position: relative;
 
@@ -214,197 +147,244 @@ body {
     filter:
         drop-shadow(
             0 30px 35px
-            rgba(
-                60,
-                45,
-                28,
-                0.18
-            )
+            rgba(89, 58, 35, 0.20)
         );
 
+    transition:
+        transform 0.8s ease;
+}
+
+.envelope.open {
+    transform: translateY(-15px);
 }
 
 
-/* BACK */
+/* Back */
 
 .envelope-back {
-
     position: absolute;
-
     inset: 0;
+
+    border-radius: 8px;
 
     background:
         linear-gradient(
-            145deg,
-            #e8d7b9,
-            #c6a46d
+            135deg,
+            #ead0bd,
+            #f8e9db
         );
 
-    border-radius: 5px;
-
+    border: 1px solid #cda989;
 }
 
 
-/* PAPER */
+/* Paper */
 
 .envelope-paper {
-
     position: absolute;
 
-    left: 7%;
+    width: 72%;
+    height: 80%;
 
-    right: 7%;
-
-    top: 7%;
-
-    height: 85%;
+    left: 14%;
+    top: 10%;
 
     background:
-        #fffdf8;
+        linear-gradient(
+            135deg,
+            #fffdf8,
+            #f7eee3
+        );
 
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
+    border: 1px solid #d8b997;
 
     z-index: 2;
 
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 10px 20px rgba(70, 43, 28, 0.12);
+
     transition:
-        transform 1s ease;
+        transform 1s cubic-bezier(.2,.8,.2,1);
 
 }
 
+.paper-border {
+    position: absolute;
+    inset: 9px;
 
-.envelope-paper p {
+    border: 1px solid #d2a77f;
 
-    color:
-        #a17c43;
+    pointer-events: none;
+}
 
-    font-family:
-        Georgia,
-        serif;
+.paper-small {
+    margin: 0 0 5px;
+    font-size: 15px;
+}
 
-    margin-bottom: 12px;
+.envelope-paper h2 {
+    margin: 0;
 
+    font-size: 38px;
+
+    color: #8b5d3c;
+}
+
+.envelope-paper p:last-child {
+    margin-top: 4px;
+}
+
+.mini-flower {
+    position: absolute;
+    color: #b87969;
+}
+
+.flower-paper-one {
+    top: 12px;
+    right: 18px;
+}
+
+.flower-paper-two {
+    bottom: 12px;
+    left: 18px;
 }
 
 
-.envelope-paper h1 {
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 34px;
-
-    font-weight: 400;
-
-    color:
-        #4b3b29;
-
-    margin-bottom: 10px;
-
-}
-
-
-.envelope-paper span {
-
-    color:
-        #8d8172;
-
-    font-size: 13px;
-
-}
-
-
-/* FLAP */
+/* Flap */
 
 .envelope-flap {
-
     position: absolute;
 
     top: 0;
-
     left: 0;
 
-    width: 0;
-
-    height: 0;
-
-    border-left:
-        195px solid transparent;
-
-    border-right:
-        195px solid transparent;
-
-    border-top:
-        135px solid #dbc29a;
-
-    transform-origin:
-        top center;
-
-    transition:
-        transform 1s ease;
+    width: 100%;
+    height: 55%;
 
     z-index: 5;
 
+    background:
+        linear-gradient(
+            135deg,
+            #f9eadc,
+            #e9cdb9
+        );
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+
+    transform-origin: top center;
+
+    transition:
+        transform 1s cubic-bezier(.2,.8,.2,1);
+
+    backface-visibility: hidden;
+
+    border-top: 1px solid #c99f7b;
 }
 
 
-/* FRONT */
+/* Front */
 
 .envelope-front {
-
     position: absolute;
 
     inset: 0;
 
     z-index: 4;
 
-    pointer-events: none;
+    border-radius: 8px;
 
     background:
         linear-gradient(
-            32deg,
-            transparent 49%,
-            rgba(
-                119,
-                88,
-                45,
-                0.13
-            ) 50%,
-            transparent 51%
+            135deg,
+            #f7e5d6,
+            #f1d8c4
         );
 
+    clip-path: polygon(
+        0 30%,
+        50% 70%,
+        100% 30%,
+        100% 100%,
+        0 100%
+    );
+
+    border: 1px solid #cba27f;
+}
+
+
+/* Open animation */
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope.open .envelope-paper {
+    transform: translateY(-100px);
 }
 
 
 /* =========================================================
-   OPEN ANIMATION
+   ENVELOPE EMBROIDERY
 ========================================================= */
 
-.envelope.open
-.envelope-flap {
+.flap-embroidery {
+    position: absolute;
 
-    transform:
-        rotateX(180deg);
+    top: 25px;
+    left: 50%;
 
-    z-index: 1;
+    transform: translateX(-50%);
 
+    display: flex;
+    gap: 16px;
+
+    color: #a97052;
+
+    font-size: 22px;
+
+    text-shadow:
+        1px 1px 0 #fff,
+        -1px -1px 0 #c99576;
 }
 
+.embroidered-corner {
+    position: absolute;
 
-.envelope.open
-.envelope-paper {
+    display: flex;
 
-    transform:
-        translateY(-90px);
+    flex-direction: column;
 
+    gap: 0;
+
+    color: #a66b50;
+
+    font-size: 26px;
+
+    text-shadow:
+        1px 1px 0 #fff1e7,
+        2px 2px 0 rgba(139, 93, 60, 0.25);
+}
+
+.top-right {
+    top: 34%;
+    right: 25px;
+}
+
+.bottom-left {
+    bottom: 15px;
+    left: 25px;
 }
 
 
@@ -412,114 +392,87 @@ body {
    WAX SEAL
 ========================================================= */
 
-.wax-seal {
-
+.envelope-center {
     position: absolute;
+
+    bottom: 8px;
 
     left: 50%;
 
-    top: 50%;
+    transform: translateX(-50%);
 
-    transform:
-        translate(
-            -50%,
-            -50%
-        );
+    width: 70%;
 
-    width: 58px;
+    text-align: center;
+}
 
-    height: 58px;
+.wax-seal {
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 8px;
 
     border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     background:
         radial-gradient(
             circle,
-            #bd9453,
-            #8a642e
+            #c88778,
+            #a45f52
         );
 
-    color: #fff8e9;
+    color: #fff7ef;
 
+    border: 3px double #e8b7a5;
+
+    box-shadow:
+        0 7px 14px rgba(77, 45, 34, 0.2);
+}
+
+.to-label {
+    margin: 0;
+
+    font-size: 14px;
+}
+
+#guest-name {
+    margin: 2px 0;
+
+    font-size: clamp(24px, 4vw, 34px);
+
+    color: #754c36;
+}
+
+.special-invitation {
+    margin: 4px 0;
+
+    font-size: 13px;
+
+    letter-spacing: 2px;
+}
+
+.thread-divider {
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    font-size: 22px;
-
-    box-shadow:
-        0 5px 12px
-        rgba(
-            71,
-            46,
-            19,
-            0.25
-        );
-
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
-
+    gap: 10px;
 }
 
+.thread-divider span {
+    width: 50px;
 
-.envelope.open
-.wax-seal {
-
-    opacity: 0;
-
-    transform:
-        translate(
-            -50%,
-            -50%
-        )
-        scale(0.7);
-
+    border-top: 1px dashed #b77b5d;
 }
 
-
-/* =========================================================
-   RECIPIENT
-========================================================= */
-
-.recipient {
-
-    text-align: center;
-
-    margin-top: 35px;
-
-}
-
-
-.recipient span {
-
-    display: block;
-
-    color:
-        #9c8567;
-
-    font-size: 13px;
-
-    margin-bottom: 8px;
-
-}
-
-
-.recipient h2 {
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 27px;
-
-    font-weight: 400;
-
-    color:
-        #4b3b29;
-
+.thread-divider b {
+    color: #b77b5d;
 }
 
 
@@ -527,47 +480,51 @@ body {
    OPEN BUTTON
 ========================================================= */
 
-.open-button {
+.envelope-bottom {
+    text-align: center;
 
-    margin-top: 28px;
-
-    border:
-        1px solid
-        #b08b4f;
-
-    background:
-        transparent;
-
-    color:
-        #8d6937;
-
-    padding:
-        13px 35px;
-
-    border-radius: 30px;
-
-    font-family:
-        inherit;
-
-    cursor: pointer;
-
-    transition:
-        0.3s ease;
-
+    margin-top: 30px;
 }
 
+.envelope-bottom p {
+    margin: 0 0 15px;
 
-.open-button:hover {
+    font-size: 14px;
+
+    color: #8e7058;
+}
+
+.open-button {
+    border: 1px solid #b98464;
+
+    padding: 13px 45px;
+
+    border-radius: 999px;
 
     background:
-        #a98249;
+        linear-gradient(
+            135deg,
+            #b87967,
+            #9d5e50
+        );
 
-    color:
-        white;
+    color: white;
 
-    transform:
-        translateY(-2px);
+    font-size: 16px;
 
+    box-shadow:
+        0 10px 22px rgba(126, 78, 59, 0.22);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.open-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 14px 28px rgba(126, 78, 59, 0.28);
 }
 
 
@@ -576,222 +533,440 @@ body {
 ========================================================= */
 
 .main-invitation {
-
     display: none;
 
     min-height: 100vh;
 
     padding:
-        70px 20px;
+        45px
+        18px
+        80px;
 
-    animation:
-        invitationReveal 1.2s ease;
-
+    position: relative;
 }
-
 
 .main-invitation.visible {
-
     display: block;
 
+    animation:
+        invitationReveal 1.2s ease both;
 }
-
 
 @keyframes invitationReveal {
 
     from {
-
         opacity: 0;
-
-        transform:
-            translateY(30px);
-
+        transform: translateY(40px);
     }
 
     to {
-
         opacity: 1;
-
-        transform:
-            translateY(0);
-
+        transform: translateY(0);
     }
 
 }
 
 
 /* =========================================================
-   INVITATION INNER
+   CARD
 ========================================================= */
 
-.invitation-inner {
-
+.invitation-card {
     max-width: 760px;
 
-    margin: 0 auto;
-
-    background:
-        rgba(
-            255,
-            253,
-            248,
-            0.96
-        );
-
-    border:
-        1px solid
-        #ddceb7;
-
-    padding:
-        70px 45px;
-
-    text-align: center;
-
-    box-shadow:
-        0 25px 80px
-        rgba(
-            65,
-            49,
-            29,
-            0.10
-        );
+    margin: auto;
 
     position: relative;
 
+    padding:
+        55px
+        clamp(22px, 6vw, 70px)
+        60px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf8,
+            #f7ecdf
+        );
+
+    border: 1px solid #cda57e;
+
+    box-shadow:
+        0 30px 70px
+        rgba(91, 60, 37, 0.18);
+
+    overflow: hidden;
 }
 
 
-/* =========================================================
-   INVITATION DECORATION
-========================================================= */
+/* Double stitched border */
 
-.invitation-inner::before {
-
+.invitation-card::before {
     content: "";
 
     position: absolute;
 
-    inset: 15px;
+    inset: 14px;
 
-    border:
-        1px solid
-        rgba(
-            167,
-            131,
-            73,
-            0.22
-        );
+    border: 1px dashed #bd8d67;
 
     pointer-events: none;
-
 }
 
+.invitation-card::after {
+    content: "";
 
-.invitation-label {
+    position: absolute;
 
-    font-family:
-        Georgia,
-        serif;
+    inset: 21px;
 
-    color:
-        #987440;
+    border: 1px solid rgba(191, 145, 108, 0.45);
 
-    font-size: 14px;
-
-    margin-bottom: 28px;
-
-}
-
-
-.ornament {
-
-    color:
-        #ae884d;
-
-    font-size: 22px;
-
-    margin:
-        22px 0;
-
+    pointer-events: none;
 }
 
 
 /* =========================================================
-   COUPLE
+   TOP DECORATION
+========================================================= */
+
+.top-decoration {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+}
+
+.top-center {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.tiny-line {
+    width: 60px;
+
+    border-top: 1px solid #bb8964;
+}
+
+.ornament {
+    font-size: 25px;
+
+    color: #b67758;
+}
+
+.flower-stem {
+    width: 90px;
+
+    position: relative;
+
+    color: #a66e52;
+}
+
+.embroidered-flower {
+    font-size: 30px;
+
+    text-shadow:
+        1px 1px 0 white,
+        2px 2px 0 #c18c70;
+}
+
+.leaf {
+    position: absolute;
+
+    width: 18px;
+    height: 9px;
+
+    border-radius: 100% 0;
+
+    border: 2px solid #78916d;
+
+    transform: rotate(-30deg);
+}
+
+.leaf-one {
+    top: 15px;
+    left: 15px;
+}
+
+.leaf-two {
+    top: 28px;
+    left: 45px;
+
+    transform: rotate(25deg);
+}
+
+
+/* =========================================================
+   INTRO
 ========================================================= */
 
 .invitation-intro {
+    text-align: center;
 
-    color:
-        #887c6e;
+    position: relative;
 
-    margin-bottom: 15px;
-
+    z-index: 2;
 }
 
+.bismillah {
+    font-size: 19px;
 
-.couple-names {
+    color: #8d674b;
 
-    font-family:
-        Georgia,
-        serif;
+    margin-bottom: 25px;
+}
 
-    font-size:
-        clamp(
-            40px,
-            8vw,
-            65px
-        );
+.intro-small {
+    margin: 0;
 
-    font-weight: 400;
+    color: #a17759;
 
-    color:
-        #423427;
+    font-size: 15px;
+}
 
-    line-height: 1.2;
+#couple-names {
+    margin:
+        5px
+        0
+        10px;
 
+    font-size: clamp(42px, 8vw, 72px);
+
+    font-weight: 500;
+
+    color: #835b41;
+
+    line-height: 1.25;
+}
+
+.gold-thread-line {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 10px 0 20px;
+}
+
+.gold-thread-line span {
+    width: 80px;
+
+    border-top: 1px dashed #bb8964;
+}
+
+.gold-thread-line i {
+    color: #b46f52;
+
+    font-style: normal;
+
+    font-size: 22px;
+}
+
+#invitation-title {
+    margin: 0;
+
+    font-size: 25px;
+
+    font-weight: 500;
+
+    color: #76523d;
+}
+
+.invitation-message {
+    max-width: 500px;
+
+    margin:
+        15px
+        auto
+        0;
+
+    line-height: 2;
+
+    color: #856d5a;
 }
 
 
 /* =========================================================
-   TITLE
+   ILLUSTRATIONS
 ========================================================= */
 
-.invitation-title {
+.illustration-area {
+    min-height: 270px;
 
-    font-family:
-        Georgia,
-        serif;
+    display: flex;
 
-    font-size: 25px;
-
-    font-weight: 400;
-
-    color:
-        #554535;
+    align-items: center;
+    justify-content: center;
 
     margin:
-        30px auto 18px;
+        25px
+        0;
 
-    max-width: 600px;
+    position: relative;
+}
 
-    line-height: 1.7;
+.illustration {
+    display: none;
+
+    width: 100%;
+
+    min-height: 250px;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    animation:
+        illustrationAppear .8s ease both;
+}
+
+.illustration.active {
+    display: flex;
+}
+
+@keyframes illustrationAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 
 }
 
 
-.invitation-message {
+/* Wedding */
 
-    color:
-        #83786b;
+.wedding-illustration {
+    gap: 20px;
+}
 
-    line-height: 2;
+.castle {
+    font-size: 75px;
 
-    max-width: 550px;
+    opacity: .85;
 
-    margin:
-        0 auto 45px;
+    filter:
+        drop-shadow(
+            0 5px 5px
+            rgba(90, 55, 35, .12)
+        );
+}
 
+.bride,
+.groom {
+    font-size: 85px;
+
+    filter:
+        drop-shadow(
+            0 8px 8px
+            rgba(70, 40, 25, .13)
+        );
+}
+
+.flower-ground {
+    position: absolute;
+
+    bottom: 10px;
+
+    font-size: 28px;
+
+    letter-spacing: 8px;
+}
+
+
+/* Baby */
+
+.baby-illustration {
+    flex-direction: column;
+}
+
+.baby-drawing {
+    font-size: 110px;
+}
+
+.cloud {
+    font-size: 45px;
+}
+
+.baby-stars {
+    color: #b87991;
+
+    font-size: 20px;
+}
+
+
+/* Birthday */
+
+.birthday-illustration {
+    flex-direction: column;
+}
+
+.birthday-cake {
+    font-size: 120px;
+}
+
+.birthday-balloons {
+    font-size: 30px;
+}
+
+.birthday-stars {
+    color: #b87958;
+
+    margin-top: 10px;
+}
+
+
+/* Graduation */
+
+.graduation-illustration {
+    flex-direction: column;
+}
+
+.graduation-cap {
+    font-size: 110px;
+}
+
+.graduation-scroll {
+    font-size: 55px;
+}
+
+.graduation-stars {
+    color: #8c715b;
+}
+
+
+/* Children */
+
+.children-illustration {
+    flex-direction: column;
+}
+
+.fairytale-castle {
+    font-size: 120px;
+}
+
+.children-drawing {
+    font-size: 65px;
+
+    margin-top: -25px;
+}
+
+.castle-stars {
+    color: #bd8c4f;
 }
 
 
@@ -800,148 +975,154 @@ body {
 ========================================================= */
 
 .event-details {
-
     display: grid;
 
     grid-template-columns:
-        repeat(
-            2,
-            1fr
-        );
+        repeat(4, 1fr);
 
-    gap: 18px;
-
-    max-width: 600px;
+    gap: 10px;
 
     margin:
-        0 auto 45px;
+        25px
+        0;
 
+    position: relative;
+
+    z-index: 2;
 }
 
+.detail-card {
+    text-align: center;
 
-.detail {
+    padding: 15px 8px;
 
     border:
-        1px solid
-        #e3d9c8;
-
-    padding:
-        22px 15px;
+        1px dashed
+        #c9a27e;
 
     background:
-        #fffaf2;
+        rgba(255,255,255,.38);
+
+    min-height: 120px;
 
     display: flex;
 
     flex-direction: column;
 
-    align-items: center;
+    justify-content: center;
 
+    gap: 5px;
 }
-
 
 .detail-icon {
+    color: #b27658;
 
     font-size: 22px;
-
-    color:
-        #ac8448;
-
-    margin-bottom: 9px;
-
 }
 
-
-.detail-label {
-
-    color:
-        #9a8c7b;
-
+.detail-card small {
     font-size: 12px;
 
-    margin-bottom: 6px;
-
+    color: #9a7b63;
 }
 
-
-.detail strong {
-
-    color:
-        #514436;
-
+.detail-card strong {
     font-size: 15px;
 
+    font-weight: 600;
+
+    color: #72523c;
 }
 
+.detail-card em {
+    font-size: 11px;
 
-.detail small {
+    color: #9b806b;
 
-    color:
-        #9a8c7b;
-
-    margin-top: 5px;
-
+    font-style: normal;
 }
 
 
 /* =========================================================
-   GUEST MESSAGE
+   GUEST
 ========================================================= */
 
-.guest-message {
+.guest-section {
+    margin:
+        35px
+        0;
+
+    text-align: center;
 
     padding:
-        35px 20px;
-
-    margin:
-        0 auto 30px;
+        25px
+        15px;
 
     border-top:
-        1px solid #e3d8c5;
+        1px dashed #bd8d68;
 
     border-bottom:
-        1px solid #e3d8c5;
+        1px dashed #bd8d68;
 
+    position: relative;
 }
 
+.guest-flower {
+    color: #b57859;
 
-.guest-message p {
-
-    color:
-        #918271;
-
-    font-size: 14px;
-
-    margin-bottom: 10px;
-
+    font-size: 28px;
 }
 
+.guest-section p {
+    margin:
+        5px
+        0;
 
-.guest-message h2 {
-
-    font-family:
-        Georgia,
-        serif;
-
-    font-size: 32px;
-
-    font-weight: 400;
-
-    color:
-        #9a743d;
-
-    margin-bottom: 10px;
-
+    color: #8c705b;
 }
 
+#personalized-name {
+    margin: 3px 0;
 
-.guest-message span {
+    color: #79543d;
 
-    color:
-        #8b7d6c;
+    font-size: 31px;
 
+    font-weight: 500;
+}
+
+.guest-count {
     font-size: 13px;
+}
 
+.guest-count strong {
+    color: #a8664e;
+
+    font-size: 18px;
+}
+
+.guest-thread {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 12px;
+}
+
+.guest-thread span {
+    width: 70px;
+
+    border-top: 1px dashed #bd8d68;
+}
+
+.guest-thread i {
+    font-style: normal;
+
+    color: #b8795c;
 }
 
 
@@ -949,38 +1130,44 @@ body {
    MAP
 ========================================================= */
 
-.map-button {
+.map-section {
+    text-align: center;
 
-    display: inline-block;
+    margin:
+        30px
+        0;
+}
+
+.map-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        11px
+        28px;
+
+    border-radius: 999px;
 
     text-decoration: none;
 
-    color: white;
+    color: #805a42;
+
+    border: 1px solid #bb8967;
 
     background:
-        #9a753f;
-
-    padding:
-        13px 28px;
-
-    border-radius: 8px;
-
-    font-size: 14px;
+        rgba(255,255,255,.55);
 
     transition:
-        0.3s ease;
-
+        .25s ease;
 }
 
-
 .map-button:hover {
+    transform: translateY(-2px);
 
-    background:
-        #76552c;
-
-    transform:
-        translateY(-2px);
-
+    background: #fffaf4;
 }
 
 
@@ -989,44 +1176,42 @@ body {
 ========================================================= */
 
 .rsvp-section {
+    text-align: center;
 
-    margin-top: 55px;
+    margin-top: 40px;
 
-    padding-top: 40px;
+    padding:
+        25px
+        15px;
 
-    border-top:
-        1px solid #e3d8c5;
+    border:
+        1px dashed #c59a75;
 
+    background:
+        rgba(255,255,255,.35);
 }
 
-
-.rsvp-section h2 {
-
-    font-family:
-        Georgia,
-        serif;
+.rsvp-decoration {
+    color: #b57659;
 
     font-size: 25px;
-
-    font-weight: 400;
-
-    margin-bottom: 8px;
-
 }
 
+.rsvp-section h2 {
+    margin:
+        3px
+        0;
+
+    font-weight: 500;
+}
 
 .rsvp-section p {
+    color: #8f7460;
 
-    color:
-        #918576;
-
-    margin-bottom: 25px;
-
+    font-size: 14px;
 }
 
-
 .rsvp-buttons {
-
     display: flex;
 
     justify-content: center;
@@ -1034,68 +1219,45 @@ body {
     gap: 12px;
 
     flex-wrap: wrap;
-
 }
 
+.rsvp-button {
+    border: 1px solid #b98565;
 
-.rsvp-buttons button {
-
-    border: none;
+    border-radius: 999px;
 
     padding:
-        12px 25px;
+        10px
+        24px;
 
-    border-radius: 8px;
+    background: white;
 
-    font-family:
-        inherit;
+    color: #77543e;
 
-    cursor: pointer;
-
-    transition:
-        0.25s ease;
-
+    transition: .25s ease;
 }
 
+.rsvp-button:hover {
+    transform: translateY(-2px);
+}
 
-.rsvp-yes {
-
+.rsvp-button.yes {
     background:
-        #9a753f;
+        linear-gradient(
+            135deg,
+            #a77764,
+            #8d5b4e
+        );
 
     color: white;
-
 }
-
-
-.rsvp-no {
-
-    background:
-        #eee6da;
-
-    color:
-        #766958;
-
-}
-
-
-.rsvp-buttons button:hover {
-
-    transform:
-        translateY(-2px);
-
-}
-
 
 .rsvp-result {
+    min-height: 20px;
 
-    margin-top: 18px;
+    color: #a4664e !important;
 
-    color:
-        #92713f;
-
-    font-size: 14px;
-
+    font-weight: 600;
 }
 
 
@@ -1103,35 +1265,60 @@ body {
    CLOSING
 ========================================================= */
 
-.closing {
+.closing-section {
+    text-align: center;
 
-    font-family:
-        Georgia,
-        serif;
+    padding-top: 40px;
 
-    color:
-        #80633b;
+    position: relative;
+}
 
-    margin-top: 55px;
+.closing-flower {
+    color: #b77859;
 
-    line-height: 1.8;
+    font-size: 28px;
+}
 
+#invitation-closing {
+    font-size: 17px;
+
+    color: #795a44;
+}
+
+.closing-heart {
+    color: #b87865;
+
+    font-size: 25px;
 }
 
 
 /* =========================================================
-   FOOTER
+   BOTTOM EMBROIDERY
 ========================================================= */
 
-footer {
+.bottom-embroidery {
+    text-align: center;
 
     margin-top: 30px;
 
-    color:
-        #a29788;
+    position: relative;
 
-    font-size: 11px;
+    z-index: 2;
+}
 
+.embroidered-branch {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    font-size: 25px;
+
+    filter:
+        drop-shadow(
+            1px 1px 0 white
+        );
 }
 
 
@@ -1139,72 +1326,74 @@ footer {
    MOBILE
 ========================================================= */
 
-@media (
-    max-width: 600px
-) {
+@media (max-width: 650px) {
 
-    .envelope {
-
-        width:
-            330px;
-
-        height:
-            225px;
-
-    }
-
-
-    .envelope-flap {
-
-        border-left-width:
-            165px;
-
-        border-right-width:
-            165px;
-
-        border-top-width:
-            115px;
-
-    }
-
-
-    .invitation-inner {
-
+    .main-invitation {
         padding:
-            55px 22px;
-
+            15px
+            8px
+            50px;
     }
 
+    .invitation-card {
+        padding:
+            40px
+            15px
+            45px;
+    }
+
+    .invitation-card::before {
+        inset: 9px;
+    }
+
+    .invitation-card::after {
+        inset: 15px;
+    }
 
     .event-details {
-
         grid-template-columns:
-            1fr;
-
+            repeat(2, 1fr);
     }
 
-
-    .couple-names {
-
-        font-size:
-            43px;
-
+    .detail-card {
+        min-height: 105px;
     }
 
-
-    .invitation-title {
-
-        font-size:
-            21px;
-
+    .top-decoration {
+        margin-bottom: 20px;
     }
 
+    .flower-stem {
+        width: 55px;
+    }
 
-    .recipient h2 {
+    .tiny-line {
+        width: 35px;
+    }
 
-        font-size:
-            24px;
+    .castle {
+        font-size: 50px;
+    }
 
+    .bride,
+    .groom {
+        font-size: 60px;
+    }
+
+    .envelope {
+        aspect-ratio: 1.35;
+    }
+
+    .envelope-center {
+        width: 80%;
+    }
+
+    #guest-name {
+        font-size: 25px;
+    }
+
+    .envelope-paper h2 {
+        font-size: 30px;
     }
 
 }
