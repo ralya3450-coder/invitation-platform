@@ -7,6 +7,234 @@
    DATA
 ========================================================= */
 
+/* =========================================================
+   DESIGN COLOR COLLECTIONS
+========================================================= */
+
+const templateColors = {
+
+    gold: [
+
+        {
+            id: "champagne",
+            name: "شامبين فاخر",
+            color: "#d8b27c",
+            accent: "#9a6d3f",
+            background: "#f7ecdc"
+        },
+
+        {
+            id: "rose-gold",
+            name: "روز غولد",
+            color: "#c98f82",
+            accent: "#8e5c53",
+            background: "#f7e5df"
+        },
+
+        {
+            id: "ivory-gold",
+            name: "عاجي وذهبي",
+            color: "#c7a66b",
+            accent: "#86663b",
+            background: "#faf5ea"
+        },
+
+        {
+            id: "olive-gold",
+            name: "زيتوني وذهبي",
+            color: "#9a9a72",
+            accent: "#676746",
+            background: "#f0efe2"
+        }
+
+    ],
+
+
+    ivory: [
+
+        {
+            id: "cream",
+            name: "كريمي ناعم",
+            color: "#d9c2a7",
+            accent: "#98765a",
+            background: "#fbf5eb"
+        },
+
+        {
+            id: "dusty-pink",
+            name: "وردي غباري",
+            color: "#c79a9c",
+            accent: "#8f6569",
+            background: "#f7e9e9"
+        },
+
+        {
+            id: "sage",
+            name: "سيج",
+            color: "#a5ad91",
+            accent: "#687157",
+            background: "#eff1e8"
+        },
+
+        {
+            id: "powder-blue",
+            name: "أزرق بودرة",
+            color: "#9caec1",
+            accent: "#5f7287",
+            background: "#edf2f7"
+        }
+
+    ],
+
+
+    arabic: [
+
+        {
+            id: "sand",
+            name: "رملي",
+            color: "#c8a477",
+            accent: "#785b3e",
+            background: "#f4ead9"
+        },
+
+        {
+            id: "olive",
+            name: "زيتوني",
+            color: "#8d9470",
+            accent: "#586047",
+            background: "#edf0e4"
+        },
+
+        {
+            id: "terracotta",
+            name: "تيراكوتا",
+            color: "#b87961",
+            accent: "#7d4939",
+            background: "#f4e2da"
+        },
+
+        {
+            id: "emerald",
+            name: "زمردي",
+            color: "#668675",
+            accent: "#3f5e4d",
+            background: "#e7eee9"
+        }
+
+    ],
+
+
+    floral: [
+
+        {
+            id: "blush",
+            name: "بلوش وردي",
+            color: "#d69c9d",
+            accent: "#965d62",
+            background: "#faeaea"
+        },
+
+        {
+            id: "sage-floral",
+            name: "أخضر سيج",
+            color: "#9da98d",
+            accent: "#5f6f54",
+            background: "#edf1e8"
+        },
+
+        {
+            id: "blue-floral",
+            name: "أزرق ناعم",
+            color: "#91a9c0",
+            accent: "#566d84",
+            background: "#eaf0f6"
+        },
+
+        {
+            id: "lavender",
+            name: "لافندر",
+            color: "#b3a0bb",
+            accent: "#745e7c",
+            background: "#f1ebf4"
+        }
+
+    ],
+
+
+    dark: [
+
+        {
+            id: "black-gold",
+            name: "أسود وذهبي",
+            color: "#c5a15b",
+            accent: "#d7b873",
+            background: "#171513"
+        },
+
+        {
+            id: "navy-gold",
+            name: "كحلي وذهبي",
+            color: "#b79b62",
+            accent: "#d6bb79",
+            background: "#151c29"
+        },
+
+        {
+            id: "plum",
+            name: "برغندي داكن",
+            color: "#b78680",
+            accent: "#d0aaa2",
+            background: "#26191e"
+        },
+
+        {
+            id: "emerald-dark",
+            name: "زمردي فاخر",
+            color: "#8fac93",
+            accent: "#b9c9b5",
+            background: "#15221d"
+        }
+
+    ],
+
+
+    romantic: [
+
+        {
+            id: "dusty-rose",
+            name: "روز غباري",
+            color: "#c99599",
+            accent: "#8d5d62",
+            background: "#f7e8e8"
+        },
+
+        {
+            id: "mauve",
+            name: "موف",
+            color: "#aa8f9f",
+            accent: "#715b6a",
+            background: "#f0e9ef"
+        },
+
+        {
+            id: "peach",
+            name: "خوخي",
+            color: "#d9a58c",
+            accent: "#9a684e",
+            background: "#faebe1"
+        },
+
+        {
+            id: "champagne-rose",
+            name: "شامبين وردي",
+            color: "#c9a27f",
+            accent: "#89664b",
+            background: "#f8eee3"
+        }
+
+    ]
+
+};
 const invitationData = {
 
     template: "",
