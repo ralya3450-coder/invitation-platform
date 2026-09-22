@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>دعوة خاصة</title>
+    <title>دعوتكم</title>
 
     <link
         rel="stylesheet"
@@ -19,7 +19,222 @@
 
 </head>
 
+
 <body>
+
+    <!-- =====================================================
+         SVG DEFINITIONS
+         Reusable embroidery filters and gradients
+    ====================================================== -->
+
+    <svg
+        width="0"
+        height="0"
+        aria-hidden="true"
+        style="position:absolute"
+    >
+
+        <defs>
+
+            <!-- Thread texture -->
+            <filter
+                id="threadTexture"
+                x="-20%"
+                y="-20%"
+                width="140%"
+                height="140%"
+            >
+
+                <feTurbulence
+                    type="fractalNoise"
+                    baseFrequency="0.8"
+                    numOctaves="2"
+                    seed="4"
+                    result="noise"
+                />
+
+                <feDisplacementMap
+                    in="SourceGraphic"
+                    in2="noise"
+                    scale="0.35"
+                />
+
+            </filter>
+
+
+            <!-- Soft embroidery shadow -->
+            <filter
+                id="embroideryShadow"
+                x="-30%"
+                y="-30%"
+                width="160%"
+                height="160%"
+            >
+
+                <feDropShadow
+                    dx="0"
+                    dy="1"
+                    stdDeviation="1"
+                    flood-opacity="0.18"
+                />
+
+            </filter>
+
+
+            <!-- Gold thread -->
+            <linearGradient
+                id="goldThread"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#8f6834"
+                />
+
+                <stop
+                    offset="30%"
+                    stop-color="#e5c783"
+                />
+
+                <stop
+                    offset="55%"
+                    stop-color="#fff0bd"
+                />
+
+                <stop
+                    offset="75%"
+                    stop-color="#bd9651"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#76542b"
+                />
+
+            </linearGradient>
+
+
+            <!-- Rose thread -->
+            <linearGradient
+                id="roseThread"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#8d535c"
+                />
+
+                <stop
+                    offset="45%"
+                    stop-color="#d9a0a3"
+                />
+
+                <stop
+                    offset="70%"
+                    stop-color="#f0c4c5"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#8c565c"
+                />
+
+            </linearGradient>
+
+
+            <!-- Green thread -->
+            <linearGradient
+                id="greenThread"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#52644d"
+                />
+
+                <stop
+                    offset="50%"
+                    stop-color="#aab895"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#53634e"
+                />
+
+            </linearGradient>
+
+
+            <!-- Blue thread -->
+            <linearGradient
+                id="blueThread"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#50677c"
+                />
+
+                <stop
+                    offset="50%"
+                    stop-color="#a9bfd2"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#566d82"
+                />
+
+            </linearGradient>
+
+
+            <!-- Purple thread -->
+            <linearGradient
+                id="purpleThread"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+            >
+
+                <stop
+                    offset="0%"
+                    stop-color="#6e5b76"
+                />
+
+                <stop
+                    offset="50%"
+                    stop-color="#c4afd0"
+                />
+
+                <stop
+                    offset="100%"
+                    stop-color="#76607e"
+                />
+
+            </linearGradient>
+
+        </defs>
+
+    </svg>
+
+
 
     <!-- =====================================================
          ENVELOPE SCREEN
@@ -30,124 +245,213 @@
         class="envelope-screen"
     >
 
-        <div class="floating-thread thread-one"></div>
-        <div class="floating-thread thread-two"></div>
-
-        <div class="envelope-area">
+        <div class="envelope-wrapper">
 
             <div
                 id="envelope"
                 class="envelope"
             >
 
-                <!-- Back -->
-                <div class="envelope-back"></div>
+                <!-- Envelope back -->
 
-                <!-- Inner paper -->
-                <div class="envelope-paper">
+                <div class="envelope-back">
 
-                    <div class="paper-border"></div>
+                    <div class="envelope-border"></div>
 
-                    <div class="mini-flower flower-paper-one">
-                        ✿
+
+                    <!-- Luxury corner embroidery -->
+
+                    <svg
+                        class="envelope-corner top-right"
+                        viewBox="0 0 180 180"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            class="thread-line"
+                            d="M5 170 C30 130 30 80 80 50 C105 35 135 25 175 5"
+                        />
+
+                        <path
+                            class="thread-line thin"
+                            d="M20 178 C50 130 55 92 92 64 C118 45 145 34 178 20"
+                        />
+
+                        <g class="thread-flower">
+
+                            <circle cx="125" cy="43" r="8"/>
+                            <circle cx="142" cy="39" r="8"/>
+                            <circle cx="136" cy="54" r="8"/>
+                            <circle cx="132" cy="46" r="4"/>
+
+                        </g>
+
+                        <path
+                            class="thread-leaf"
+                            d="M92 65 Q75 48 65 62 Q78 76 92 65"
+                        />
+
+                        <path
+                            class="thread-leaf"
+                            d="M73 91 Q53 79 50 96 Q62 105 73 91"
+                        />
+
+                    </svg>
+
+
+                    <svg
+                        class="envelope-corner bottom-left"
+                        viewBox="0 0 180 180"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            class="thread-line"
+                            d="M5 170 C30 130 30 80 80 50 C105 35 135 25 175 5"
+                        />
+
+                        <path
+                            class="thread-line thin"
+                            d="M20 178 C50 130 55 92 92 64 C118 45 145 34 178 20"
+                        />
+
+                        <g class="thread-flower">
+
+                            <circle cx="125" cy="43" r="8"/>
+                            <circle cx="142" cy="39" r="8"/>
+                            <circle cx="136" cy="54" r="8"/>
+                            <circle cx="132" cy="46" r="4"/>
+
+                        </g>
+
+                        <path
+                            class="thread-leaf"
+                            d="M92 65 Q75 48 65 62 Q78 76 92 65"
+                        />
+
+                        <path
+                            class="thread-leaf"
+                            d="M73 91 Q53 79 50 96 Q62 105 73 91"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+
+                <!-- Invitation paper -->
+
+                <div
+                    class="envelope-paper"
+                    id="envelope-paper"
+                >
+
+                    <div class="paper-decoration">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
                     </div>
 
-                    <div class="mini-flower flower-paper-two">
-                        ✿
-                    </div>
 
                     <p class="paper-small">
-                        بكل حب
+                        دعوة خاصة
                     </p>
 
-                    <h2>
-                        ندعوكم
-                    </h2>
 
-                    <p>
-                        لمشاركتنا فرحتنا
+                    <div
+                        class="paper-guest"
+                        id="guest-name"
+                    >
+                        ضيفنا العزيز
+                    </div>
+
+
+                    <div class="paper-divider"></div>
+
+
+                    <p class="paper-hint">
+                        يسعدنا حضوركم ومشاركتنا فرحتنا
                     </p>
 
                 </div>
 
-                <!-- Flap -->
-                <div class="envelope-flap">
 
-                    <div class="flap-embroidery">
 
-                        <span>✿</span>
-                        <span>❀</span>
-                        <span>✿</span>
+                <!-- Envelope flap -->
+
+                <div
+                    class="envelope-flap"
+                    id="envelope-flap"
+                >
+
+                    <svg
+                        class="flap-embroidery"
+                        viewBox="0 0 240 120"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            class="thread-line"
+                            d="M15 85 C55 25 95 20 120 60 C145 20 185 25 225 85"
+                        />
+
+                        <path
+                            class="thread-line thin"
+                            d="M30 95 C60 55 95 45 120 75 C145 45 180 55 210 95"
+                        />
+
+                        <g class="flap-flower">
+
+                            <circle cx="120" cy="60" r="11"/>
+                            <circle cx="103" cy="53" r="9"/>
+                            <circle cx="137" cy="53" r="9"/>
+                            <circle cx="111" cy="70" r="9"/>
+                            <circle cx="129" cy="70" r="9"/>
+                            <circle cx="120" cy="60" r="5"/>
+
+                        </g>
+
+                    </svg>
+
+
+                    <div class="wax-seal">
+
+                        <span>دعوة</span>
 
                     </div>
 
                 </div>
 
-                <!-- Front -->
+
+
+                <!-- Envelope front -->
+
                 <div class="envelope-front">
 
-                    <div class="embroidered-corner top-right">
-                        <span>❀</span>
-                        <span>✿</span>
-                        <span>❁</span>
-                    </div>
+                    <div class="front-line"></div>
 
-                    <div class="embroidered-corner bottom-left">
-                        <span>❁</span>
-                        <span>✿</span>
-                        <span>❀</span>
-                    </div>
-
-                    <div class="envelope-center">
-
-                        <div class="wax-seal">
-
-                            <span>♥</span>
-
-                        </div>
-
-                        <p class="to-label">
-                            إلى
-                        </p>
-
-                        <h1 id="guest-name">
-                            ضيفنا العزيز
-                        </h1>
-
-                        <div class="thread-divider">
-                            <span></span>
-                            <b>✿</b>
-                            <span></span>
-                        </div>
-
-                        <p class="special-invitation">
-                            دعوة خاصة
-                        </p>
-
-                    </div>
+                    <div class="front-line second"></div>
 
                 </div>
 
             </div>
 
-        </div>
-
-        <div class="envelope-bottom">
-
-            <p>
-                اسحب لفتح الدعوة
-            </p>
 
             <button
                 id="open-invitation"
                 class="open-button"
+                type="button"
             >
-                فتح الدعوة
+                افتحوا الدعوة
             </button>
 
         </div>
 
     </section>
+
 
 
     <!-- =====================================================
@@ -159,256 +463,762 @@
         class="main-invitation"
     >
 
-        <!-- Decorative threads -->
-
-        <div class="page-thread page-thread-top"></div>
-        <div class="page-thread page-thread-bottom"></div>
+        <article class="invitation-card">
 
 
-        <div class="invitation-card">
+            <!-- Top embroidery -->
 
-            <!-- =================================================
-                 TOP DECORATION
-            ================================================== -->
+            <div class="card-top-embroidery">
 
-            <div class="top-decoration">
+                <svg
+                    viewBox="0 0 420 150"
+                    aria-hidden="true"
+                >
 
-                <div class="flower-stem stem-left">
-                    <span class="leaf leaf-one"></span>
-                    <span class="leaf leaf-two"></span>
-                    <span class="embroidered-flower">✿</span>
-                </div>
+                    <path
+                        class="ornament-line"
+                        d="M20 115 C75 45 115 35 160 85 C185 112 205 112 210 78 C215 112 235 112 260 85 C305 35 345 45 400 115"
+                    />
 
-                <div class="top-center">
+                    <path
+                        class="ornament-line thin"
+                        d="M40 125 C85 75 120 65 155 98 C180 122 200 122 210 92 C220 122 240 122 265 98 C300 65 335 75 380 125"
+                    />
 
-                    <span class="tiny-line"></span>
+                    <g class="ornament-flower">
 
-                    <span class="ornament">
-                        ❀
-                    </span>
+                        <circle cx="210" cy="78" r="12"/>
+                        <circle cx="190" cy="69" r="10"/>
+                        <circle cx="230" cy="69" r="10"/>
+                        <circle cx="198" cy="88" r="10"/>
+                        <circle cx="222" cy="88" r="10"/>
+                        <circle cx="210" cy="78" r="5"/>
 
-                    <span class="tiny-line"></span>
+                    </g>
 
-                </div>
+                    <path
+                        class="ornament-leaf"
+                        d="M165 86 Q140 63 133 86 Q149 101 165 86"
+                    />
 
-                <div class="flower-stem stem-right">
-                    <span class="leaf leaf-one"></span>
-                    <span class="leaf leaf-two"></span>
-                    <span class="embroidered-flower">✿</span>
-                </div>
+                    <path
+                        class="ornament-leaf"
+                        d="M255 86 Q280 63 287 86 Q271 101 255 86"
+                    />
+
+                </svg>
 
             </div>
 
 
-            <!-- =================================================
-                 INTRO
-            ================================================== -->
 
-            <section class="invitation-intro">
+            <!-- Couple names -->
 
-                <p class="bismillah">
-                    بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ
+            <section class="hero-section">
+
+                <p class="eyebrow">
+                    بكل الحب والفرح
                 </p>
 
-                <p class="intro-small">
-                    بكل حب وسعادة
-                </p>
 
                 <h1 id="couple-names">
                     محمد &amp; سارة
                 </h1>
 
-                <div class="gold-thread-line">
+
+                <div class="name-ornament">
+
                     <span></span>
-                    <i>❀</i>
+                    <b>♥</b>
                     <span></span>
+
                 </div>
+
 
                 <h2 id="invitation-title">
                     يسعدنا دعوتكم لمشاركتنا فرحتنا
                 </h2>
 
-                <p
-                    id="invitation-message"
-                    class="invitation-message"
-                >
-                    نتشرف بحضوركم ومشاركتكم أجمل لحظاتنا.
-                </p>
-
             </section>
 
 
+
             <!-- =================================================
-                 ILLUSTRATION
+                 ILLUSTRATIONS
             ================================================== -->
 
-            <section
-                id="illustration-area"
-                class="illustration-area"
-            >
+            <section class="illustration-area">
 
-                <!-- Wedding -->
+
+                <!-- WEDDING -->
 
                 <div
                     id="wedding-illustration"
                     class="illustration wedding-illustration"
                 >
 
-                    <div class="castle castle-left">
-                        🏰
-                    </div>
+                    <svg
+                        viewBox="0 0 500 300"
+                        aria-hidden="true"
+                    >
 
-                    <div class="bride">
+                        <!-- Castle -->
 
-                        <div class="bride-head">
-                            ♡
-                        </div>
+                        <g class="castle-svg">
 
-                        <div class="bride-body">
-                            👰🏻‍♀️
-                        </div>
+                            <path
+                                d="M165 220 V105 L185 82 L205 105 V220"
+                            />
 
-                    </div>
+                            <path
+                                d="M295 220 V105 L315 82 L335 105 V220"
+                            />
 
-                    <div class="groom">
+                            <path
+                                d="M205 220 V125 H295 V220"
+                            />
 
-                        <div class="groom-body">
-                            🤵🏻‍♂️
-                        </div>
+                            <path
+                                d="M185 82 V55 H205 V105"
+                            />
 
-                    </div>
+                            <path
+                                d="M315 82 V55 H335 V105"
+                            />
 
-                    <div class="flower-ground">
+                            <path
+                                d="M225 220 V165 Q250 140 275 165 V220"
+                            />
 
-                        <span>🌸</span>
-                        <span>🌿</span>
-                        <span>🌷</span>
-                        <span>🌿</span>
-                        <span>🌸</span>
+                            <path
+                                d="M225 145 H275"
+                            />
 
-                    </div>
+                        </g>
+
+
+                        <!-- Castle flags -->
+
+                        <path
+                            class="castle-flag"
+                            d="M195 55 V28 L225 38 L195 48"
+                        />
+
+                        <path
+                            class="castle-flag"
+                            d="M325 55 V28 L355 38 L325 48"
+                        />
+
+
+                        <!-- Bride -->
+
+                        <g class="bride-svg">
+
+                            <circle
+                                cx="205"
+                                cy="183"
+                                r="15"
+                            />
+
+                            <path
+                                d="M190 183 Q205 165 220 183"
+                            />
+
+                            <path
+                                d="M193 201 Q205 192 217 201 L230 245 H180 Z"
+                            />
+
+                            <path
+                                d="M195 201 Q205 218 215 201"
+                            />
+
+                            <path
+                                d="M183 245 Q205 230 232 245"
+                            />
+
+                            <path
+                                d="M190 201 Q178 207 176 225"
+                            />
+
+                            <path
+                                d="M220 201 Q232 207 234 225"
+                            />
+
+                            <path
+                                class="veil"
+                                d="M192 188 Q205 180 218 188 Q222 222 205 230 Q188 222 192 188"
+                            />
+
+                        </g>
+
+
+                        <!-- Groom -->
+
+                        <g class="groom-svg">
+
+                            <circle
+                                cx="295"
+                                cy="183"
+                                r="15"
+                            />
+
+                            <path
+                                d="M280 183 Q295 168 310 183"
+                            />
+
+                            <path
+                                d="M280 201 L295 194 L310 201 L322 245 H268 Z"
+                            />
+
+                            <path
+                                d="M295 194 V245"
+                            />
+
+                            <path
+                                d="M285 201 L295 213 L305 201"
+                            />
+
+                            <path
+                                class="bowtie"
+                                d="M288 208 L295 203 L302 208 L295 213 Z"
+                            />
+
+                        </g>
+
+
+                        <!-- Flowers -->
+
+                        <g class="flower-bouquet">
+
+                            <circle cx="155" cy="238" r="10"/>
+                            <circle cx="168" cy="229" r="10"/>
+                            <circle cx="181" cy="240" r="10"/>
+
+                            <path d="M166 240 Q150 260 135 264"/>
+                            <path d="M169 241 Q185 260 198 263"/>
+
+                        </g>
+
+
+                        <!-- Decorative hearts -->
+
+                        <path
+                            class="svg-heart"
+                            d="M250 75
+                               C235 55 205 70 250 103
+                               C295 70 265 55 250 75 Z"
+                        />
+
+                    </svg>
 
                 </div>
 
 
-                <!-- Baby -->
+
+                <!-- BABY -->
 
                 <div
                     id="baby-illustration"
                     class="illustration baby-illustration"
                 >
 
-                    <div class="cloud">
-                        ☁️
-                    </div>
+                    <svg
+                        viewBox="0 0 500 300"
+                        aria-hidden="true"
+                    >
 
-                    <div class="baby-drawing">
-                        🧸
-                    </div>
+                        <!-- Moon -->
 
-                    <div class="baby-stars">
-                        ✦　✧　✦
-                    </div>
+                        <path
+                            class="moon-svg"
+                            d="M185 70
+                               A60 60 0 1 0 245 130
+                               A48 48 0 1 1 185 70"
+                        />
+
+
+                        <!-- Stars -->
+
+                        <path
+                            class="star-svg"
+                            d="M320 55 L326 72 L344 73 L330 84 L334 102 L320 92 L305 102 L310 84 L296 73 L314 72 Z"
+                        />
+
+                        <path
+                            class="star-svg small"
+                            d="M120 80 L125 93 L139 94 L128 102 L132 116 L120 108 L108 116 L112 102 L101 94 L115 93 Z"
+                        />
+
+
+                        <!-- Cloud -->
+
+                        <path
+                            class="cloud-svg"
+                            d="M120 205
+                               Q120 180 145 180
+                               Q155 150 185 165
+                               Q205 135 235 160
+                               Q265 150 275 180
+                               Q305 180 305 205
+                               Z"
+                        />
+
+
+                        <!-- Baby blanket -->
+
+                        <path
+                            class="baby-blanket"
+                            d="M170 220
+                               Q250 175 330 220
+                               L315 250
+                               Q250 225 185 250 Z"
+                        />
+
+
+                        <!-- Baby head -->
+
+                        <circle
+                            class="baby-head"
+                            cx="250"
+                            cy="205"
+                            r="28"
+                        />
+
+
+                        <!-- Baby face -->
+
+                        <circle
+                            class="baby-eye"
+                            cx="240"
+                            cy="205"
+                            r="2"
+                        />
+
+                        <circle
+                            class="baby-eye"
+                            cx="260"
+                            cy="205"
+                            r="2"
+                        />
+
+                        <path
+                            class="baby-smile"
+                            d="M245 214 Q250 218 255 214"
+                        />
+
+
+                        <!-- Baby bonnet -->
+
+                        <path
+                            class="baby-bonnet"
+                            d="M220 201 Q225 165 250 166 Q275 165 280 201"
+                        />
+
+
+                        <!-- Little flowers -->
+
+                        <g class="baby-flower">
+
+                            <circle cx="145" cy="245" r="8"/>
+                            <circle cx="158" cy="238" r="8"/>
+                            <circle cx="171" cy="245" r="8"/>
+                            <circle cx="158" cy="250" r="5"/>
+
+                        </g>
+
+                    </svg>
 
                 </div>
 
 
-                <!-- Birthday -->
+
+                <!-- BIRTHDAY -->
 
                 <div
                     id="birthday-illustration"
                     class="illustration birthday-illustration"
                 >
 
-                    <div class="birthday-cake">
-                        🎂
-                    </div>
+                    <svg
+                        viewBox="0 0 500 300"
+                        aria-hidden="true"
+                    >
 
-                    <div class="birthday-balloons">
-                        🎈　🎈　🎈
-                    </div>
+                        <!-- Balloons -->
 
-                    <div class="birthday-stars">
-                        ✦　✧　✦
-                    </div>
+                        <g class="balloon-svg">
+
+                            <ellipse
+                                cx="145"
+                                cy="90"
+                                rx="30"
+                                ry="40"
+                            />
+
+                            <ellipse
+                                cx="355"
+                                cy="90"
+                                rx="30"
+                                ry="40"
+                            />
+
+                            <ellipse
+                                cx="105"
+                                cy="125"
+                                rx="24"
+                                ry="32"
+                            />
+
+                            <ellipse
+                                cx="395"
+                                cy="125"
+                                rx="24"
+                                ry="32"
+                            />
+
+                        </g>
+
+
+                        <!-- Strings -->
+
+                        <path
+                            class="balloon-string"
+                            d="M145 130 Q155 175 180 205"
+                        />
+
+                        <path
+                            class="balloon-string"
+                            d="M355 130 Q345 175 320 205"
+                        />
+
+
+                        <!-- Cake -->
+
+                        <path
+                            class="cake-svg"
+                            d="M150 215 H350 L335 255 H165 Z"
+                        />
+
+                        <path
+                            class="cake-top"
+                            d="M150 215 Q250 190 350 215 Q250 238 150 215"
+                        />
+
+
+                        <!-- Cake decorations -->
+
+                        <path
+                            class="cake-line"
+                            d="M175 230 Q250 248 325 230"
+                        />
+
+                        <path
+                            class="cake-line"
+                            d="M180 243 Q250 258 320 243"
+                        />
+
+
+                        <!-- Candles -->
+
+                        <path
+                            class="candle"
+                            d="M210 208 V175"
+                        />
+
+                        <path
+                            class="candle"
+                            d="M250 202 V165"
+                        />
+
+                        <path
+                            class="candle"
+                            d="M290 208 V175"
+                        />
+
+
+                        <!-- Flames -->
+
+                        <path
+                            class="flame"
+                            d="M210 172 Q202 160 210 151 Q218 160 210 172"
+                        />
+
+                        <path
+                            class="flame"
+                            d="M250 162 Q242 150 250 141 Q258 150 250 162"
+                        />
+
+                        <path
+                            class="flame"
+                            d="M290 172 Q282 160 290 151 Q298 160 290 172"
+                        />
+
+
+                        <!-- Stars -->
+
+                        <path
+                            class="birthday-star"
+                            d="M250 85 L256 101 L273 102 L260 112 L264 128 L250 119 L236 128 L240 112 L227 102 L244 101 Z"
+                        />
+
+                    </svg>
 
                 </div>
 
 
-                <!-- Graduation -->
+
+                <!-- GRADUATION -->
 
                 <div
                     id="graduation-illustration"
                     class="illustration graduation-illustration"
                 >
 
-                    <div class="graduation-cap">
-                        🎓
-                    </div>
+                    <svg
+                        viewBox="0 0 500 300"
+                        aria-hidden="true"
+                    >
 
-                    <div class="graduation-scroll">
-                        📜
-                    </div>
+                        <!-- Cap -->
 
-                    <div class="graduation-stars">
-                        ✦　✧　✦
-                    </div>
+                        <path
+                            class="grad-cap"
+                            d="M130 125 L250 70 L370 125 L250 180 Z"
+                        />
+
+                        <path
+                            class="grad-cap-band"
+                            d="M175 142 V180 Q250 215 325 180 V142"
+                        />
+
+
+                        <!-- Tassel -->
+
+                        <path
+                            class="tassel-line"
+                            d="M370 125 V185"
+                        />
+
+                        <path
+                            class="tassel"
+                            d="M355 185 H385 L378 205 H362 Z"
+                        />
+
+
+                        <!-- Diploma -->
+
+                        <g class="diploma">
+
+                            <path
+                                d="M170 220 Q250 195 330 220"
+                            />
+
+                            <rect
+                                x="190"
+                                y="215"
+                                width="120"
+                                height="55"
+                                rx="5"
+                            />
+
+                            <path
+                                d="M215 235 H285"
+                            />
+
+                            <path
+                                d="M215 248 H275"
+                            />
+
+                            <circle
+                                cx="250"
+                                cy="260"
+                                r="7"
+                            />
+
+                        </g>
+
+
+                        <!-- Stars -->
+
+                        <path
+                            class="grad-star"
+                            d="M105 80 L111 96 L128 97 L115 107 L119 124 L105 114 L91 124 L95 107 L82 97 L99 96 Z"
+                        />
+
+                        <path
+                            class="grad-star"
+                            d="M395 80 L401 96 L418 97 L405 107 L409 124 L395 114 L381 124 L385 107 L372 97 L389 96 Z"
+                        />
+
+                    </svg>
 
                 </div>
 
 
-                <!-- Children / Castle -->
+
+                <!-- CHILDREN / FAIRYTALE -->
 
                 <div
                     id="children-illustration"
                     class="illustration children-illustration"
                 >
 
-                    <div class="fairytale-castle">
-                        🏰
-                    </div>
+                    <svg
+                        viewBox="0 0 500 300"
+                        aria-hidden="true"
+                    >
 
-                    <div class="children-drawing">
-                        🧸
-                    </div>
+                        <!-- Fairytale castle -->
 
-                    <div class="castle-stars">
-                        ✦　✧　✦
-                    </div>
+                        <g class="fairytale-castle-svg">
+
+                            <path
+                                d="M155 230 V120 L180 92 L205 120 V230"
+                            />
+
+                            <path
+                                d="M295 230 V120 L320 92 L345 120 V230"
+                            />
+
+                            <path
+                                d="M205 230 V135 H295 V230"
+                            />
+
+                            <path
+                                d="M180 92 V60 H205 V120"
+                            />
+
+                            <path
+                                d="M320 92 V60 H345 V120"
+                            />
+
+                            <path
+                                d="M220 230 V175 Q250 145 280 175 V230"
+                            />
+
+                            <path
+                                d="M235 145 Q250 125 265 145"
+                            />
+
+                        </g>
+
+
+                        <!-- Castle flags -->
+
+                        <path
+                            class="fairytale-flag"
+                            d="M193 60 V35 L220 44 L193 52"
+                        />
+
+                        <path
+                            class="fairytale-flag"
+                            d="M333 60 V35 L360 44 L333 52"
+                        />
+
+
+                        <!-- Crown -->
+
+                        <path
+                            class="crown-svg"
+                            d="M225 92 L235 70 L250 85 L265 70 L275 92 Z"
+                        />
+
+
+                        <!-- Stars -->
+
+                        <path
+                            class="fairytale-star"
+                            d="M105 80 L111 96 L128 97 L115 107 L119 124 L105 114 L91 124 L95 107 L82 97 L99 96 Z"
+                        />
+
+                        <path
+                            class="fairytale-star"
+                            d="M395 80 L401 96 L418 97 L405 107 L409 124 L395 114 L381 124 L385 107 L372 97 L389 96 Z"
+                        />
+
+
+                        <!-- Children -->
+
+                        <g class="child-svg">
+
+                            <circle
+                                cx="210"
+                                cy="215"
+                                r="14"
+                            />
+
+                            <path
+                                d="M196 230 Q210 220 224 230 L230 265 H190 Z"
+                            />
+
+                            <circle
+                                cx="290"
+                                cy="215"
+                                r="14"
+                            />
+
+                            <path
+                                d="M276 230 Q290 220 304 230 L310 265 H270 Z"
+                            />
+
+                        </g>
+
+
+                        <!-- Flowers -->
+
+                        <g class="fairytale-flower">
+
+                            <circle cx="150" cy="250" r="8"/>
+                            <circle cx="163" cy="243" r="8"/>
+                            <circle cx="176" cy="250" r="8"/>
+                            <circle cx="163" cy="255" r="5"/>
+
+                            <circle cx="324" cy="250" r="8"/>
+                            <circle cx="337" cy="243" r="8"/>
+                            <circle cx="350" cy="250" r="8"/>
+                            <circle cx="337" cy="255" r="5"/>
+
+                        </g>
+
+                    </svg>
 
                 </div>
 
             </section>
 
 
-            <!-- =================================================
-                 EVENT DETAILS
-            ================================================== -->
 
-            <section class="event-details">
+            <!-- Invitation message -->
 
-                <div class="detail-card">
+            <section class="message-section">
 
-                    <span class="detail-icon">
-                        ♡
-                    </span>
-
-                    <small>
-                        المناسبة
-                    </small>
-
-                    <strong id="event-type">
-                        حفل زفاف
-                    </strong>
-
+                <div class="section-ornament">
+                    <span></span>
+                    <b>✦</b>
+                    <span></span>
                 </div>
 
 
+                <p id="invitation-message">
+                    نتشرف بحضوركم ومشاركتكم أجمل لحظاتنا.
+                </p>
+
+
+                <p id="invitation-closing">
+                    تشرفنا حضوركم ومشاركتكم فرحتنا
+                </p>
+
+            </section>
+
+
+
+            <!-- Event details -->
+
+            <section class="details-section">
+
                 <div class="detail-card">
 
-                    <span class="detail-icon">
-                        ♡
-                    </span>
+                    <span class="detail-icon">✦</span>
 
                     <small>
                         التاريخ
@@ -423,9 +1233,7 @@
 
                 <div class="detail-card">
 
-                    <span class="detail-icon">
-                        ◷
-                    </span>
+                    <span class="detail-icon">◷</span>
 
                     <small>
                         الوقت
@@ -440,9 +1248,7 @@
 
                 <div class="detail-card">
 
-                    <span class="detail-icon">
-                        ⌖
-                    </span>
+                    <span class="detail-icon">⌂</span>
 
                     <small>
                         المكان
@@ -452,163 +1258,167 @@
                         —
                     </strong>
 
-                    <em id="venue-city">
+                    <span id="venue-city">
                         —
-                    </em>
+                    </span>
 
                 </div>
 
             </section>
 
 
-            <!-- =================================================
-                 GUEST
-            ================================================== -->
 
-            <section class="guest-section">
+            <!-- Map -->
 
-                <div class="guest-flower">
-                    ❀
-                </div>
-
-                <p>
-                    نتشرف بحضور
-                </p>
-
-                <h2 id="personalized-name">
-                    أم عبدالله
-                </h2>
-
-                <p class="guest-count">
-
-                    ونسعد بحضوركم بعدد
-
-                    <strong id="allowed-guests">
-                        1
-                    </strong>
-
-                    من الأشخاص
-
-                </p>
-
-                <div class="guest-thread">
-
-                    <span></span>
-                    <i>✿</i>
-                    <span></span>
-
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 MAP
-            ================================================== -->
-
-            <section class="map-section">
+            <div class="map-container">
 
                 <a
                     id="map-link"
                     href="#"
                     target="_blank"
+                    rel="noopener"
                     class="map-button"
                 >
-                    <span>⌖</span>
-                    عرض الموقع
+                    عرض الموقع على الخريطة
                 </a>
+
+            </div>
+
+
+
+            <!-- Personalized guest -->
+
+            <section
+                id="guest-section"
+                class="guest-section"
+            >
+
+                <div class="guest-ornament">
+                    ❦
+                </div>
+
+
+                <p>
+                    هذه الدعوة مقدمة بكل حب إلى
+                </p>
+
+
+                <h3 id="personalized-name">
+                    ضيفنا العزيز
+                </h3>
+
+
+                <div
+                    id="allowed-guests"
+                    class="allowed-guests"
+                >
+                    ننتظركم بكل شوق
+                </div>
 
             </section>
 
 
-            <!-- =================================================
-                 RSVP
-            ================================================== -->
+
+            <!-- RSVP -->
 
             <section
                 id="rsvp-section"
                 class="rsvp-section"
             >
 
-                <div class="rsvp-decoration">
-                    ❀
+                <div class="section-ornament">
+
+                    <span></span>
+                    <b>♥</b>
+                    <span></span>
+
                 </div>
 
-                <h2>
+
+                <h3>
                     تأكيد الحضور
-                </h2>
+                </h3>
+
 
                 <p>
-                    يسعدنا تأكيد حضوركم
+                    يسعدنا معرفة إمكانية حضوركم
                 </p>
+
 
                 <div class="rsvp-buttons">
 
                     <button
                         id="rsvp-yes"
-                        class="rsvp-button yes"
+                        type="button"
                     >
-                        سأحضر
+                        بكل سرور سأحضر
                     </button>
+
 
                     <button
                         id="rsvp-no"
-                        class="rsvp-button no"
+                        type="button"
                     >
                         أعتذر عن الحضور
                     </button>
 
                 </div>
 
-                <p
+
+                <div
                     id="rsvp-result"
                     class="rsvp-result"
-                ></p>
+                ></div>
 
             </section>
 
 
-            <!-- =================================================
-                 CLOSING
-            ================================================== -->
 
-            <section class="closing-section">
-
-                <div class="closing-flower">
-                    ❀
-                </div>
-
-                <p id="invitation-closing">
-                    تشرفنا حضوركم ومشاركتكم فرحتنا
-                </p>
-
-                <div class="closing-heart">
-                    ♡
-                </div>
-
-            </section>
-
-
-            <!-- =================================================
-                 BOTTOM EMBROIDERY
-            ================================================== -->
+            <!-- Bottom embroidery -->
 
             <div class="bottom-embroidery">
 
-                <div class="embroidered-branch">
+                <svg
+                    viewBox="0 0 420 120"
+                    aria-hidden="true"
+                >
 
-                    <span>🌿</span>
-                    <span>🌸</span>
-                    <span>🌿</span>
-                    <span>🌷</span>
-                    <span>🌿</span>
-                    <span>🌸</span>
+                    <path
+                        class="ornament-line"
+                        d="M25 25 C75 80 110 85 145 50 C175 20 195 20 210 50 C225 20 245 20 275 50 C310 85 345 80 395 25"
+                    />
 
-                </div>
+                    <path
+                        class="ornament-line thin"
+                        d="M50 30 C85 65 115 70 145 43"
+                    />
+
+                    <path
+                        class="ornament-line thin"
+                        d="M370 30 C335 65 305 70 275 43"
+                    />
+
+                    <g class="ornament-flower">
+
+                        <circle cx="210" cy="50" r="10"/>
+                        <circle cx="193" cy="43" r="8"/>
+                        <circle cx="227" cy="43" r="8"/>
+                        <circle cx="201" cy="60" r="8"/>
+                        <circle cx="219" cy="60" r="8"/>
+                        <circle cx="210" cy="50" r="4"/>
+
+                    </g>
+
+                </svg>
 
             </div>
 
-        </div>
+
+            <p class="footer-text">
+                بكل الحب صممنا هذه الدعوة خصيصاً لكم
+            </p>
+
+        </article>
 
     </main>
 
