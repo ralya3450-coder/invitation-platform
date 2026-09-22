@@ -7,6 +7,7 @@
    DATA
 ========================================================= */
 
+
 /* =========================================================
    DESIGN COLOR COLLECTIONS
 ========================================================= */
@@ -235,9 +236,14 @@ const templateColors = {
     ]
 
 };
+
+
 const invitationData = {
 
     template: "",
+
+    color: "blush",
+    colorData: null,
 
     personOne: "",
     personTwo: "",
@@ -387,6 +393,11 @@ templateButtons.forEach((button) => {
                 template;
 
 
+            renderTemplateColors(
+                template
+            );
+
+
             templateCards.forEach((card) => {
 
                 card.classList.remove(
@@ -430,6 +441,8 @@ templateButtons.forEach((button) => {
     );
 
 });
+
+
 /* =========================================================
    COLOR SELECTOR
 ========================================================= */
@@ -601,6 +614,7 @@ function renderTemplateColors(templateId) {
 
 }
 
+
 /* =========================================================
    STEP 1 NEXT
 ========================================================= */
@@ -724,10 +738,12 @@ function collectCurrentStepData() {
             "person-one"
         );
 
+
     const personTwo =
         document.getElementById(
             "person-two"
         );
+
 
     const familyName =
         document.getElementById(
@@ -768,10 +784,12 @@ function collectCurrentStepData() {
             "event-type"
         );
 
+
     const eventDate =
         document.getElementById(
             "event-date"
         );
+
 
     const eventTime =
         document.getElementById(
@@ -812,10 +830,12 @@ function collectCurrentStepData() {
             "venue-name"
         );
 
+
     const venueCity =
         document.getElementById(
             "venue-city"
         );
+
 
     const venueMap =
         document.getElementById(
@@ -856,10 +876,12 @@ function collectCurrentStepData() {
             "invitation-title"
         );
 
+
     const invitationMessage =
         document.getElementById(
             "invitation-message"
         );
+
 
     const invitationClosing =
         document.getElementById(
@@ -900,10 +922,12 @@ function collectCurrentStepData() {
             "enable-rsvp"
         );
 
+
     const allowGuestCount =
         document.getElementById(
             "allow-guest-count"
         );
+
 
     const allowNotes =
         document.getElementById(
@@ -943,6 +967,7 @@ function collectCurrentStepData() {
         document.getElementById(
             "music-url"
         );
+
 
     const musicAutoplay =
         document.getElementById(
@@ -994,6 +1019,7 @@ function addGuest() {
         document.getElementById(
             "guest-name"
         );
+
 
     const countInput =
         document.getElementById(
@@ -1785,3 +1811,11 @@ if (publishButton) {
 loadData();
 
 showStep(1);
+
+if (invitationData.template) {
+
+    renderTemplateColors(
+        invitationData.template
+    );
+
+}
