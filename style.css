@@ -1643,3 +1643,217 @@ body {
     }
 
 }
+/* =========================================================
+   TEMPLATE COLOR OPTIONS
+========================================================= */
+
+.template-colors {
+    margin-top: 35px;
+
+    padding: 28px;
+
+    border: 1px solid #d7b88f;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf8,
+            #f8eee1
+        );
+
+    position: relative;
+
+    display: none;
+
+    animation:
+        colorPanelReveal
+        .45s
+        ease
+        both;
+}
+
+.template-colors.visible {
+    display: block;
+}
+
+@keyframes colorPanelReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+.color-selection-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 22px;
+}
+
+.color-selection-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f0dfca;
+
+    color: #a46f50;
+
+    font-size: 22px;
+}
+
+.color-selection-header h3 {
+    margin: 0;
+
+    color: #76553f;
+
+    font-size: 20px;
+}
+
+.color-selection-header p {
+    margin: 4px 0 0;
+
+    color: #9a8069;
+
+    font-size: 13px;
+}
+
+
+/* Color options */
+
+.color-options {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+}
+
+
+/* Individual color */
+
+.color-option {
+    min-width: 115px;
+
+    padding: 10px;
+
+    border: 1px solid #ddc7af;
+
+    background: #fffdf9;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.color-option:hover {
+    transform: translateY(-3px);
+
+    border-color: #b88965;
+
+    box-shadow:
+        0 8px 20px
+        rgba(113, 76, 48, .10);
+}
+
+.color-option.selected {
+    border-color: #9f684b;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(159, 104, 75, .16);
+}
+
+
+/* Swatch */
+
+.color-swatch {
+    height: 48px;
+
+    border-radius: 7px;
+
+    margin-bottom: 8px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* Small embroidery effect */
+
+.color-swatch::after {
+    content: "✿  ❀  ✿";
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: rgba(255,255,255,.8);
+
+    font-size: 15px;
+
+    text-shadow:
+        1px 1px 1px
+        rgba(0,0,0,.15);
+}
+
+
+.color-option-name {
+    display: block;
+
+    text-align: center;
+
+    color: #76553f;
+
+    font-size: 13px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .template-colors {
+        padding: 20px 15px;
+    }
+
+    .color-options {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .color-option {
+        min-width: 0;
+    }
+
+}
