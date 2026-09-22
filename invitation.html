@@ -19,158 +19,214 @@
 
 </head>
 
-
 <body>
 
-
-    <!-- =========================================
+    <!-- =====================================================
          ENVELOPE SCREEN
-    ========================================== -->
+    ====================================================== -->
 
-    <main
-        class="guest-page"
-        id="guest-page"
+    <section
+        id="envelope-screen"
+        class="envelope-screen"
     >
 
+        <div class="floating-thread thread-one"></div>
+        <div class="floating-thread thread-two"></div>
 
-        <div
-            class="background-decoration decoration-one"
-        ></div>
-
-        <div
-            class="background-decoration decoration-two"
-        ></div>
-
-
-        <section
-            class="envelope-screen"
-            id="envelope-screen"
-        >
-
-
-            <p class="envelope-small-text">
-                دعوة خاصة
-            </p>
-
+        <div class="envelope-area">
 
             <div
-                class="envelope"
                 id="envelope"
+                class="envelope"
             >
 
+                <!-- Back -->
+                <div class="envelope-back"></div>
 
-                <div class="envelope-back">
-
-                </div>
-
-
+                <!-- Inner paper -->
                 <div class="envelope-paper">
 
-                    <p>
+                    <div class="paper-border"></div>
+
+                    <div class="mini-flower flower-paper-one">
+                        ✿
+                    </div>
+
+                    <div class="mini-flower flower-paper-two">
+                        ✿
+                    </div>
+
+                    <p class="paper-small">
                         بكل حب
                     </p>
 
-                    <h1>
+                    <h2>
                         ندعوكم
-                    </h1>
+                    </h2>
 
-                    <span>
+                    <p>
                         لمشاركتنا فرحتنا
-                    </span>
+                    </p>
 
                 </div>
 
-
+                <!-- Flap -->
                 <div class="envelope-flap">
 
-                </div>
+                    <div class="flap-embroidery">
 
+                        <span>✿</span>
+                        <span>❀</span>
+                        <span>✿</span>
 
-                <div class="envelope-front">
-
-                    <div class="wax-seal">
-                        ✦
                     </div>
 
                 </div>
 
+                <!-- Front -->
+                <div class="envelope-front">
+
+                    <div class="embroidered-corner top-right">
+                        <span>❀</span>
+                        <span>✿</span>
+                        <span>❁</span>
+                    </div>
+
+                    <div class="embroidered-corner bottom-left">
+                        <span>❁</span>
+                        <span>✿</span>
+                        <span>❀</span>
+                    </div>
+
+                    <div class="envelope-center">
+
+                        <div class="wax-seal">
+
+                            <span>♥</span>
+
+                        </div>
+
+                        <p class="to-label">
+                            إلى
+                        </p>
+
+                        <h1 id="guest-name">
+                            ضيفنا العزيز
+                        </h1>
+
+                        <div class="thread-divider">
+                            <span></span>
+                            <b>✿</b>
+                            <span></span>
+                        </div>
+
+                        <p class="special-invitation">
+                            دعوة خاصة
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
+        </div>
 
-            <div class="recipient">
+        <div class="envelope-bottom">
 
-                <span>
-                    دعوة خاصة إلى
-                </span>
-
-                <h2 id="guest-name">
-                    ضيفنا العزيز
-                </h2>
-
-            </div>
-
+            <p>
+                اسحب لفتح الدعوة
+            </p>
 
             <button
-                class="open-button"
                 id="open-invitation"
+                class="open-button"
             >
                 فتح الدعوة
             </button>
 
+        </div>
 
-        </section>
-
-
-
-        <!-- =====================================
-             MAIN INVITATION
-        ====================================== -->
-
-        <section
-            class="main-invitation"
-            id="main-invitation"
-        >
+    </section>
 
 
-            <div class="invitation-inner">
+    <!-- =====================================================
+         MAIN INVITATION
+    ====================================================== -->
+
+    <main
+        id="main-invitation"
+        class="main-invitation"
+    >
+
+        <!-- Decorative threads -->
+
+        <div class="page-thread page-thread-top"></div>
+        <div class="page-thread page-thread-bottom"></div>
 
 
-                <p class="invitation-label">
+        <div class="invitation-card">
+
+            <!-- =================================================
+                 TOP DECORATION
+            ================================================== -->
+
+            <div class="top-decoration">
+
+                <div class="flower-stem stem-left">
+                    <span class="leaf leaf-one"></span>
+                    <span class="leaf leaf-two"></span>
+                    <span class="embroidered-flower">✿</span>
+                </div>
+
+                <div class="top-center">
+
+                    <span class="tiny-line"></span>
+
+                    <span class="ornament">
+                        ❀
+                    </span>
+
+                    <span class="tiny-line"></span>
+
+                </div>
+
+                <div class="flower-stem stem-right">
+                    <span class="leaf leaf-one"></span>
+                    <span class="leaf leaf-two"></span>
+                    <span class="embroidered-flower">✿</span>
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 INTRO
+            ================================================== -->
+
+            <section class="invitation-intro">
+
+                <p class="bismillah">
                     بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ
                 </p>
 
-
-                <div class="ornament">
-                    ✦
-                </div>
-
-
-                <p class="invitation-intro">
+                <p class="intro-small">
                     بكل حب وسعادة
                 </p>
 
-
-                <h1
-                    class="couple-names"
-                    id="couple-names"
-                >
-                    محمد & سارة
+                <h1 id="couple-names">
+                    محمد &amp; سارة
                 </h1>
 
-
-                <div class="ornament">
-                    ❦
+                <div class="gold-thread-line">
+                    <span></span>
+                    <i>❀</i>
+                    <span></span>
                 </div>
 
-
-                <h2
-                    id="invitation-title"
-                    class="invitation-title"
-                >
+                <h2 id="invitation-title">
                     يسعدنا دعوتكم لمشاركتنا فرحتنا
                 </h2>
-
 
                 <p
                     id="invitation-message"
@@ -179,190 +235,380 @@
                     نتشرف بحضوركم ومشاركتكم أجمل لحظاتنا.
                 </p>
 
-
-                <!-- EVENT -->
-
-                <div class="event-details">
+            </section>
 
 
-                    <div class="detail">
+            <!-- =================================================
+                 ILLUSTRATION
+            ================================================== -->
 
-                        <span class="detail-icon">
+            <section
+                id="illustration-area"
+                class="illustration-area"
+            >
+
+                <!-- Wedding -->
+
+                <div
+                    id="wedding-illustration"
+                    class="illustration wedding-illustration"
+                >
+
+                    <div class="castle castle-left">
+                        🏰
+                    </div>
+
+                    <div class="bride">
+
+                        <div class="bride-head">
                             ♡
-                        </span>
+                        </div>
 
-                        <span class="detail-label">
-                            المناسبة
-                        </span>
-
-                        <strong id="event-type">
-                            حفل زفاف
-                        </strong>
+                        <div class="bride-body">
+                            👰🏻‍♀️
+                        </div>
 
                     </div>
 
+                    <div class="groom">
 
-                    <div class="detail">
-
-                        <span class="detail-icon">
-                            ◇
-                        </span>
-
-                        <span class="detail-label">
-                            التاريخ
-                        </span>
-
-                        <strong id="event-date">
-                            الخميس، 22 أكتوبر
-                        </strong>
+                        <div class="groom-body">
+                            🤵🏻‍♂️
+                        </div>
 
                     </div>
 
+                    <div class="flower-ground">
 
-                    <div class="detail">
-
-                        <span class="detail-icon">
-                            ◷
-                        </span>
-
-                        <span class="detail-label">
-                            الوقت
-                        </span>
-
-                        <strong id="event-time">
-                            8:00 مساءً
-                        </strong>
+                        <span>🌸</span>
+                        <span>🌿</span>
+                        <span>🌷</span>
+                        <span>🌿</span>
+                        <span>🌸</span>
 
                     </div>
-
-
-                    <div class="detail">
-
-                        <span class="detail-icon">
-                            ♧
-                        </span>
-
-                        <span class="detail-label">
-                            المكان
-                        </span>
-
-                        <strong id="venue-name">
-                            قاعة اللؤلؤة
-                        </strong>
-
-                        <small id="venue-city">
-                            الرياض
-                        </small>
-
-                    </div>
-
 
                 </div>
 
 
-                <!-- GUEST -->
+                <!-- Baby -->
 
-                <div class="guest-message">
+                <div
+                    id="baby-illustration"
+                    class="illustration baby-illustration"
+                >
 
-                    <p>
-                        نتشرف بحضور
-                    </p>
+                    <div class="cloud">
+                        ☁️
+                    </div>
 
-                    <h2 id="personalized-name">
-                        ضيفنا العزيز
-                    </h2>
+                    <div class="baby-drawing">
+                        🧸
+                    </div>
 
-                    <span>
-                        وعدد
-                        <strong id="allowed-guests">
-                            1
-                        </strong>
-                        من الأشخاص
+                    <div class="baby-stars">
+                        ✦　✧　✦
+                    </div>
+
+                </div>
+
+
+                <!-- Birthday -->
+
+                <div
+                    id="birthday-illustration"
+                    class="illustration birthday-illustration"
+                >
+
+                    <div class="birthday-cake">
+                        🎂
+                    </div>
+
+                    <div class="birthday-balloons">
+                        🎈　🎈　🎈
+                    </div>
+
+                    <div class="birthday-stars">
+                        ✦　✧　✦
+                    </div>
+
+                </div>
+
+
+                <!-- Graduation -->
+
+                <div
+                    id="graduation-illustration"
+                    class="illustration graduation-illustration"
+                >
+
+                    <div class="graduation-cap">
+                        🎓
+                    </div>
+
+                    <div class="graduation-scroll">
+                        📜
+                    </div>
+
+                    <div class="graduation-stars">
+                        ✦　✧　✦
+                    </div>
+
+                </div>
+
+
+                <!-- Children / Castle -->
+
+                <div
+                    id="children-illustration"
+                    class="illustration children-illustration"
+                >
+
+                    <div class="fairytale-castle">
+                        🏰
+                    </div>
+
+                    <div class="children-drawing">
+                        🧸
+                    </div>
+
+                    <div class="castle-stars">
+                        ✦　✧　✦
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 EVENT DETAILS
+            ================================================== -->
+
+            <section class="event-details">
+
+                <div class="detail-card">
+
+                    <span class="detail-icon">
+                        ♡
                     </span>
 
+                    <small>
+                        المناسبة
+                    </small>
+
+                    <strong id="event-type">
+                        حفل زفاف
+                    </strong>
+
                 </div>
 
 
-                <!-- MAP -->
+                <div class="detail-card">
+
+                    <span class="detail-icon">
+                        ♡
+                    </span>
+
+                    <small>
+                        التاريخ
+                    </small>
+
+                    <strong id="event-date">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-card">
+
+                    <span class="detail-icon">
+                        ◷
+                    </span>
+
+                    <small>
+                        الوقت
+                    </small>
+
+                    <strong id="event-time">
+                        —
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-card">
+
+                    <span class="detail-icon">
+                        ⌖
+                    </span>
+
+                    <small>
+                        المكان
+                    </small>
+
+                    <strong id="venue-name">
+                        —
+                    </strong>
+
+                    <em id="venue-city">
+                        —
+                    </em>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 GUEST
+            ================================================== -->
+
+            <section class="guest-section">
+
+                <div class="guest-flower">
+                    ❀
+                </div>
+
+                <p>
+                    نتشرف بحضور
+                </p>
+
+                <h2 id="personalized-name">
+                    أم عبدالله
+                </h2>
+
+                <p class="guest-count">
+
+                    ونسعد بحضوركم بعدد
+
+                    <strong id="allowed-guests">
+                        1
+                    </strong>
+
+                    من الأشخاص
+
+                </p>
+
+                <div class="guest-thread">
+
+                    <span></span>
+                    <i>✿</i>
+                    <span></span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MAP
+            ================================================== -->
+
+            <section class="map-section">
 
                 <a
-                    href="#"
                     id="map-link"
-                    class="map-button"
+                    href="#"
                     target="_blank"
+                    class="map-button"
                 >
+                    <span>⌖</span>
                     عرض الموقع
                 </a>
 
-
-                <!-- RSVP -->
-
-                <div
-                    class="rsvp-section"
-                    id="rsvp-section"
-                >
-
-                    <h2>
-                        تأكيد الحضور
-                    </h2>
-
-                    <p>
-                        يسعدنا تأكيد حضوركم.
-                    </p>
+            </section>
 
 
-                    <div class="rsvp-buttons">
+            <!-- =================================================
+                 RSVP
+            ================================================== -->
 
-                        <button
-                            class="rsvp-yes"
-                            id="rsvp-yes"
-                        >
-                            سأحضر
-                        </button>
+            <section
+                id="rsvp-section"
+                class="rsvp-section"
+            >
 
-                        <button
-                            class="rsvp-no"
-                            id="rsvp-no"
-                        >
-                            أعتذر عن الحضور
-                        </button>
+                <div class="rsvp-decoration">
+                    ❀
+                </div>
 
-                    </div>
+                <h2>
+                    تأكيد الحضور
+                </h2>
 
+                <p>
+                    يسعدنا تأكيد حضوركم
+                </p>
 
-                    <div
-                        class="rsvp-result"
-                        id="rsvp-result"
-                    ></div>
+                <div class="rsvp-buttons">
+
+                    <button
+                        id="rsvp-yes"
+                        class="rsvp-button yes"
+                    >
+                        سأحضر
+                    </button>
+
+                    <button
+                        id="rsvp-no"
+                        class="rsvp-button no"
+                    >
+                        أعتذر عن الحضور
+                    </button>
 
                 </div>
 
-
                 <p
-                    class="closing"
-                    id="invitation-closing"
-                >
+                    id="rsvp-result"
+                    class="rsvp-result"
+                ></p>
+
+            </section>
+
+
+            <!-- =================================================
+                 CLOSING
+            ================================================== -->
+
+            <section class="closing-section">
+
+                <div class="closing-flower">
+                    ❀
+                </div>
+
+                <p id="invitation-closing">
                     تشرفنا حضوركم ومشاركتكم فرحتنا
                 </p>
 
-
-                <div class="ornament">
-                    ✦
+                <div class="closing-heart">
+                    ♡
                 </div>
 
+            </section>
 
-                <footer>
 
-                    هذه الدعوة إلكترونية
+            <!-- =================================================
+                 BOTTOM EMBROIDERY
+            ================================================== -->
 
-                </footer>
+            <div class="bottom-embroidery">
 
+                <div class="embroidered-branch">
+
+                    <span>🌿</span>
+                    <span>🌸</span>
+                    <span>🌿</span>
+                    <span>🌷</span>
+                    <span>🌿</span>
+                    <span>🌸</span>
+
+                </div>
 
             </div>
 
-
-        </section>
-
+        </div>
 
     </main>
 
