@@ -9,6 +9,7 @@ const defaultInvitation = {
     color: "blush",
 
     personOne: "محمد",
+
     personTwo: "سارة",
 
     familyName: "",
@@ -50,9 +51,12 @@ const defaultInvitation = {
 
     ],
 
-    enableRSVP: true
+    enableRSVP: true,
+
+    allowGuestCount: false
 
 };
+
 
 
 /* =========================================================
@@ -70,13 +74,26 @@ function getInvitationData() {
 
         if (!saved) {
 
-            return defaultInvitation;
+            return {
+                ...defaultInvitation
+            };
 
         }
 
+        const parsed =
+            JSON.parse(saved);
+
         return {
+
             ...defaultInvitation,
-            ...JSON.parse(saved)
+
+            ...parsed,
+
+            guests:
+                Array.isArray(parsed.guests)
+                    ? parsed.guests
+                    : defaultInvitation.guests
+
         };
 
     } catch (error) {
@@ -86,74 +103,71 @@ function getInvitationData() {
             error
         );
 
-        return defaultInvitation;
+        return {
+            ...defaultInvitation
+        };
 
     }
 
 }
 
 
+
 /* =========================================================
-   URL GUEST
+   TEMPLATE + COLOR
 ========================================================= */
 
-function getGuestFromURL(data) {
+function applyTemplate(
+    template,
+    color
+) {
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
+    document.body.dataset.template =
+        template || "floral";
 
-    const guestId =
-        params.get("guest");
 
-    if (!guestId) {
-
-        return {
-            name: "ضيفنا العزيز",
-            count: 1
-        };
-
-    }
-
-    const guest =
-        data.guests?.find(
-            item =>
-                String(item.id) ===
-                String(guestId)
-        );
-
-    if (!guest) {
-
-        return {
-            name: "ضيفنا العزيز",
-            count: 1
-        };
-
-    }
-
-    return guest;
+    document.body.dataset.color =
+        color || "blush";
 
 }
 
 
+
 /* =========================================================
-   EVENT TYPE
+   EVENT CATEGORY
 ========================================================= */
 
-function getEventCategory(eventType) {
+function getEventCategory(
+    eventType
+) {
 
-    const text =
+    const value =
         String(eventType || "")
-            .toLowerCase();
+            .toLowerCase()
+            .trim();
 
 
     if (
-        text.includes("مولود") ||
-        text.includes("بيبي") ||
-        text.includes("baby") ||
-        text.includes("سبوع") ||
-        text.includes("ولادة")
+        value.includes("زواج") ||
+        value.includes("زفاف") ||
+        value.includes("عرس") ||
+        value.includes("wedding") ||
+        value.includes("marriage")
+    ) {
+
+        return "wedding";
+
+    }
+
+
+    if (
+        value.includes("مولود") ||
+        value.includes("مولوده") ||
+        value.includes("مولودة") ||
+        value.includes("بيبي") ||
+        value.includes("طفل") ||
+        value.includes("baby") ||
+        value.includes("newborn")
     ) {
 
         return "baby";
@@ -162,9 +176,8 @@ function getEventCategory(eventType) {
 
 
     if (
-        text.includes("ميلاد") ||
-        text.includes("birthday") ||
-        text.includes("عيد ميلاد")
+        value.includes("ميلاد") ||
+        value.includes("birthday")
     ) {
 
         return "birthday";
@@ -173,9 +186,9 @@ function getEventCategory(eventType) {
 
 
     if (
-        text.includes("تخرج") ||
-        text.includes("graduation") ||
-        text.includes("تخرّج")
+        value.includes("تخرج") ||
+        value.includes("تخرّج") ||
+        value.includes("graduation")
     ) {
 
         return "graduation";
@@ -184,11 +197,13 @@ function getEventCategory(eventType) {
 
 
     if (
-        text.includes("طفل") ||
-        text.includes("أطفال") ||
-        text.includes("بنات") ||
-        text.includes("أولاد") ||
-        text.includes("castle")
+        value.includes("أطفال") ||
+        value.includes("اطفال") ||
+        value.includes("طفولة") ||
+        value.includes("أميرة") ||
+        value.includes("اميرة") ||
+        value.includes("fairytale") ||
+        value.includes("children")
     ) {
 
         return "children";
@@ -201,11 +216,14 @@ function getEventCategory(eventType) {
 }
 
 
+
 /* =========================================================
    SHOW ILLUSTRATION
 ========================================================= */
 
-function showIllustration(category) {
+function showIllustration(
+    category
+) {
 
     const illustrations =
         document.querySelectorAll(
@@ -214,7 +232,7 @@ function showIllustration(category) {
 
 
     illustrations.forEach(
-        illustration => {
+        (illustration) => {
 
             illustration.classList.remove(
                 "active"
@@ -241,108 +259,270 @@ function showIllustration(category) {
 }
 
 
-/* =========================================================
-   APPLY TEMPLATE + COLOR
-========================================================= */
-
-function applyTemplate(template, color) {
-
-    document.body.dataset.template =
-        template || "floral";
-
-
-    document.body.dataset.color =
-        color || "blush";
-
-}
-
 
 /* =========================================================
    FORMAT DATE
 ========================================================= */
 
-function formatDate(dateString) {
+function formatArabicDate(
+    dateValue
+) {
 
-    if (!dateString) {
+    if (!dateValue) {
 
         return "—";
 
     }
 
 
-    try {
+    const date =
+        new Date(
+            `${dateValue}T00:00:00`
+        );
 
-        const date =
-            new Date(dateString);
 
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
 
-        return new Intl.DateTimeFormat(
-            "ar-SA",
-            {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        ).format(date);
-
-    } catch {
-
-        return dateString;
+        return dateValue;
 
     }
 
+
+    return new Intl.DateTimeFormat(
+        "ar-SA",
+        {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        }
+    ).format(date);
+
 }
+
 
 
 /* =========================================================
    FORMAT TIME
 ========================================================= */
 
-function formatTime(timeString) {
+function formatArabicTime(
+    timeValue
+) {
 
-    if (!timeString) {
+    if (!timeValue) {
 
         return "—";
 
     }
 
 
-    try {
-
-        const [hours, minutes] =
-            timeString.split(":");
+    const parts =
+        String(timeValue).split(":");
 
 
-        const date =
-            new Date();
+    if (parts.length < 2) {
+
+        return timeValue;
+
+    }
 
 
-        date.setHours(
-            Number(hours),
-            Number(minutes)
+    let hour =
+        parseInt(
+            parts[0],
+            10
         );
 
 
-        return new Intl.DateTimeFormat(
-            "ar-SA",
-            {
-                hour: "numeric",
-                minute: "2-digit"
-            }
-        ).format(date);
+    const minute =
+        parts[1];
 
-    } catch {
 
-        return timeString;
+    if (
+        Number.isNaN(hour)
+    ) {
+
+        return timeValue;
+
+    }
+
+
+    const period =
+        hour >= 12
+            ? "مساءً"
+            : "صباحاً";
+
+
+    if (hour === 0) {
+
+        hour = 12;
+
+    } else if (hour > 12) {
+
+        hour -= 12;
+
+    }
+
+
+    return `${hour}:${minute} ${period}`;
+
+}
+
+
+
+/* =========================================================
+   GET GUEST FROM URL
+========================================================= */
+
+function getGuestFromURL(
+    data
+) {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const guestParameter =
+        params.get("guest");
+
+
+    if (!guestParameter) {
+
+        return null;
+
+    }
+
+
+    /*
+        Supports:
+
+        ?guest=1
+        ?guest=2
+
+        and also:
+
+        ?guest=guest-id
+    */
+
+
+    const numericID =
+        Number(
+            guestParameter
+        );
+
+
+    if (
+        !Number.isNaN(
+            numericID
+        )
+    ) {
+
+        return (
+            data.guests || []
+        ).find(
+            (guest) =>
+                Number(guest.id) ===
+                numericID
+        );
+
+    }
+
+
+    return (
+        data.guests || []
+    ).find(
+        (guest) =>
+            String(guest.id) ===
+            String(guestParameter)
+    );
+
+}
+
+
+
+/* =========================================================
+   POPULATE GUEST
+========================================================= */
+
+function populateGuest(
+    guest
+) {
+
+    const guestName =
+        guest?.name ||
+        "ضيفنا العزيز";
+
+
+    const guestElement =
+        document.getElementById(
+            "guest-name"
+        );
+
+
+    const personalizedName =
+        document.getElementById(
+            "personalized-name"
+        );
+
+
+    if (guestElement) {
+
+        guestElement.textContent =
+            guestName;
+
+    }
+
+
+    if (personalizedName) {
+
+        personalizedName.textContent =
+            guestName;
+
+    }
+
+
+    const allowedGuests =
+        document.getElementById(
+            "allowed-guests"
+        );
+
+
+    if (!allowedGuests) {
+
+        return;
+
+    }
+
+
+    if (
+        guest &&
+        guest.count &&
+        Number(guest.count) > 1
+    ) {
+
+        allowedGuests.textContent =
+            `يشرفنا حضوركم برفقة ${guest.count} أشخاص`;
+
+    } else {
+
+        allowedGuests.textContent =
+            "ننتظركم بكل شوق";
 
     }
 
 }
 
 
+
 /* =========================================================
-   POPULATE
+   POPULATE INVITATION
 ========================================================= */
 
 function populateInvitation() {
@@ -351,165 +531,9 @@ function populateInvitation() {
         getInvitationData();
 
 
-    const guest =
-        getGuestFromURL(data);
-
-
-    /* =====================================================
-       GUEST
-    ===================================================== */
-
-    document.getElementById(
-        "guest-name"
-    ).textContent =
-        guest.name;
-
-
-    document.getElementById(
-        "personalized-name"
-    ).textContent =
-        guest.name;
-
-
-    document.getElementById(
-        "allowed-guests"
-    ).textContent =
-        guest.count || 1;
-
-
-    /* =====================================================
-       COUPLE
-    ===================================================== */
-
-    const personOne =
-        data.personOne || "";
-
-
-    const personTwo =
-        data.personTwo || "";
-
-
-    let coupleName =
-        `${personOne} & ${personTwo}`;
-
-
-    if (
-        !personOne &&
-        !personTwo
-    ) {
-
-        coupleName =
-            data.familyName ||
-            "دعوتنا الخاصة";
-
-    }
-
-
-    document.getElementById(
-        "couple-names"
-    ).textContent =
-        coupleName;
-
-
-    /* =====================================================
-       TEXT
-    ===================================================== */
-
-    document.getElementById(
-        "invitation-title"
-    ).textContent =
-        data.invitationTitle ||
-        "يسعدنا دعوتكم لمشاركتنا فرحتنا";
-
-
-    document.getElementById(
-        "invitation-message"
-    ).textContent =
-        data.invitationMessage ||
-        "نتشرف بحضوركم ومشاركتكم أجمل لحظاتنا.";
-
-
-    document.getElementById(
-        "invitation-closing"
-    ).textContent =
-        data.invitationClosing ||
-        "تشرفنا حضوركم ومشاركتكم فرحتنا";
-
-
-    /* =====================================================
-       EVENT
-    ===================================================== */
-
-    document.getElementById(
-        "event-type"
-    ).textContent =
-        data.eventType ||
-        "المناسبة";
-
-
-    document.getElementById(
-        "event-date"
-    ).textContent =
-        formatDate(
-            data.eventDate
-        );
-
-
-    document.getElementById(
-        "event-time"
-    ).textContent =
-        formatTime(
-            data.eventTime
-        );
-
-
-    document.getElementById(
-        "venue-name"
-    ).textContent =
-        data.venueName ||
-        "—";
-
-
-    document.getElementById(
-        "venue-city"
-    ).textContent =
-        data.venueCity ||
-        "—";
-
-
-    /* =====================================================
-       MAP
-    ===================================================== */
-
-    const mapLink =
-        document.getElementById(
-            "map-link"
-        );
-
-
-    if (
-        data.venueMap &&
-        data.venueMap !== "#"
-    ) {
-
-        mapLink.href =
-            data.venueMap;
-
-
-        mapLink.style.display =
-            "inline-flex";
-
-    } else {
-
-        mapLink.style.display =
-            "none";
-
-    }
-
-
-    /* =====================================================
-       TEMPLATE + COLOR
-    ===================================================== */
+    /* -------------------------------
+       DESIGN
+    -------------------------------- */
 
     applyTemplate(
         data.template,
@@ -517,9 +541,9 @@ function populateInvitation() {
     );
 
 
-    /* =====================================================
-       ILLUSTRATION
-    ===================================================== */
+    /* -------------------------------
+       CATEGORY
+    -------------------------------- */
 
     const category =
         getEventCategory(
@@ -532,26 +556,261 @@ function populateInvitation() {
     );
 
 
-    /* =====================================================
+    /* -------------------------------
+       COUPLE
+    -------------------------------- */
+
+    const coupleNames =
+        document.getElementById(
+            "couple-names"
+        );
+
+
+    if (coupleNames) {
+
+        let names =
+            data.personOne ||
+            "";
+
+
+        if (data.personTwo) {
+
+            names +=
+                ` & ${data.personTwo}`;
+
+        }
+
+
+        if (
+            data.familyName &&
+            data.familyName.trim()
+        ) {
+
+            names +=
+                ` ${data.familyName}`;
+
+        }
+
+
+        coupleNames.textContent =
+            names || "محمد & سارة";
+
+    }
+
+
+    /* -------------------------------
+       TITLE
+    -------------------------------- */
+
+    const title =
+        document.getElementById(
+            "invitation-title"
+        );
+
+
+    if (title) {
+
+        title.textContent =
+            data.invitationTitle ||
+            "يسعدنا دعوتكم لمشاركتنا فرحتنا";
+
+    }
+
+
+    /* -------------------------------
+       MESSAGE
+    -------------------------------- */
+
+    const message =
+        document.getElementById(
+            "invitation-message"
+        );
+
+
+    if (message) {
+
+        message.textContent =
+            data.invitationMessage ||
+            "نتشرف بحضوركم ومشاركتكم أجمل لحظاتنا.";
+
+    }
+
+
+    /* -------------------------------
+       CLOSING
+    -------------------------------- */
+
+    const closing =
+        document.getElementById(
+            "invitation-closing"
+        );
+
+
+    if (closing) {
+
+        closing.textContent =
+            data.invitationClosing ||
+            "تشرفنا حضوركم ومشاركتكم فرحتنا";
+
+    }
+
+
+    /* -------------------------------
+       DATE
+    -------------------------------- */
+
+    const eventDate =
+        document.getElementById(
+            "event-date"
+        );
+
+
+    if (eventDate) {
+
+        eventDate.textContent =
+            formatArabicDate(
+                data.eventDate
+            );
+
+    }
+
+
+    /* -------------------------------
+       TIME
+    -------------------------------- */
+
+    const eventTime =
+        document.getElementById(
+            "event-time"
+        );
+
+
+    if (eventTime) {
+
+        eventTime.textContent =
+            formatArabicTime(
+                data.eventTime
+            );
+
+    }
+
+
+    /* -------------------------------
+       VENUE
+    -------------------------------- */
+
+    const venueName =
+        document.getElementById(
+            "venue-name"
+        );
+
+
+    const venueCity =
+        document.getElementById(
+            "venue-city"
+        );
+
+
+    if (venueName) {
+
+        venueName.textContent =
+            data.venueName ||
+            "—";
+
+    }
+
+
+    if (venueCity) {
+
+        venueCity.textContent =
+            data.venueCity ||
+            "—";
+
+    }
+
+
+    /* -------------------------------
+       MAP
+    -------------------------------- */
+
+    const mapLink =
+        document.getElementById(
+            "map-link"
+        );
+
+
+    if (mapLink) {
+
+        if (
+            data.venueMap &&
+            data.venueMap !== "#"
+        ) {
+
+            mapLink.href =
+                data.venueMap;
+
+            mapLink.style.display =
+                "inline-flex";
+
+        } else {
+
+            mapLink.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /* -------------------------------
+       GUEST
+    -------------------------------- */
+
+    const guest =
+        getGuestFromURL(
+            data
+        );
+
+
+    populateGuest(
+        guest
+    );
+
+
+    /* -------------------------------
        RSVP
-    ===================================================== */
+    -------------------------------- */
 
-    if (
-        data.enableRSVP === false
-    ) {
-
+    const rsvpSection =
         document.getElementById(
             "rsvp-section"
-        ).style.display =
-            "none";
+        );
+
+
+    if (rsvpSection) {
+
+        if (
+            data.enableRSVP === false
+        ) {
+
+            rsvpSection.style.display =
+                "none";
+
+        } else {
+
+            rsvpSection.style.display =
+                "";
+
+        }
 
     }
 
 }
 
 
+
 /* =========================================================
-   OPEN INVITATION
+   OPEN ENVELOPE
 ========================================================= */
 
 function openInvitation() {
@@ -562,16 +821,29 @@ function openInvitation() {
         );
 
 
-    const screen =
+    const envelopeScreen =
         document.getElementById(
             "envelope-screen"
         );
 
 
-    const main =
+    const mainInvitation =
         document.getElementById(
             "main-invitation"
         );
+
+
+    const openButton =
+        document.getElementById(
+            "open-invitation"
+        );
+
+
+    if (!envelope) {
+
+        return;
+
+    }
 
 
     envelope.classList.add(
@@ -579,27 +851,50 @@ function openInvitation() {
     );
 
 
-    setTimeout(() => {
+    if (openButton) {
 
-        screen.classList.add(
-            "hidden"
-        );
+        openButton.disabled =
+            true;
 
+        openButton.style.opacity =
+            "0.5";
 
-        main.classList.add(
-            "visible"
-        );
-
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+    }
 
 
-    }, 1000);
+    setTimeout(
+        () => {
+
+            if (mainInvitation) {
+
+                mainInvitation.classList.add(
+                    "visible"
+                );
+
+            }
+
+        },
+        700
+    );
+
+
+    setTimeout(
+        () => {
+
+            if (envelopeScreen) {
+
+                envelopeScreen.classList.add(
+                    "opened"
+                );
+
+            }
+
+        },
+        1500
+    );
 
 }
+
 
 
 /* =========================================================
@@ -608,13 +903,13 @@ function openInvitation() {
 
 function setupRSVP() {
 
-    const yes =
+    const yesButton =
         document.getElementById(
             "rsvp-yes"
         );
 
 
-    const no =
+    const noButton =
         document.getElementById(
             "rsvp-no"
         );
@@ -626,32 +921,137 @@ function setupRSVP() {
         );
 
 
-    yes.addEventListener(
-        "click",
-        () => {
+    if (!result) {
 
-            result.textContent =
-                "تم تأكيد حضوركم بكل سرور ♡";
+        return;
 
-        }
-    );
+    }
 
 
-    no.addEventListener(
-        "click",
-        () => {
+    if (yesButton) {
 
-            result.textContent =
-                "شكرًا لإبلاغنا، ونتمنى أن نلتقي بكم في مناسبة قادمة ♡";
+        yesButton.addEventListener(
+            "click",
+            () => {
 
-        }
-    );
+                result.textContent =
+                    "شكراً لتأكيد حضوركم، يسعدنا استقبالكم ♥";
+
+                result.dataset.status =
+                    "yes";
+
+            }
+        );
+
+    }
+
+
+    if (noButton) {
+
+        noButton.addEventListener(
+            "click",
+            () => {
+
+                result.textContent =
+                    "شكراً لإبلاغنا، نتمنى أن نلتقي بكم في مناسبات قادمة.";
+
+                result.dataset.status =
+                    "no";
+
+            }
+        );
+
+    }
 
 }
 
 
+
 /* =========================================================
-   START
+   MUSIC
+========================================================= */
+
+function setupMusic() {
+
+    const data =
+        getInvitationData();
+
+
+    if (!data.musicUrl) {
+
+        return;
+
+    }
+
+
+    const audio =
+        document.createElement(
+            "audio"
+        );
+
+
+    audio.id =
+        "invitation-music";
+
+    audio.src =
+        data.musicUrl;
+
+    audio.loop =
+        true;
+
+    audio.preload =
+        "auto";
+
+
+    document.body.appendChild(
+        audio
+    );
+
+
+    /*
+       Browsers may block autoplay.
+       We therefore start the music
+       after the visitor opens the envelope.
+    */
+
+
+    const openButton =
+        document.getElementById(
+            "open-invitation"
+        );
+
+
+    if (openButton) {
+
+        openButton.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    data.musicAutoplay !== false
+                ) {
+
+                    audio.play()
+                        .catch(
+                            () => {}
+                        );
+
+                }
+
+            },
+            {
+                once: true
+            }
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   PAGE START
 ========================================================= */
 
 document.addEventListener(
@@ -662,15 +1062,23 @@ document.addEventListener(
 
         setupRSVP();
 
+        setupMusic();
 
-        document
-            .getElementById(
+
+        const openButton =
+            document.getElementById(
                 "open-invitation"
-            )
-            .addEventListener(
+            );
+
+
+        if (openButton) {
+
+            openButton.addEventListener(
                 "click",
                 openInvitation
             );
+
+        }
 
     }
 );
