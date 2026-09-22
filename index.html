@@ -21,7 +21,505 @@
 
     <main id="app">
 
-        <!-- The invitation builder will go here -->
+        <!-- =========================================
+             STEP 1 — CHOOSE DESIGN
+        ========================================== -->
+
+        <section class="design-page">
+
+            <header class="top-bar">
+
+                <div class="brand">
+                    <span class="brand-mark">✦</span>
+                    <span>دعوتي</span>
+                </div>
+
+                <div class="step-indicator">
+                    <span class="step-number">1</span>
+                    <span>اختيار التصميم</span>
+                </div>
+
+            </header>
+
+
+            <div class="design-header">
+
+                <p class="eyebrow">
+                    اصنع دعوتك الخاصة
+                </p>
+
+                <h1>
+                    اختر تصميم دعوتك
+                </h1>
+
+                <p class="subtitle">
+                    اختر التصميم الذي يعبر عن مناسبتك،
+                    ويمكنك تخصيصه بالكامل في الخطوات القادمة.
+                </p>
+
+            </div>
+
+
+            <!-- =====================================
+                 SEARCH
+            ====================================== -->
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="text"
+                    id="template-search"
+                    placeholder="ابحث عن تصميم..."
+                >
+
+            </div>
+
+
+            <!-- =====================================
+                 CATEGORIES
+            ====================================== -->
+
+            <div
+                class="categories"
+                id="categories"
+            >
+
+                <button
+                    class="category active"
+                    data-category="all"
+                >
+                    الكل
+                </button>
+
+                <button
+                    class="category"
+                    data-category="luxury"
+                >
+                    فاخر
+                </button>
+
+                <button
+                    class="category"
+                    data-category="modern"
+                >
+                    عصري
+                </button>
+
+                <button
+                    class="category"
+                    data-category="minimal"
+                >
+                    بسيط
+                </button>
+
+                <button
+                    class="category"
+                    data-category="arabic"
+                >
+                    عربي
+                </button>
+
+                <button
+                    class="category"
+                    data-category="floral"
+                >
+                    ورود
+                </button>
+
+                <button
+                    class="category"
+                    data-category="royal"
+                >
+                    ملكي
+                </button>
+
+                <button
+                    class="category"
+                    data-category="dark"
+                >
+                    داكن
+                </button>
+
+                <button
+                    class="category"
+                    data-category="romantic"
+                >
+                    رومانسي
+                </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 TEMPLATES
+            ====================================== -->
+
+            <div
+                class="templates-grid"
+                id="templates-grid"
+            >
+
+                <!-- Template 01 -->
+
+                <article
+                    class="template-card"
+                    data-template="01"
+                    data-category="luxury"
+                    data-name="Golden Elegance"
+                >
+
+                    <div class="template-preview template-one">
+
+                        <div class="preview-decoration">
+                            ✦
+                        </div>
+
+                        <div class="preview-content">
+
+                            <span>
+                                دعوة زفاف
+                            </span>
+
+                            <h2>
+                                أحمد
+                                <small>&</small>
+                                سارة
+                            </h2>
+
+                            <p>
+                                28 أكتوبر 2026
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="template-info">
+
+                        <div>
+                            <h3>
+                                Golden Elegance
+                            </h3>
+
+                            <p>
+                                فاخر · ذهبي
+                            </p>
+                        </div>
+
+                        <button
+                            class="select-template"
+                            data-template="01"
+                        >
+                            اختيار
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Template 02 -->
+
+                <article
+                    class="template-card"
+                    data-template="02"
+                    data-category="modern"
+                    data-name="Modern Ivory"
+                >
+
+                    <div class="template-preview template-two">
+
+                        <div class="preview-content">
+
+                            <span>
+                                بِسْمِ الله
+                            </span>
+
+                            <h2>
+                                أحمد
+                                <small>&</small>
+                                سارة
+                            </h2>
+
+                            <p>
+                                بكل حب نشارككم فرحتنا
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="template-info">
+
+                        <div>
+                            <h3>
+                                Modern Ivory
+                            </h3>
+
+                            <p>
+                                عصري · عاجي
+                            </p>
+                        </div>
+
+                        <button
+                            class="select-template"
+                            data-template="02"
+                        >
+                            اختيار
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Template 03 -->
+
+                <article
+                    class="template-card"
+                    data-template="03"
+                    data-category="arabic"
+                    data-name="Arabic Calligraphy"
+                >
+
+                    <div class="template-preview template-three">
+
+                        <div class="preview-content">
+
+                            <span class="calligraphy">
+                                ﷽
+                            </span>
+
+                            <h2>
+                                أحمد
+                                <small>&</small>
+                                سارة
+                            </h2>
+
+                            <p>
+                                على سنة الله ورسوله
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="template-info">
+
+                        <div>
+                            <h3>
+                                Arabic Calligraphy
+                            </h3>
+
+                            <p>
+                                عربي · كلاسيكي
+                            </p>
+                        </div>
+
+                        <button
+                            class="select-template"
+                            data-template="03"
+                        >
+                            اختيار
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Template 04 -->
+
+                <article
+                    class="template-card"
+                    data-template="04"
+                    data-category="floral"
+                    data-name="Soft Garden"
+                >
+
+                    <div class="template-preview template-four">
+
+                        <div class="preview-content">
+
+                            <span>
+                                OUR WEDDING
+                            </span>
+
+                            <h2>
+                                أحمد
+                                <small>&</small>
+                                سارة
+                            </h2>
+
+                            <p>
+                                28 · 10 · 2026
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="template-info">
+
+                        <div>
+                            <h3>
+                                Soft Garden
+                            </h3>
+
+                            <p>
+                                ورود · ناعم
+                            </p>
+                        </div>
+
+                        <button
+                            class="select-template"
+                            data-template="04"
+                        >
+                            اختيار
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Template 05 -->
+
+                <article
+                    class="template-card"
+                    data-template="05"
+                    data-category="dark"
+                    data-name="Midnight Gold"
+                >
+
+                    <div class="template-preview template-five">
+
+                        <div class="preview-content">
+
+                            <span>
+                                WEDDING INVITATION
+                            </span>
+
+                            <h2>
+                                أحمد
+                                <small>&</small>
+                                سارة
+                            </h2>
+
+                            <p>
+                                28 OCTOBER 2026
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="template-info">
+
+                        <div>
+                            <h3>
+                                Midnight Gold
+                            </h3>
+
+                            <p>
+                                داكن · فاخر
+                            </p>
+                        </div>
+
+                        <button
+                            class="select-template"
+                            data-template="05"
+                        >
+                            اختيار
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Template 06 -->
+
+                <article
+                    class="template-card"
+                    data-template="06"
+                    data-category="romantic"
+                    data-name="Blush Romance"
+                >
+
+                    <div class="template-preview template-six">
+
+                        <div class="preview-content">
+
+                            <span>
+                                معاً إلى الأبد
+                            </span>
+
+                            <h2>
+                                أحمد
+                                <small>&</small>
+                                سارة
+                            </h2>
+
+                            <p>
+                                28 أكتوبر 2026
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="template-info">
+
+                        <div>
+                            <h3>
+                                Blush Romance
+                            </h3>
+
+                            <p>
+                                رومانسي · وردي
+                            </p>
+                        </div>
+
+                        <button
+                            class="select-template"
+                            data-template="06"
+                        >
+                            اختيار
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- =====================================
+                 BOTTOM ACTION
+            ====================================== -->
+
+            <div class="continue-area">
+
+                <p id="selection-message">
+                    اختر تصميماً للمتابعة
+                </p>
+
+                <button
+                    id="continue-button"
+                    disabled
+                >
+                    متابعة
+                    <span>←</span>
+                </button>
+
+            </div>
+
+        </section>
 
     </main>
 
