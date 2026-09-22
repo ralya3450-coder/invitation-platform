@@ -4,12 +4,652 @@
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f8f6f2;
-    color: #222;
+:root {
+    --background: #f8f6f1;
+    --surface: #ffffff;
+    --text: #26231f;
+    --muted: #817b72;
+    --border: #e8e3da;
+    --accent: #9b7b4f;
+    --accent-dark: #725936;
 }
 
-#app {
+body {
+    font-family:
+        Arial,
+        "Noto Sans Arabic",
+        sans-serif;
+
+    background: var(--background);
+    color: var(--text);
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.design-page {
     min-height: 100vh;
+    padding-bottom: 140px;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.top-bar {
+    height: 76px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.brand-mark {
+    color: var(--accent);
+    font-size: 24px;
+}
+
+.step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--text);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.design-header {
+    max-width: 850px;
+    margin: 80px auto 35px;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+}
+
+.design-header h1 {
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 500;
+    margin-bottom: 18px;
+}
+
+.subtitle {
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.search-box {
+    width: min(520px, 90%);
+    height: 52px;
+    margin: 0 auto 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 30px;
+
+    padding: 0 20px;
+}
+
+.search-icon {
+    font-size: 25px;
+    color: var(--muted);
+}
+
+.search-box input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.search-box input::placeholder {
+    color: #aaa39a;
+}
+
+
+/* =========================================
+   CATEGORIES
+========================================= */
+
+.categories {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    max-width: 1000px;
+    margin: 0 auto 45px;
+
+    padding: 0 20px;
+}
+
+.category {
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+
+    padding: 10px 20px;
+    border-radius: 30px;
+
+    cursor: pointer;
+    font-family: inherit;
+
+    transition: 0.2s ease;
+}
+
+.category:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.category.active {
+    background: var(--text);
+    border-color: var(--text);
+    color: white;
+}
+
+
+/* =========================================
+   TEMPLATE GRID
+========================================= */
+
+.templates-grid {
+    width: min(1250px, 92%);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 28px;
+}
+
+
+/* =========================================
+   TEMPLATE CARD
+========================================= */
+
+.template-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.template-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+}
+
+.template-card.selected {
+    border: 2px solid var(--accent);
+}
+
+
+/* =========================================
+   TEMPLATE PREVIEW
+========================================= */
+
+.template-preview {
+    aspect-ratio: 4 / 5;
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.preview-content {
+    position: relative;
+    z-index: 2;
+}
+
+.preview-content > span {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 25px;
+}
+
+.preview-content h2 {
+    font-family: Georgia, serif;
+    font-size: clamp(27px, 4vw, 42px);
+    font-weight: 400;
+}
+
+.preview-content h2 small {
+    font-size: 18px;
+    margin: 0 8px;
+}
+
+.preview-content p {
+    margin-top: 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.preview-decoration {
+    position: absolute;
+    top: 12%;
+    font-size: 40px;
+}
+
+
+/* =========================================
+   TEMPLATE 01
+========================================= */
+
+.template-one {
+    background:
+        linear-gradient(
+            135deg,
+            #f4eee2,
+            #d8c29e
+        );
+
+    color: #3c3022;
+}
+
+.template-one::before,
+.template-one::after {
+    content: "";
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border: 1px solid rgba(80, 60, 30, 0.25);
+    border-radius: 50%;
+}
+
+.template-one::before {
+    top: -80px;
+    right: -80px;
+}
+
+.template-one::after {
+    bottom: -80px;
+    left: -80px;
+}
+
+
+/* =========================================
+   TEMPLATE 02
+========================================= */
+
+.template-two {
+    background: #f4f0e8;
+    color: #3b3935;
+}
+
+.template-two::before {
+    content: "";
+    position: absolute;
+
+    width: 75%;
+    height: 75%;
+
+    border: 1px solid #c9bfae;
+}
+
+
+/* =========================================
+   TEMPLATE 03
+========================================= */
+
+.template-three {
+    background:
+        linear-gradient(
+            150deg,
+            #efe5d5,
+            #c9a978
+        );
+
+    color: #33281d;
+}
+
+.calligraphy {
+    font-size: 28px !important;
+    letter-spacing: 0 !important;
+}
+
+
+/* =========================================
+   TEMPLATE 04
+========================================= */
+
+.template-four {
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            #d7dfcf,
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 75%,
+            #e5d7c4,
+            transparent 30%
+        ),
+        #f4f0e7;
+
+    color: #465044;
+}
+
+.template-four::before,
+.template-four::after {
+    content: "❧";
+
+    position: absolute;
+
+    font-size: 90px;
+    opacity: 0.12;
+}
+
+.template-four::before {
+    top: -10px;
+    right: 10px;
+}
+
+.template-four::after {
+    bottom: -10px;
+    left: 10px;
+}
+
+
+/* =========================================
+   TEMPLATE 05
+========================================= */
+
+.template-five {
+    background:
+        linear-gradient(
+            145deg,
+            #181715,
+            #35302a
+        );
+
+    color: #d8bd83;
+}
+
+.template-five::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 20px;
+
+    border: 1px solid rgba(216, 189, 131, 0.35);
+}
+
+
+/* =========================================
+   TEMPLATE 06
+========================================= */
+
+.template-six {
+    background:
+        linear-gradient(
+            145deg,
+            #f3e3e1,
+            #e6c8c4
+        );
+
+    color: #604747;
+}
+
+.template-six::before,
+.template-six::after {
+    content: "♡";
+
+    position: absolute;
+
+    font-size: 130px;
+
+    opacity: 0.08;
+}
+
+.template-six::before {
+    top: -20px;
+    right: 20px;
+}
+
+.template-six::after {
+    bottom: -40px;
+    left: 10px;
+}
+
+
+/* =========================================
+   TEMPLATE INFO
+========================================= */
+
+.template-info {
+    min-height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 17px 18px;
+}
+
+.template-info h3 {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.template-info p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.select-template {
+    border: 1px solid var(--border);
+    background: white;
+
+    padding: 9px 17px;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+    font-family: inherit;
+
+    transition: 0.2s ease;
+}
+
+.select-template:hover {
+    background: var(--text);
+    color: white;
+    border-color: var(--text);
+}
+
+.template-card.selected .select-template {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+
+/* =========================================
+   CONTINUE
+========================================= */
+
+.continue-area {
+    position: fixed;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    min-height: 90px;
+
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid var(--border);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 25px;
+
+    padding: 15px 20px;
+}
+
+#selection-message {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+#continue-button {
+    border: none;
+
+    background: var(--text);
+    color: white;
+
+    padding: 13px 28px;
+
+    border-radius: 30px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+#continue-button:hover:not(:disabled) {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+}
+
+#continue-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+#continue-button span {
+    margin-right: 8px;
+}
+
+
+/* =========================================
+   HIDDEN TEMPLATES
+========================================= */
+
+.template-card.hidden {
+    display: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .templates-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .top-bar {
+        padding: 0 20px;
+    }
+
+    .design-header {
+        margin-top: 55px;
+    }
+
+    .design-header h1 {
+        font-size: 34px;
+    }
+
+    .templates-grid {
+        grid-template-columns: 1fr;
+        width: 90%;
+    }
+
+    .categories {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 5px;
+    }
+
+    .category {
+        white-space: nowrap;
+    }
+
+    .continue-area {
+        justify-content: space-between;
+    }
+
+    #selection-message {
+        display: none;
+    }
+
 }
