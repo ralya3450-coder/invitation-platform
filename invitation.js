@@ -1,16 +1,12 @@
 /* =========================================================
-   GUEST INVITATION
-========================================================= */
-
-
-/* =========================================================
-   DEFAULT INVITATION
+   INVITATION DATA
 ========================================================= */
 
 const defaultInvitation = {
 
-    personOne: "محمد",
+    template: "floral",
 
+    personOne: "محمد",
     personTwo: "سارة",
 
     familyName: "",
@@ -50,46 +46,42 @@ const defaultInvitation = {
             count: 2
         }
 
-    ]
+    ],
+
+    enableRSVP: true
 
 };
 
 
 /* =========================================================
-   GET INVITATION DATA
+   GET DATA
 ========================================================= */
 
 function getInvitationData() {
 
-    const saved =
-        localStorage.getItem(
-            "invitationData"
-        );
-
-
-    if (!saved) {
-
-        return defaultInvitation;
-
-    }
-
-
     try {
 
-        const parsed =
-            JSON.parse(saved);
+        const saved =
+            localStorage.getItem("invitationData");
 
+        if (!saved) {
+
+            return defaultInvitation;
+
+        }
 
         return {
-
             ...defaultInvitation,
-
-            ...parsed
-
+            ...JSON.parse(saved)
         };
 
     } catch (error) {
 
+        console.error(
+            "Could not load invitation data:",
+            error
+        );
+
         return defaultInvitation;
 
     }
@@ -97,399 +89,191 @@ function getInvitationData() {
 }
 
 
-const invitation =
-    getInvitationData();
-
-
 /* =========================================================
-   GET GUEST
+   URL GUEST
 ========================================================= */
 
-/*
-   For now we use ?guest=1
+function getGuestFromURL(data) {
 
-   Example:
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
 
-   invitation.html?guest=1
+    const guestId =
+        params.get("guest");
 
-   Later this will become a real unique link
-   from Supabase.
-*/
+    if (!guestId) {
 
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
-const guestNumber =
-    Number(
-        params.get("guest")
-    ) || 1;
-
-
-const guestIndex =
-    guestNumber - 1;
-
-
-const guest =
-    invitation.guests &&
-    invitation.guests.length > guestIndex
-
-        ? invitation.guests[guestIndex]
-
-        : {
-
+        return {
             name: "ضيفنا العزيز",
-
             count: 1
-
         };
 
+    }
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
-const envelope =
-    document.getElementById(
-        "envelope"
-    );
-
-
-const openButton =
-    document.getElementById(
-        "open-invitation"
-    );
-
-
-const envelopeScreen =
-    document.getElementById(
-        "envelope-screen"
-    );
-
-
-const mainInvitation =
-    document.getElementById(
-        "main-invitation"
-    );
-
-
-/* =========================================================
-   PERSONALIZED GUEST
-========================================================= */
-
-document.getElementById(
-    "guest-name"
-).textContent =
-    guest.name;
-
-
-document.getElementById(
-    "personalized-name"
-).textContent =
-    guest.name;
-
-
-document.getElementById(
-    "allowed-guests"
-).textContent =
-    guest.count;
-
-
-/* =========================================================
-   COUPLE
-========================================================= */
-
-let coupleName =
-    invitation.personOne &&
-    invitation.personTwo
-
-        ? `${invitation.personOne} & ${invitation.personTwo}`
-
-        : "محمد & سارة";
-
-
-if (invitation.familyName) {
-
-    coupleName +=
-        ` ${invitation.familyName}`;
-
-}
-
-
-document.getElementById(
-    "couple-names"
-).textContent =
-    coupleName;
-
-
-/* =========================================================
-   TEXT
-========================================================= */
-
-if (invitation.invitationTitle) {
-
-    document.getElementById(
-        "invitation-title"
-    ).textContent =
-        invitation.invitationTitle;
-
-}
-
-
-if (invitation.invitationMessage) {
-
-    document.getElementById(
-        "invitation-message"
-    ).textContent =
-        invitation.invitationMessage;
-
-}
-
-
-if (invitation.invitationClosing) {
-
-    document.getElementById(
-        "invitation-closing"
-    ).textContent =
-        invitation.invitationClosing;
-
-}
-
-
-/* =========================================================
-   EVENT
-========================================================= */
-
-if (invitation.eventType) {
-
-    document.getElementById(
-        "event-type"
-    ).textContent =
-        invitation.eventType;
-
-}
-
-
-if (invitation.eventDate) {
-
-    document.getElementById(
-        "event-date"
-    ).textContent =
-        formatDate(
-            invitation.eventDate
+    const guest =
+        data.guests?.find(
+            item =>
+                String(item.id) ===
+                String(guestId)
         );
 
+    if (!guest) {
+
+        return {
+            name: "ضيفنا العزيز",
+            count: 1
+        };
+
+    }
+
+    return guest;
+
 }
 
 
-if (invitation.eventTime) {
+/* =========================================================
+   EVENT TYPE
+========================================================= */
 
-    document.getElementById(
-        "event-time"
-    ).textContent =
-        formatTime(
-            invitation.eventTime
+function getEventCategory(eventType) {
+
+    const text =
+        String(eventType || "")
+            .toLowerCase();
+
+    if (
+        text.includes("مولود") ||
+        text.includes("بيبي") ||
+        text.includes("baby") ||
+        text.includes("سبوع") ||
+        text.includes("ولادة")
+    ) {
+
+        return "baby";
+
+    }
+
+    if (
+        text.includes("ميلاد") ||
+        text.includes("birthday") ||
+        text.includes("عيد ميلاد")
+    ) {
+
+        return "birthday";
+
+    }
+
+    if (
+        text.includes("تخرج") ||
+        text.includes("graduation") ||
+        text.includes("تخرّج")
+    ) {
+
+        return "graduation";
+
+    }
+
+    if (
+        text.includes("طفل") ||
+        text.includes("أطفال") ||
+        text.includes("بنات") ||
+        text.includes("أولاد") ||
+        text.includes("castle")
+    ) {
+
+        return "children";
+
+    }
+
+    return "wedding";
+
+}
+
+
+/* =========================================================
+   SHOW ILLUSTRATION
+========================================================= */
+
+function showIllustration(category) {
+
+    const illustrations =
+        document.querySelectorAll(
+            ".illustration"
         );
 
-}
+    illustrations.forEach(
+        illustration => {
 
+            illustration.classList.remove(
+                "active"
+            );
 
-/* =========================================================
-   VENUE
-========================================================= */
-
-if (invitation.venueName) {
-
-    document.getElementById(
-        "venue-name"
-    ).textContent =
-        invitation.venueName;
-
-}
-
-
-if (invitation.venueCity) {
-
-    document.getElementById(
-        "venue-city"
-    ).textContent =
-        invitation.venueCity;
-
-}
-
-
-/* =========================================================
-   MAP
-========================================================= */
-
-const mapLink =
-    document.getElementById(
-        "map-link"
+        }
     );
 
 
-if (
-    invitation.venueMap &&
-    invitation.venueMap !== "#"
-) {
-
-    mapLink.href =
-        invitation.venueMap;
-
-} else {
-
-    mapLink.style.display =
-        "none";
-
-}
-
-
-/* =========================================================
-   OPEN INVITATION
-========================================================= */
-
-openButton.addEventListener(
-    "click",
-    function () {
-
-        envelope.classList.add(
-            "open"
+    const selected =
+        document.getElementById(
+            `${category}-illustration`
         );
 
+    if (selected) {
 
-        openButton.disabled =
-            true;
-
-
-        openButton.textContent =
-            "جارٍ فتح الدعوة...";
-
-
-        setTimeout(
-            function () {
-
-                envelopeScreen.classList.add(
-                    "hidden"
-                );
-
-
-                setTimeout(
-                    function () {
-
-                        envelopeScreen.style.display =
-                            "none";
-
-
-                        mainInvitation.classList.add(
-                            "visible"
-                        );
-
-
-                        window.scrollTo({
-
-                            top: 0,
-
-                            behavior: "smooth"
-
-                        });
-
-                    },
-                    500
-                );
-
-            },
-            1200
+        selected.classList.add(
+            "active"
         );
 
     }
-);
+
+}
 
 
 /* =========================================================
-   RSVP
+   APPLY TEMPLATE
 ========================================================= */
 
-const rsvpYes =
-    document.getElementById(
-        "rsvp-yes"
-    );
+function applyTemplate(template) {
 
+    document.body.dataset.template =
+        template || "floral";
 
-const rsvpNo =
-    document.getElementById(
-        "rsvp-no"
-    );
-
-
-const rsvpResult =
-    document.getElementById(
-        "rsvp-result"
-    );
-
-
-rsvpYes.addEventListener(
-    "click",
-    function () {
-
-        rsvpResult.textContent =
-            "شكراً لتأكيد حضوركم، يسعدنا وجودكم معنا ✨";
-
-    }
-);
-
-
-rsvpNo.addEventListener(
-    "click",
-    function () {
-
-        rsvpResult.textContent =
-            "شكراً لإبلاغنا، نتمنى أن نلتقي بكم في مناسبات قادمة.";
-
-    }
-);
+}
 
 
 /* =========================================================
    FORMAT DATE
 ========================================================= */
 
-function formatDate(
-    dateString
-) {
+function formatDate(dateString) {
 
-    const date =
-        new Date(
-            `${dateString}T00:00:00`
-        );
+    if (!dateString) {
 
+        return "—";
 
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
+    }
+
+    try {
+
+        const date =
+            new Date(dateString);
+
+        return new Intl.DateTimeFormat(
+            "ar-SA",
+            {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric"
+            }
+        ).format(date);
+
+    } catch {
 
         return dateString;
 
     }
-
-
-    return date.toLocaleDateString(
-        "ar-SA",
-        {
-
-            weekday: "long",
-
-            year: "numeric",
-
-            month: "long",
-
-            day: "numeric"
-
-        }
-    );
 
 }
 
@@ -498,46 +282,344 @@ function formatDate(
    FORMAT TIME
 ========================================================= */
 
-function formatTime(
-    timeString
-) {
+function formatTime(timeString) {
 
     if (!timeString) {
 
-        return "";
+        return "—";
 
     }
 
+    try {
 
-    const parts =
-        timeString.split(":");
+        const [hours, minutes] =
+            timeString.split(":");
 
+        const date =
+            new Date();
 
-    const hours =
-        Number(parts[0]);
+        date.setHours(
+            Number(hours),
+            Number(minutes)
+        );
 
+        return new Intl.DateTimeFormat(
+            "ar-SA",
+            {
+                hour: "numeric",
+                minute: "2-digit"
+            }
+        ).format(date);
 
-    const minutes =
-        parts[1] || "00";
+    } catch {
 
-
-    const period =
-        hours >= 12
-            ? "مساءً"
-            : "صباحاً";
-
-
-    let displayHour =
-        hours % 12;
-
-
-    if (displayHour === 0) {
-
-        displayHour = 12;
+        return timeString;
 
     }
-
-
-    return `${displayHour}:${minutes} ${period}`;
 
 }
+
+
+/* =========================================================
+   POPULATE
+========================================================= */
+
+function populateInvitation() {
+
+    const data =
+        getInvitationData();
+
+    const guest =
+        getGuestFromURL(data);
+
+
+    /* Guest */
+
+    document.getElementById(
+        "guest-name"
+    ).textContent =
+        guest.name;
+
+
+    document.getElementById(
+        "personalized-name"
+    ).textContent =
+        guest.name;
+
+
+    document.getElementById(
+        "allowed-guests"
+    ).textContent =
+        guest.count || 1;
+
+
+    /* Couple */
+
+    const personOne =
+        data.personOne || "";
+
+    const personTwo =
+        data.personTwo || "";
+
+
+    let coupleName =
+        `${personOne} & ${personTwo}`;
+
+    if (
+        !personOne &&
+        !personTwo
+    ) {
+
+        coupleName =
+            data.familyName ||
+            "دعوتنا الخاصة";
+
+    }
+
+
+    document.getElementById(
+        "couple-names"
+    ).textContent =
+        coupleName;
+
+
+    /* Text */
+
+    document.getElementById(
+        "invitation-title"
+    ).textContent =
+        data.invitationTitle ||
+        "يسعدنا دعوتكم لمشاركتنا فرحتنا";
+
+
+    document.getElementById(
+        "invitation-message"
+    ).textContent =
+        data.invitationMessage ||
+        "نتشرف بحضوركم ومشاركتكم أجمل لحظاتنا.";
+
+
+    document.getElementById(
+        "invitation-closing"
+    ).textContent =
+        data.invitationClosing ||
+        "تشرفنا حضوركم ومشاركتكم فرحتنا";
+
+
+    /* Event */
+
+    document.getElementById(
+        "event-type"
+    ).textContent =
+        data.eventType ||
+        "المناسبة";
+
+
+    document.getElementById(
+        "event-date"
+    ).textContent =
+        formatDate(
+            data.eventDate
+        );
+
+
+    document.getElementById(
+        "event-time"
+    ).textContent =
+        formatTime(
+            data.eventTime
+        );
+
+
+    document.getElementById(
+        "venue-name"
+    ).textContent =
+        data.venueName ||
+        "—";
+
+
+    document.getElementById(
+        "venue-city"
+    ).textContent =
+        data.venueCity ||
+        "—";
+
+
+    /* Map */
+
+    const mapLink =
+        document.getElementById(
+            "map-link"
+        );
+
+    if (
+        data.venueMap &&
+        data.venueMap !== "#"
+    ) {
+
+        mapLink.href =
+            data.venueMap;
+
+        mapLink.style.display =
+            "inline-flex";
+
+    } else {
+
+        mapLink.style.display =
+            "none";
+
+    }
+
+
+    /* Template */
+
+    applyTemplate(
+        data.template
+    );
+
+
+    /* Illustration */
+
+    const category =
+        getEventCategory(
+            data.eventType
+        );
+
+    showIllustration(
+        category
+    );
+
+
+    /* RSVP */
+
+    if (
+        data.enableRSVP === false
+    ) {
+
+        document.getElementById(
+            "rsvp-section"
+        ).style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN INVITATION
+========================================================= */
+
+function openInvitation() {
+
+    const envelope =
+        document.getElementById(
+            "envelope"
+        );
+
+    const screen =
+        document.getElementById(
+            "envelope-screen"
+        );
+
+    const main =
+        document.getElementById(
+            "main-invitation"
+        );
+
+
+    envelope.classList.add(
+        "open"
+    );
+
+
+    setTimeout(() => {
+
+        screen.classList.add(
+            "hidden"
+        );
+
+        main.classList.add(
+            "visible"
+        );
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 1000);
+
+}
+
+
+/* =========================================================
+   RSVP
+========================================================= */
+
+function setupRSVP() {
+
+    const yes =
+        document.getElementById(
+            "rsvp-yes"
+        );
+
+    const no =
+        document.getElementById(
+            "rsvp-no"
+        );
+
+    const result =
+        document.getElementById(
+            "rsvp-result"
+        );
+
+
+    yes.addEventListener(
+        "click",
+        () => {
+
+            result.textContent =
+                "تم تأكيد حضوركم بكل سرور ♡";
+
+        }
+    );
+
+
+    no.addEventListener(
+        "click",
+        () => {
+
+            result.textContent =
+                "شكرًا لإبلاغنا، ونتمنى أن نلتقي بكم في مناسبة قادمة ♡";
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        populateInvitation();
+
+        setupRSVP();
+
+
+        document
+            .getElementById(
+                "open-invitation"
+            )
+            .addEventListener(
+                "click",
+                openInvitation
+            );
+
+    }
+);
