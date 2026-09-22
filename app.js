@@ -430,7 +430,176 @@ templateButtons.forEach((button) => {
     );
 
 });
+/* =========================================================
+   COLOR SELECTOR
+========================================================= */
 
+function renderTemplateColors(templateId) {
+
+    const panel =
+        document.getElementById(
+            "template-colors"
+        );
+
+    const container =
+        document.getElementById(
+            "color-options"
+        );
+
+    const selectedName =
+        document.getElementById(
+            "selected-color-name"
+        );
+
+
+    if (!panel || !container) {
+
+        return;
+
+    }
+
+
+    const colors =
+        templateColors[templateId];
+
+
+    if (!colors) {
+
+        panel.classList.remove(
+            "visible"
+        );
+
+        container.innerHTML = "";
+
+        return;
+
+    }
+
+
+    panel.classList.add(
+        "visible"
+    );
+
+
+    container.innerHTML = "";
+
+
+    colors.forEach(color => {
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+        button.type = "button";
+
+        button.className =
+            "color-option";
+
+
+        if (
+            invitationData.color ===
+            color.id
+        ) {
+
+            button.classList.add(
+                "selected"
+            );
+
+        }
+
+
+        button.innerHTML = `
+
+            <span
+                class="color-swatch"
+                style="
+                    background:
+                    linear-gradient(
+                        135deg,
+                        ${color.color},
+                        ${color.background}
+                    );
+                "
+            ></span>
+
+            <span class="color-option-name">
+                ${color.name}
+            </span>
+
+        `;
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                invitationData.color =
+                    color.id;
+
+
+                invitationData.colorData =
+                    color;
+
+
+                document
+                    .querySelectorAll(
+                        ".color-option"
+                    )
+                    .forEach(option => {
+
+                        option.classList.remove(
+                            "selected"
+                        );
+
+                    });
+
+
+                button.classList.add(
+                    "selected"
+                );
+
+
+                selectedName.textContent =
+                    `اللون المختار: ${color.name}`;
+
+
+                saveData();
+
+                updatePreview();
+
+            }
+        );
+
+
+        container.appendChild(
+            button
+        );
+
+    });
+
+
+    const selectedColor =
+        colors.find(
+            color =>
+                color.id ===
+                invitationData.color
+        );
+
+
+    if (selectedColor) {
+
+        selectedName.textContent =
+            `اللون المختار: ${selectedColor.name}`;
+
+    } else {
+
+        selectedName.textContent =
+            "اختاري لون التصميم";
+
+    }
+
+}
 
 /* =========================================================
    STEP 1 NEXT
