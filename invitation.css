@@ -6,20 +6,16 @@
     box-sizing: border-box;
 }
 
+
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
     margin: 0;
 
-    background:
-        radial-gradient(
-            circle at top,
-            #fffaf1 0%,
-            #f5eadc 45%,
-            #eadbc9 100%
-        );
+    min-height: 100vh;
 
     color: #70543d;
 
@@ -29,46 +25,287 @@ body {
         Georgia,
         serif;
 
-    --design-main: #b87967;
-    --design-accent: #8d604d;
-    --design-background: #f7e9dd;
+    background:
+        radial-gradient(
+            circle at top,
+            #fffaf2 0%,
+            #f5eadc 45%,
+            #e8d7c5 100%
+        );
+
+    --design-main: #d69c9d;
+    --design-accent: #965d62;
+    --design-background: #faeaea;
+    --design-light: #fff9f7;
+    --design-thread: #c28b8d;
+    --design-dark: #714b50;
+
+    transition:
+        background 0.6s ease,
+        color 0.6s ease;
 }
+
 
 button,
 a {
     font-family: inherit;
 }
 
-button {
-    cursor: pointer;
+
+/* =========================================================
+   COLOR THEMES
+========================================================= */
+
+
+/* ---------- FLORAL ---------- */
+
+body[data-template="floral"][data-color="blush"] {
+    --design-main: #d69c9d;
+    --design-accent: #965d62;
+    --design-background: #faeaea;
+    --design-light: #fff8f7;
+    --design-thread: #c9878b;
+    --design-dark: #71494e;
 }
 
 
-/* =========================================================
-   THREAD TEXTURE
-========================================================= */
+body[data-template="floral"][data-color="sage-floral"] {
+    --design-main: #9da98d;
+    --design-accent: #5f6f54;
+    --design-background: #edf1e8;
+    --design-light: #fbfcf8;
+    --design-thread: #849477;
+    --design-dark: #46543f;
+}
 
-body::before {
-    content: "";
 
-    position: fixed;
+body[data-template="floral"][data-color="blue-floral"] {
+    --design-main: #91a9c0;
+    --design-accent: #566d84;
+    --design-background: #eaf0f6;
+    --design-light: #fafcff;
+    --design-thread: #7f9ab4;
+    --design-dark: #42596e;
+}
 
-    inset: 0;
 
-    pointer-events: none;
+body[data-template="floral"][data-color="lavender"] {
+    --design-main: #b3a0bb;
+    --design-accent: #745e7c;
+    --design-background: #f1ebf4;
+    --design-light: #fcfaff;
+    --design-thread: #9c86a7;
+    --design-dark: #5b4964;
+}
 
-    opacity: 0.14;
 
-    background-image:
-        repeating-linear-gradient(
-            0deg,
-            rgba(120, 88, 60, 0.15) 0,
-            rgba(120, 88, 60, 0.15) 1px,
-            transparent 1px,
-            transparent 5px
-        );
+/* ---------- ROMANTIC ---------- */
 
-    mix-blend-mode: multiply;
+body[data-template="romantic"][data-color="dusty-rose"] {
+    --design-main: #c99599;
+    --design-accent: #8d5d62;
+    --design-background: #f7e8e8;
+    --design-light: #fff9f8;
+    --design-thread: #bb7f85;
+    --design-dark: #6e474d;
+}
+
+
+body[data-template="romantic"][data-color="mauve"] {
+    --design-main: #aa8f9f;
+    --design-accent: #715b6a;
+    --design-background: #f0e9ef;
+    --design-light: #fbf8fc;
+    --design-thread: #967b8d;
+    --design-dark: #574453;
+}
+
+
+body[data-template="romantic"][data-color="peach"] {
+    --design-main: #d9a58c;
+    --design-accent: #9a684e;
+    --design-background: #faebe1;
+    --design-light: #fffaf6;
+    --design-thread: #c58c72;
+    --design-dark: #754b39;
+}
+
+
+body[data-template="romantic"][data-color="champagne-rose"] {
+    --design-main: #c9a27f;
+    --design-accent: #89664b;
+    --design-background: #f8eee3;
+    --design-light: #fffaf3;
+    --design-thread: #b58d67;
+    --design-dark: #684c37;
+}
+
+
+/* ---------- ARABIC ---------- */
+
+body[data-template="arabic"][data-color="sand"] {
+    --design-main: #c8a477;
+    --design-accent: #785b3e;
+    --design-background: #f4ead9;
+    --design-light: #fffaf0;
+    --design-thread: #b08b5e;
+    --design-dark: #60472e;
+}
+
+
+body[data-template="arabic"][data-color="olive"] {
+    --design-main: #8d9470;
+    --design-accent: #586047;
+    --design-background: #edf0e4;
+    --design-light: #fafbf5;
+    --design-thread: #79825d;
+    --design-dark: #424934;
+}
+
+
+body[data-template="arabic"][data-color="terracotta"] {
+    --design-main: #b87961;
+    --design-accent: #7d4939;
+    --design-background: #f4e2da;
+    --design-light: #fff8f5;
+    --design-thread: #a26350;
+    --design-dark: #61392e;
+}
+
+
+body[data-template="arabic"][data-color="emerald"] {
+    --design-main: #668675;
+    --design-accent: #3f5e4d;
+    --design-background: #e7eee9;
+    --design-light: #f9fcfa;
+    --design-thread: #577864;
+    --design-dark: #31483b;
+}
+
+
+/* ---------- IVORY ---------- */
+
+body[data-template="ivory"][data-color="cream"] {
+    --design-main: #d9c2a7;
+    --design-accent: #98765a;
+    --design-background: #fbf5eb;
+    --design-light: #fffdf8;
+    --design-thread: #c2a888;
+    --design-dark: #73553e;
+}
+
+
+body[data-template="ivory"][data-color="dusty-pink"] {
+    --design-main: #c79a9c;
+    --design-accent: #8f6569;
+    --design-background: #f7e9e9;
+    --design-light: #fffafa;
+    --design-thread: #b68185;
+    --design-dark: #6b494e;
+}
+
+
+body[data-template="ivory"][data-color="sage"] {
+    --design-main: #a5ad91;
+    --design-accent: #687157;
+    --design-background: #eff1e8;
+    --design-light: #fcfdf9;
+    --design-thread: #8f997a;
+    --design-dark: #4e563f;
+}
+
+
+body[data-template="ivory"][data-color="powder-blue"] {
+    --design-main: #9caec1;
+    --design-accent: #5f7287;
+    --design-background: #edf2f7;
+    --design-light: #fbfdff;
+    --design-thread: #8499af;
+    --design-dark: #45596e;
+}
+
+
+/* ---------- GOLD ---------- */
+
+body[data-template="gold"][data-color="champagne"] {
+    --design-main: #d8b27c;
+    --design-accent: #9a6d3f;
+    --design-background: #f7ecdc;
+    --design-light: #fffaf1;
+    --design-thread: #c39b61;
+    --design-dark: #74502d;
+}
+
+
+body[data-template="gold"][data-color="rose-gold"] {
+    --design-main: #c98f82;
+    --design-accent: #8e5c53;
+    --design-background: #f7e5df;
+    --design-light: #fff9f6;
+    --design-thread: #b9786c;
+    --design-dark: #6e423b;
+}
+
+
+body[data-template="gold"][data-color="ivory-gold"] {
+    --design-main: #c7a66b;
+    --design-accent: #86663b;
+    --design-background: #faf5ea;
+    --design-light: #fffdf8;
+    --design-thread: #b69051;
+    --design-dark: #664b2b;
+}
+
+
+body[data-template="gold"][data-color="olive-gold"] {
+    --design-main: #9a9a72;
+    --design-accent: #676746;
+    --design-background: #f0efe2;
+    --design-light: #fbfbf4;
+    --design-thread: #85855d;
+    --design-dark: #4b4b32;
+}
+
+
+/* ---------- DARK ---------- */
+
+body[data-template="dark"][data-color="black-gold"] {
+    --design-main: #c5a15b;
+    --design-accent: #d7b873;
+    --design-background: #171513;
+    --design-light: #211e19;
+    --design-thread: #c9a75f;
+    --design-dark: #f1d48b;
+}
+
+
+body[data-template="dark"][data-color="navy-gold"] {
+    --design-main: #b79b62;
+    --design-accent: #d6bb79;
+    --design-background: #151c29;
+    --design-light: #1c2433;
+    --design-thread: #bba36d;
+    --design-dark: #f0d89a;
+}
+
+
+body[data-template="dark"][data-color="plum"] {
+    --design-main: #b78680;
+    --design-accent: #d0aaa2;
+    --design-background: #26191e;
+    --design-light: #302126;
+    --design-thread: #b88781;
+    --design-dark: #e5c1ba;
+}
+
+
+body[data-template="dark"][data-color="emerald-dark"] {
+    --design-main: #8fac93;
+    --design-accent: #b9c9b5;
+    --design-background: #15221d;
+    --design-light: #1c2c25;
+    --design-thread: #8fab91;
+    --design-dark: #d1dfcd;
 }
 
 
@@ -81,24 +318,16 @@ body::before {
 
     display: flex;
 
-    flex-direction: column;
-
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
-
-    padding: 40px 20px;
-
-    position: relative;
-
-    overflow: hidden;
+    padding: 50px 20px;
 
     background:
         radial-gradient(
-            circle at 50% 20%,
-            #fffdf8,
-            var(--design-background) 65%,
-            #ead6c1
+            circle at 50% 25%,
+            var(--design-light),
+            var(--design-background)
         );
 
     transition:
@@ -106,485 +335,443 @@ body::before {
         visibility 0.8s ease;
 }
 
-.envelope-screen.hidden {
+
+.envelope-screen.opened {
     opacity: 0;
-
     visibility: hidden;
-
     pointer-events: none;
 }
 
 
-/* =========================================================
-   FLOATING THREAD
-========================================================= */
-
-.floating-thread {
-    position: absolute;
-
-    width: 180px;
-
-    height: 180px;
-
-    border:
-        2px dashed
-        rgba(166, 113, 78, 0.35);
-
-    border-radius: 50%;
-}
-
-.thread-one {
-    top: -90px;
-
-    left: -80px;
-}
-
-.thread-two {
-    right: -90px;
-
-    bottom: -80px;
-}
-
-
-/* =========================================================
-   ENVELOPE
-========================================================= */
-
-.envelope-area {
-    width: min(520px, 92vw);
-}
-
-.envelope {
-    width: 100%;
-
-    aspect-ratio: 1.5;
-
-    position: relative;
-
-    perspective: 1200px;
-
-    filter:
-        drop-shadow(
-            0 30px 35px
-            rgba(89, 58, 35, 0.20)
-        );
-
-    transition:
-        transform 0.8s ease;
-}
-
-.envelope.open {
-    transform:
-        translateY(-15px);
-}
-
-
-/* =========================================================
-   ENVELOPE BACK
-========================================================= */
-
-.envelope-back {
-    position: absolute;
-
-    inset: 0;
-
-    border-radius: 8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--design-background),
-            #fffaf4
-        );
-
-    border:
-        1px solid
-        var(--design-main);
-}
-
-
-/* =========================================================
-   ENVELOPE PAPER
-========================================================= */
-
-.envelope-paper {
-    position: absolute;
-
-    width: 72%;
-
-    height: 80%;
-
-    left: 14%;
-
-    top: 10%;
-
-    background:
-        linear-gradient(
-            135deg,
-            #fffdf8,
-            var(--design-background)
-        );
-
-    border:
-        1px solid
-        var(--design-main);
-
-    z-index: 2;
+.envelope-wrapper {
+    width: min(520px, 100%);
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
 
-    justify-content: center;
-
-    box-shadow:
-        0 10px 20px
-        rgba(70, 43, 28, 0.12);
-
-    transition:
-        transform 1s cubic-bezier(.2,.8,.2,1);
+    gap: 30px;
 }
 
-.paper-border {
+
+.envelope {
+    position: relative;
+
+    width: min(440px, 92vw);
+    aspect-ratio: 1.55;
+
+    perspective: 1400px;
+
+    filter:
+        drop-shadow(
+            0 25px 35px rgba(70, 45, 30, 0.16)
+        );
+}
+
+
+.envelope-back,
+.envelope-paper,
+.envelope-flap,
+.envelope-front {
     position: absolute;
 
-    inset: 9px;
-
-    border:
-        1px solid
-        var(--design-main);
-
-    pointer-events: none;
-}
-
-.paper-small {
-    margin: 0 0 5px;
-
-    font-size: 15px;
-}
-
-.envelope-paper h2 {
-    margin: 0;
-
-    font-size: 38px;
-
-    color:
-        var(--design-accent);
-}
-
-.envelope-paper p:last-child {
-    margin-top: 4px;
-}
-
-.mini-flower {
-    position: absolute;
-
-    color:
-        var(--design-main);
-}
-
-.flower-paper-one {
-    top: 12px;
-
-    right: 18px;
-}
-
-.flower-paper-two {
-    bottom: 12px;
-
-    left: 18px;
+    inset: 0;
 }
 
 
-/* =========================================================
-   ENVELOPE FLAP
-========================================================= */
+.envelope-back {
+    z-index: 1;
 
-.envelope-flap {
-    position: absolute;
-
-    top: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 55%;
-
-    z-index: 5;
+    overflow: hidden;
 
     background:
         linear-gradient(
             135deg,
-            #fffaf5,
+            var(--design-light),
             var(--design-background)
+        );
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--design-accent),
+            transparent 45%
+        );
+
+    border-radius: 5px;
+}
+
+
+.envelope-border {
+    position: absolute;
+
+    inset: 12px;
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 45%
+        );
+
+    border-radius: 2px;
+}
+
+
+.envelope-paper {
+    z-index: 2;
+
+    width: 88%;
+    height: 92%;
+
+    left: 6%;
+    top: 4%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf9,
+            var(--design-light)
+        );
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 45%
+        );
+
+    box-shadow:
+        0 8px 25px rgba(70, 40, 20, 0.08);
+
+    transform:
+        translateY(12%);
+
+    transition:
+        transform 1.2s cubic-bezier(.2,.75,.25,1);
+}
+
+
+.envelope.open .envelope-paper {
+    transform:
+        translateY(-45%);
+}
+
+
+.paper-decoration {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-bottom: 10px;
+}
+
+
+.paper-decoration span {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: var(--design-main);
+}
+
+
+.paper-small {
+    margin: 0 0 10px;
+
+    color: var(--design-accent);
+
+    font-size: 14px;
+
+    letter-spacing: 2px;
+}
+
+
+.paper-guest {
+    color: var(--design-dark);
+
+    font-size: clamp(28px, 7vw, 42px);
+
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+.paper-divider {
+    width: 90px;
+    height: 1px;
+
+    margin: 12px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--design-main),
+            transparent
+        );
+}
+
+
+.paper-hint {
+    max-width: 270px;
+
+    margin: 0;
+
+    color: var(--design-accent);
+
+    font-size: 14px;
+
+    line-height: 2;
+}
+
+
+.envelope-flap {
+    z-index: 5;
+
+    transform-origin: top center;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--design-background),
+            var(--design-light)
         );
 
     clip-path:
         polygon(
             0 0,
             100% 0,
-            50% 100%
+            50% 67%
         );
-
-    transform-origin:
-        top center;
-
-    transition:
-        transform 1s cubic-bezier(.2,.8,.2,1);
-
-    backface-visibility: hidden;
 
     border-top:
         1px solid
-        var(--design-main);
-}
-
-
-/* =========================================================
-   ENVELOPE FRONT
-========================================================= */
-
-.envelope-front {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 4;
-
-    border-radius: 8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--design-background),
-            #fffaf5
+        color-mix(
+            in srgb,
+            var(--design-accent),
+            transparent 40%
         );
 
-    clip-path:
-        polygon(
-            0 30%,
-            50% 70%,
-            100% 30%,
-            100% 100%,
-            0 100%
-        );
+    transition:
+        transform 1s cubic-bezier(.2,.8,.25,1);
 
-    border:
-        1px solid
-        var(--design-main);
+    transform-style: preserve-3d;
 }
 
-
-/* =========================================================
-   OPEN ANIMATION
-========================================================= */
 
 .envelope.open .envelope-flap {
     transform:
         rotateX(180deg);
 
-    z-index: 1;
+    z-index: 0;
 }
 
-.envelope.open .envelope-paper {
-    transform:
-        translateY(-100px);
-}
-
-
-/* =========================================================
-   ENVELOPE EMBROIDERY
-========================================================= */
 
 .flap-embroidery {
     position: absolute;
 
-    top: 25px;
+    width: 55%;
 
-    left: 50%;
+    left: 22.5%;
+    top: 8%;
+}
 
-    transform:
-        translateX(-50%);
 
-    display: flex;
+.thread-line,
+.ornament-line {
+    fill: none;
 
-    gap: 16px;
+    stroke:
+        var(--design-thread);
 
-    color:
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+
+    stroke-dasharray:
+        1 5;
+
+    filter:
+        url(#embroideryShadow);
+}
+
+
+.thread-line.thin,
+.ornament-line.thin {
+    stroke-width: 1.2;
+}
+
+
+.thread-flower circle,
+.flap-flower circle,
+.ornament-flower circle {
+    fill:
         var(--design-main);
 
-    font-size: 22px;
+    stroke:
+        var(--design-accent);
 
-    text-shadow:
-        1px 1px 0 #fff,
-        -1px -1px 0 var(--design-accent);
-}
+    stroke-width: 1;
 
-.embroidered-corner {
-    position: absolute;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 0;
-
-    color:
-        var(--design-main);
-
-    font-size: 26px;
-
-    text-shadow:
-        1px 1px 0 #fff1e7,
-        2px 2px 0
-        rgba(139, 93, 60, 0.25);
-}
-
-.top-right {
-    top: 34%;
-
-    right: 25px;
-}
-
-.bottom-left {
-    bottom: 15px;
-
-    left: 25px;
+    filter:
+        url(#embroideryShadow);
 }
 
 
-/* =========================================================
-   WAX SEAL
-========================================================= */
+.thread-leaf,
+.ornament-leaf {
+    fill:
+        var(--design-thread);
 
-.envelope-center {
-    position: absolute;
+    stroke:
+        var(--design-accent);
 
-    bottom: 8px;
-
-    left: 50%;
-
-    transform:
-        translateX(-50%);
-
-    width: 70%;
-
-    text-align: center;
+    stroke-width: 1;
 }
+
 
 .wax-seal {
-    width: 62px;
+    position: absolute;
 
+    left: 50%;
+    top: 42%;
+
+    width: 62px;
     height: 62px;
 
-    margin:
-        0 auto 8px;
-
-    border-radius: 50%;
+    transform:
+        translate(-50%, -50%);
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
+
+    border-radius: 50%;
 
     background:
         radial-gradient(
-            circle,
+            circle at 35% 30%,
             var(--design-main),
             var(--design-accent)
         );
 
-    color: #fff7ef;
+    color: #fffaf0;
 
-    border:
-        3px double
-        var(--design-main);
+    font-size: 12px;
 
     box-shadow:
-        0 7px 14px
-        rgba(77, 45, 34, 0.2);
-}
+        0 5px 12px rgba(50, 30, 20, 0.2);
 
-.to-label {
-    margin: 0;
-
-    font-size: 14px;
-}
-
-#guest-name {
-    margin: 2px 0;
-
-    font-size:
-        clamp(24px, 4vw, 34px);
-
-    color:
-        var(--design-accent);
-}
-
-.special-invitation {
-    margin: 4px 0;
-
-    font-size: 13px;
-
-    letter-spacing: 2px;
-}
-
-.thread-divider {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 10px;
-}
-
-.thread-divider span {
-    width: 50px;
-
-    border-top:
-        1px dashed
-        var(--design-main);
-}
-
-.thread-divider b {
-    color:
-        var(--design-main);
+    border:
+        2px solid
+        color-mix(
+            in srgb,
+            var(--design-main),
+            white 25%
+        );
 }
 
 
-/* =========================================================
-   OPEN BUTTON
-========================================================= */
+.wax-seal::after {
+    content: "";
 
-.envelope-bottom {
-    text-align: center;
+    position: absolute;
 
-    margin-top: 30px;
-}
+    inset: 5px;
 
-.envelope-bottom p {
-    margin:
-        0 0 15px;
-
-    font-size: 14px;
-
-    color: #8e7058;
-}
-
-.open-button {
     border:
         1px solid
-        var(--design-main);
+        rgba(255,255,255,0.35);
+
+    border-radius: 50%;
+}
+
+
+.envelope-front {
+    z-index: 6;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    clip-path:
+        polygon(
+            0 45%,
+            50% 100%,
+            100% 45%,
+            100% 100%,
+            0 100%
+        );
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--design-light),
+            var(--design-background)
+        );
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+
+.front-line {
+    position: absolute;
+
+    width: 70%;
+
+    height: 1px;
+
+    left: 15%;
+    bottom: 27%;
+
+    transform:
+        rotate(27deg);
+
+    background:
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 45%
+        );
+}
+
+
+.front-line.second {
+    transform:
+        rotate(-27deg);
+}
+
+
+.open-button {
+    border: 0;
 
     padding:
-        13px 45px;
+        15px 35px;
 
     border-radius: 999px;
+
+    color: #fffdf7;
 
     background:
         linear-gradient(
@@ -593,26 +780,41 @@ body::before {
             var(--design-accent)
         );
 
-    color: white;
+    cursor: pointer;
 
-    font-size: 16px;
+    font-size: 17px;
 
     box-shadow:
-        0 10px 22px
-        rgba(126, 78, 59, 0.22);
+        0 10px 25px
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 65%
+        );
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
+
 
 .open-button:hover {
     transform:
         translateY(-3px);
 
     box-shadow:
-        0 14px 28px
-        rgba(126, 78, 59, 0.28);
+        0 14px 30px
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 55%
+        );
+}
+
+
+.open-button:active {
+    transform:
+        translateY(0);
 }
 
 
@@ -626,12 +828,16 @@ body::before {
     min-height: 100vh;
 
     padding:
-        45px
-        18px
-        80px;
+        50px 20px 80px;
 
-    position: relative;
+    background:
+        radial-gradient(
+            circle at top,
+            var(--design-light),
+            var(--design-background)
+        );
 }
+
 
 .main-invitation.visible {
     display: block;
@@ -640,84 +846,65 @@ body::before {
         invitationReveal 1.2s ease both;
 }
 
+
 @keyframes invitationReveal {
 
     from {
         opacity: 0;
-
-        transform:
-            translateY(40px);
+        transform: translateY(35px);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
 
 }
 
 
-/* =========================================================
-   CARD
-========================================================= */
-
 .invitation-card {
-    max-width: 760px;
+    position: relative;
+
+    width: min(760px, 100%);
 
     margin: auto;
 
-    position: relative;
-
     padding:
-        55px
-        clamp(22px, 6vw, 70px)
-        60px;
+        35px
+        clamp(20px, 6vw, 70px)
+        50px;
+
+    overflow: hidden;
+
+    text-align: center;
 
     background:
         linear-gradient(
             145deg,
-            #fffdf8,
+            var(--design-light),
             var(--design-background)
         );
 
     border:
         1px solid
-        var(--design-main);
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 45%
+        );
 
     box-shadow:
-        0 30px 70px
-        rgba(91, 60, 37, 0.18);
-
-    overflow: hidden;
+        0 25px 70px
+        rgba(80, 50, 30, 0.12);
 }
 
-
-/* =========================================================
-   DOUBLE STITCHED BORDER
-========================================================= */
 
 .invitation-card::before {
     content: "";
 
     position: absolute;
 
-    inset: 14px;
-
-    border:
-        1px dashed
-        var(--design-main);
-
-    pointer-events: none;
-}
-
-.invitation-card::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 21px;
+    inset: 10px;
 
     border:
         1px solid
@@ -731,252 +918,229 @@ body::before {
 }
 
 
-/* =========================================================
-   TOP DECORATION
-========================================================= */
+.invitation-card::after {
+    content: "";
 
-.top-decoration {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 35px;
-}
-
-.top-center {
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-}
-
-.tiny-line {
-    width: 60px;
-
-    border-top:
-        1px solid
-        var(--design-main);
-}
-
-.ornament {
-    font-size: 25px;
-
-    color:
-        var(--design-main);
-}
-
-.flower-stem {
-    width: 90px;
-
-    position: relative;
-
-    color:
-        var(--design-main);
-}
-
-.embroidered-flower {
-    font-size: 30px;
-
-    color:
-        var(--design-main);
-
-    text-shadow:
-        1px 1px 0 white,
-        2px 2px 0
-        var(--design-accent);
-}
-
-.leaf {
     position: absolute;
 
-    width: 18px;
-
-    height: 9px;
-
-    border-radius:
-        100% 0;
+    inset: 18px;
 
     border:
-        2px solid
-        var(--design-accent);
+        1px dashed
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 65%
+        );
 
-    transform:
-        rotate(-30deg);
-}
-
-.leaf-one {
-    top: 15px;
-
-    left: 15px;
-}
-
-.leaf-two {
-    top: 28px;
-
-    left: 45px;
-
-    transform:
-        rotate(25deg);
+    pointer-events: none;
 }
 
 
 /* =========================================================
-   INTRO
+   TOP EMBROIDERY
 ========================================================= */
 
-.invitation-intro {
-    text-align: center;
+.card-top-embroidery {
+    position: relative;
 
+    width: 100%;
+
+    max-width: 430px;
+
+    margin:
+        0 auto 5px;
+}
+
+
+.card-top-embroidery svg {
+    width: 100%;
+    height: auto;
+}
+
+
+.ornament-line {
+    stroke-width: 2;
+}
+
+
+.ornament-flower circle {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+}
+
+
+.ornament-leaf {
+    fill:
+        var(--design-thread);
+
+    stroke:
+        var(--design-accent);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-section {
     position: relative;
 
     z-index: 2;
 }
 
-.bismillah {
-    font-size: 19px;
 
-    color:
-        var(--design-accent);
+.eyebrow {
+    margin: 0 0 12px;
 
-    margin-bottom: 25px;
+    color: var(--design-accent);
+
+    font-size: 14px;
+
+    letter-spacing: 3px;
 }
 
-.intro-small {
-    margin: 0;
-
-    color:
-        var(--design-accent);
-
-    font-size: 15px;
-}
 
 #couple-names {
     margin:
-        5px
-        0
-        10px;
+        0;
+
+    color:
+        var(--design-dark);
+
+    font-family:
+        "Amiri",
+        "Noto Naskh Arabic",
+        Georgia,
+        serif;
 
     font-size:
-        clamp(42px, 8vw, 72px);
+        clamp(42px, 10vw, 74px);
 
     font-weight: 500;
 
-    color:
-        var(--design-accent);
-
-    line-height: 1.25;
+    line-height: 1.3;
 }
 
-.gold-thread-line {
+
+.name-ornament {
     display: flex;
 
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
-
-    gap: 10px;
+    gap: 12px;
 
     margin:
-        10px 0 20px;
+        15px auto;
 }
 
-.gold-thread-line span {
-    width: 80px;
 
-    border-top:
-        1px dashed
-        var(--design-main);
+.name-ornament span {
+    width: 75px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--design-main)
+        );
 }
 
-.gold-thread-line i {
+
+.name-ornament span:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            var(--design-main),
+            transparent
+        );
+}
+
+
+.name-ornament b {
     color:
         var(--design-main);
 
-    font-style: normal;
-
-    font-size: 22px;
+    font-size: 16px;
 }
+
 
 #invitation-title {
-    margin: 0;
-
-    font-size: 25px;
-
-    font-weight: 500;
-
-    color:
-        var(--design-accent);
-}
-
-.invitation-message {
-    max-width: 500px;
+    max-width: 560px;
 
     margin:
         15px auto 0;
 
-    line-height: 2;
-
     color:
         var(--design-accent);
+
+    font-size:
+        clamp(20px, 4vw, 27px);
+
+    font-weight: 500;
+
+    line-height: 1.9;
 }
 
 
 /* =========================================================
-   ILLUSTRATIONS
+   SVG ILLUSTRATIONS
 ========================================================= */
 
 .illustration-area {
-    min-height: 270px;
+    position: relative;
+
+    min-height: 330px;
+
+    margin:
+        10px auto 0;
 
     display: flex;
 
     align-items: center;
-
     justify-content: center;
-
-    margin:
-        25px 0;
-
-    position: relative;
 }
+
 
 .illustration {
     display: none;
 
-    width: 100%;
-
-    min-height: 250px;
-
-    align-items: center;
-
-    justify-content: center;
-
-    position: relative;
+    width: min(520px, 100%);
 
     animation:
-        illustrationAppear .8s ease both;
+        illustrationReveal 0.9s ease both;
 }
+
 
 .illustration.active {
-    display: flex;
+    display: block;
 }
 
-@keyframes illustrationAppear {
+
+.illustration svg {
+    width: 100%;
+    height: auto;
+
+    overflow: visible;
+}
+
+
+@keyframes illustrationReveal {
 
     from {
         opacity: 0;
-
         transform:
-            translateY(20px)
-            scale(.96);
+            translateY(15px)
+            scale(0.96);
     }
 
     to {
         opacity: 1;
-
         transform:
             translateY(0)
             scale(1);
@@ -986,138 +1150,539 @@ body::before {
 
 
 /* =========================================================
-   WEDDING
+   SVG EMBROIDERY COLORS
 ========================================================= */
 
-.wedding-illustration {
-    gap: 20px;
-}
+.castle-svg path,
+.fairytale-castle-svg path {
+    fill:
+        color-mix(
+            in srgb,
+            var(--design-light),
+            var(--design-main) 10%
+        );
 
-.castle {
-    font-size: 75px;
+    stroke:
+        var(--design-accent);
 
-    opacity: .85;
+    stroke-width: 3;
+
+    stroke-linejoin: round;
 
     filter:
-        drop-shadow(
-            0 5px 5px
-            rgba(90, 55, 35, .12)
-        );
+        url(#embroideryShadow);
 }
 
-.bride,
-.groom {
-    font-size: 85px;
 
+.castle-flag,
+.fairytale-flag {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+.bride-svg circle,
+.groom-svg circle,
+.child-svg circle {
+    fill:
+        var(--design-light);
+
+    stroke:
+        var(--design-dark);
+
+    stroke-width: 2;
+}
+
+
+.bride-svg path,
+.groom-svg path,
+.child-svg path {
+    fill:
+        var(--design-light);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2.2;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+    stroke-dasharray:
+        1 4;
+}
+
+
+.bride-svg .veil {
+    fill:
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 78%
+        );
+
+    stroke:
+        var(--design-thread);
+}
+
+
+.bride-svg .veil,
+.groom-svg .bowtie {
     filter:
-        drop-shadow(
-            0 8px 8px
-            rgba(70, 40, 25, .13)
-        );
-}
-
-.flower-ground {
-    position: absolute;
-
-    bottom: 10px;
-
-    font-size: 28px;
-
-    letter-spacing: 8px;
+        url(#threadTexture);
 }
 
 
-/* =========================================================
-   BABY
-========================================================= */
-
-.baby-illustration {
-    flex-direction: column;
-}
-
-.baby-drawing {
-    font-size: 110px;
-}
-
-.cloud {
-    font-size: 45px;
-}
-
-.baby-stars {
-    color:
-        var(--design-main);
-
-    font-size: 20px;
-}
-
-
-/* =========================================================
-   BIRTHDAY
-========================================================= */
-
-.birthday-illustration {
-    flex-direction: column;
-}
-
-.birthday-cake {
-    font-size: 120px;
-}
-
-.birthday-balloons {
-    font-size: 30px;
-}
-
-.birthday-stars {
-    color:
-        var(--design-main);
-
-    margin-top: 10px;
-}
-
-
-/* =========================================================
-   GRADUATION
-========================================================= */
-
-.graduation-illustration {
-    flex-direction: column;
-}
-
-.graduation-cap {
-    font-size: 110px;
-}
-
-.graduation-scroll {
-    font-size: 55px;
-}
-
-.graduation-stars {
-    color:
+.groom-svg .bowtie {
+    fill:
         var(--design-accent);
 }
 
 
+.flower-bouquet path,
+.fairytale-flower {
+    fill:
+        none;
+
+    stroke:
+        var(--design-thread);
+
+    stroke-width: 2;
+}
+
+
+.flower-bouquet circle,
+.fairytale-flower circle {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 1.5;
+}
+
+
+.svg-heart {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+
+    filter:
+        url(#embroideryShadow);
+}
+
+
+/* ---------- BABY ---------- */
+
+.moon-svg {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+.star-svg {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 1.5;
+}
+
+
+.star-svg.small {
+    transform:
+        scale(0.75);
+
+    transform-origin:
+        120px 100px;
+}
+
+
+.cloud-svg {
+    fill:
+        var(--design-light);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2.5;
+
+    stroke-dasharray:
+        1 4;
+}
+
+
+.baby-blanket {
+    fill:
+        var(--design-main);
+
+    fill-opacity: 0.35;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+.baby-head {
+    fill:
+        #f3d0b5;
+
+    stroke:
+        var(--design-dark);
+
+    stroke-width: 2;
+}
+
+
+.baby-eye {
+    fill:
+        var(--design-dark);
+}
+
+
+.baby-smile {
+    fill: none;
+
+    stroke:
+        var(--design-dark);
+
+    stroke-width: 1.5;
+}
+
+
+.baby-bonnet {
+    fill:
+        var(--design-main);
+
+    fill-opacity: 0.7;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+.baby-flower circle {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 1.5;
+}
+
+
+/* ---------- BIRTHDAY ---------- */
+
+.balloon-svg ellipse {
+    fill:
+        var(--design-main);
+
+    fill-opacity: 0.45;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+
+    stroke-dasharray:
+        2 3;
+}
+
+
+.balloon-string {
+    fill: none;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 1.5;
+}
+
+
+.cake-svg {
+    fill:
+        var(--design-main);
+
+    fill-opacity: 0.6;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2.5;
+}
+
+
+.cake-top {
+    fill:
+        var(--design-light);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+.cake-line {
+    fill: none;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 1.5;
+
+    stroke-dasharray:
+        1 4;
+}
+
+
+.candle {
+    fill: none;
+
+    stroke:
+        var(--design-dark);
+
+    stroke-width: 4;
+}
+
+
+.flame {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 1.5;
+}
+
+
+.birthday-star {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+/* ---------- GRADUATION ---------- */
+
+.grad-cap {
+    fill:
+        var(--design-main);
+
+    fill-opacity: 0.7;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 3;
+}
+
+
+.grad-cap-band {
+    fill: none;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 3;
+
+    stroke-dasharray:
+        2 4;
+}
+
+
+.tassel-line {
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+
+    fill: none;
+}
+
+
+.tassel {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+.diploma rect {
+    fill:
+        var(--design-light);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+.diploma path,
+.diploma circle {
+    fill: none;
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 1.8;
+}
+
+
+.grad-star {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+/* ---------- FAIRYTALE ---------- */
+
+.crown-svg {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 2;
+}
+
+
+.fairytale-star {
+    fill:
+        var(--design-main);
+
+    stroke:
+        var(--design-accent);
+
+    stroke-width: 1.5;
+}
+
+
 /* =========================================================
-   CHILDREN
+   MESSAGE
 ========================================================= */
 
-.children-illustration {
-    flex-direction: column;
+.message-section {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 600px;
+
+    margin:
+        0 auto;
+
+    padding:
+        10px 0 25px;
 }
 
-.fairytale-castle {
-    font-size: 120px;
+
+.section-ornament {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    margin:
+        0 auto 18px;
 }
 
-.children-drawing {
-    font-size: 65px;
 
-    margin-top: -25px;
+.section-ornament span {
+    width: 70px;
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--design-main)
+        );
 }
 
-.castle-stars {
+
+.section-ornament span:last-child {
+    background:
+        linear-gradient(
+            90deg,
+            var(--design-main),
+            transparent
+        );
+}
+
+
+.section-ornament b {
     color:
         var(--design-main);
+
+    font-size: 14px;
+}
+
+
+#invitation-message {
+    margin:
+        0 auto 20px;
+
+    color:
+        var(--design-accent);
+
+    font-size:
+        clamp(17px, 3.5vw, 21px);
+
+    line-height: 2.2;
+}
+
+
+#invitation-closing {
+    margin: 0;
+
+    color:
+        var(--design-dark);
+
+    font-size: 17px;
+
+    line-height: 2;
 }
 
 
@@ -1125,76 +1690,151 @@ body::before {
    EVENT DETAILS
 ========================================================= */
 
-.event-details {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 10px;
-
-    margin:
-        25px 0;
-
+.details-section {
     position: relative;
 
     z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin:
+        20px auto 25px;
 }
 
+
 .detail-card {
-    text-align: center;
-
-    padding:
-        15px 8px;
-
-    border:
-        1px dashed
-        var(--design-main);
-
-    background:
-        rgba(255,255,255,.38);
-
-    min-height: 120px;
+    min-height: 135px;
 
     display: flex;
 
     flex-direction: column;
 
+    align-items: center;
     justify-content: center;
 
-    gap: 5px;
+    padding: 15px 10px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--design-light),
+            var(--design-main) 8%
+        );
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 55%
+        );
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 7px 20px
+        rgba(60, 40, 25, 0.05);
 }
 
+
 .detail-icon {
+    display: block;
+
+    margin-bottom: 7px;
+
     color:
         var(--design-main);
 
     font-size: 22px;
 }
 
-.detail-card small {
-    font-size: 12px;
 
+.detail-card small {
     color:
         var(--design-accent);
+
+    font-size: 12px;
 }
+
 
 .detail-card strong {
-    font-size: 15px;
-
-    font-weight: 600;
+    margin-top: 5px;
 
     color:
-        var(--design-accent);
+        var(--design-dark);
+
+    font-size: 17px;
+
+    line-height: 1.7;
 }
 
-.detail-card em {
-    font-size: 11px;
+
+.detail-card span:last-child {
+    color:
+        var(--design-accent);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.map-container {
+    margin:
+        15px 0 30px;
+}
+
+
+.map-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 220px;
+
+    padding:
+        12px 25px;
 
     color:
         var(--design-accent);
 
-    font-style: normal;
+    text-decoration: none;
+
+    border:
+        1px solid
+        var(--design-main);
+
+    border-radius: 999px;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--design-light),
+            var(--design-main) 6%
+        );
+
+    transition:
+        all 0.25s ease;
+}
+
+
+.map-button:hover {
+    color:
+        var(--design-light);
+
+    background:
+        var(--design-main);
+
+    transform:
+        translateY(-2px);
 }
 
 
@@ -1203,136 +1843,81 @@ body::before {
 ========================================================= */
 
 .guest-section {
-    margin:
-        35px 0;
+    position: relative;
 
-    text-align: center;
+    z-index: 2;
+
+    margin:
+        30px 0;
 
     padding:
         25px 15px;
 
+    background:
+        color-mix(
+            in srgb,
+            var(--design-light),
+            var(--design-main) 5%
+        );
+
     border-top:
-        1px dashed
-        var(--design-main);
+        1px solid
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 55%
+        );
 
     border-bottom:
-        1px dashed
-        var(--design-main);
-
-    position: relative;
+        1px solid
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 55%
+        );
 }
 
-.guest-flower {
+
+.guest-ornament {
+    margin-bottom: 5px;
+
     color:
         var(--design-main);
 
-    font-size: 28px;
+    font-size: 27px;
 }
 
+
 .guest-section p {
+    margin:
+        0 0 4px;
+
+    color:
+        var(--design-accent);
+
+    font-size: 14px;
+}
+
+
+#personalized-name {
     margin:
         5px 0;
 
     color:
-        var(--design-accent);
-}
+        var(--design-dark);
 
-#personalized-name {
-    margin:
-        3px 0;
-
-    color:
-        var(--design-accent);
-
-    font-size: 31px;
+    font-size:
+        clamp(28px, 6vw, 38px);
 
     font-weight: 500;
 }
 
-.guest-count {
-    font-size: 13px;
-}
 
-.guest-count strong {
-    color:
-        var(--design-main);
-
-    font-size: 18px;
-}
-
-.guest-thread {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    margin-top: 12px;
-}
-
-.guest-thread span {
-    width: 70px;
-
-    border-top:
-        1px dashed
-        var(--design-main);
-}
-
-.guest-thread i {
-    font-style: normal;
-
-    color:
-        var(--design-main);
-}
-
-
-/* =========================================================
-   MAP
-========================================================= */
-
-.map-section {
-    text-align: center;
-
-    margin:
-        30px 0;
-}
-
-.map-button {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    padding:
-        11px 28px;
-
-    border-radius: 999px;
-
-    text-decoration: none;
-
+.allowed-guests {
     color:
         var(--design-accent);
 
-    border:
-        1px solid
-        var(--design-main);
-
-    background:
-        rgba(255,255,255,.55);
-
-    transition:
-        .25s ease;
-}
-
-.map-button:hover {
-    transform:
-        translateY(-2px);
-
-    background:
-        #fffaf4;
+    font-size: 14px;
 }
 
 
@@ -1341,128 +1926,123 @@ body::before {
 ========================================================= */
 
 .rsvp-section {
-    text-align: center;
+    position: relative;
 
-    margin-top: 40px;
+    z-index: 2;
+
+    margin-top:
+        35px;
 
     padding:
         25px 15px;
 
-    border:
-        1px dashed
-        var(--design-main);
-
     background:
-        rgba(255,255,255,.35);
+        color-mix(
+            in srgb,
+            var(--design-light),
+            var(--design-main) 5%
+        );
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 60%
+        );
 }
 
-.rsvp-decoration {
+
+.rsvp-section h3 {
+    margin:
+        0 0 5px;
+
     color:
-        var(--design-main);
+        var(--design-dark);
 
     font-size: 25px;
 }
 
-.rsvp-section h2 {
+
+.rsvp-section > p {
     margin:
-        3px 0;
+        0 0 20px;
 
-    font-weight: 500;
-}
-
-.rsvp-section p {
     color:
         var(--design-accent);
-
-    font-size: 14px;
 }
+
 
 .rsvp-buttons {
     display: flex;
 
+    flex-wrap: wrap;
+
     justify-content: center;
 
-    gap: 12px;
-
-    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.rsvp-button {
+
+.rsvp-buttons button {
+    min-width: 180px;
+
+    padding:
+        12px 20px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+#rsvp-yes {
+    color: #fffdf7;
+
     border:
         1px solid
         var(--design-main);
 
-    border-radius: 999px;
+    background:
+        var(--design-main);
+}
 
-    padding:
-        10px 24px;
 
-    background: white;
-
+#rsvp-no {
     color:
         var(--design-accent);
 
-    transition:
-        .25s ease;
+    border:
+        1px solid
+        var(--design-main);
+
+    background:
+        transparent;
 }
 
-.rsvp-button:hover {
+
+.rsvp-buttons button:hover {
     transform:
         translateY(-2px);
 }
 
-.rsvp-button.yes {
-    background:
-        linear-gradient(
-            135deg,
-            var(--design-main),
-            var(--design-accent)
-        );
-
-    color: white;
-}
 
 .rsvp-result {
-    min-height: 20px;
+    min-height: 25px;
 
-    color:
-        var(--design-accent) !important;
-
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   CLOSING
-========================================================= */
-
-.closing-section {
-    text-align: center;
-
-    padding-top: 40px;
-
-    position: relative;
-}
-
-.closing-flower {
-    color:
-        var(--design-main);
-
-    font-size: 28px;
-}
-
-#invitation-closing {
-    font-size: 17px;
+    margin-top: 15px;
 
     color:
         var(--design-accent);
-}
 
-.closing-heart {
-    color:
-        var(--design-main);
-
-    font-size: 25px;
+    font-size: 15px;
 }
 
 
@@ -1471,395 +2051,116 @@ body::before {
 ========================================================= */
 
 .bottom-embroidery {
-    text-align: center;
+    width: min(430px, 90%);
 
-    margin-top: 30px;
+    margin:
+        30px auto 5px;
+}
 
+
+.bottom-embroidery svg {
+    width: 100%;
+    height: auto;
+}
+
+
+.footer-text {
     position: relative;
 
     z-index: 2;
-}
 
-.embroidered-branch {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    font-size: 25px;
-
-    filter:
-        drop-shadow(
-            1px 1px 0 white
-        );
+    margin:
+        0;
 
     color:
-        var(--design-main);
+        var(--design-accent);
+
+    font-size: 12px;
+
+    opacity: 0.75;
 }
 
 
 /* =========================================================
-   COLOR THEMES
-========================================================= */
-
-
-/* =========================================================
-   FLORAL — BLUSH
-========================================================= */
-
-body[data-template="floral"][data-color="blush"] {
-    --design-main: #d69c9d;
-    --design-accent: #965d62;
-    --design-background: #faeaea;
-}
-
-
-/* FLORAL — SAGE */
-
-body[data-template="floral"][data-color="sage-floral"] {
-    --design-main: #9da98d;
-    --design-accent: #5f6f54;
-    --design-background: #edf1e8;
-}
-
-
-/* FLORAL — BLUE */
-
-body[data-template="floral"][data-color="blue-floral"] {
-    --design-main: #91a9c0;
-    --design-accent: #566d84;
-    --design-background: #eaf0f6;
-}
-
-
-/* FLORAL — LAVENDER */
-
-body[data-template="floral"][data-color="lavender"] {
-    --design-main: #b3a0bb;
-    --design-accent: #745e7c;
-    --design-background: #f1ebf4;
-}
-
-
-/* =========================================================
-   ROMANTIC
-========================================================= */
-
-body[data-template="romantic"][data-color="dusty-rose"] {
-    --design-main: #c99599;
-    --design-accent: #8d5d62;
-    --design-background: #f7e8e8;
-}
-
-body[data-template="romantic"][data-color="mauve"] {
-    --design-main: #aa8f9f;
-    --design-accent: #715b6a;
-    --design-background: #f0e9ef;
-}
-
-body[data-template="romantic"][data-color="peach"] {
-    --design-main: #d9a58c;
-    --design-accent: #9a684e;
-    --design-background: #faebe1;
-}
-
-body[data-template="romantic"][data-color="champagne-rose"] {
-    --design-main: #c9a27f;
-    --design-accent: #89664b;
-    --design-background: #f8eee3;
-}
-
-
-/* =========================================================
-   ARABIC
-========================================================= */
-
-body[data-template="arabic"][data-color="sand"] {
-    --design-main: #c8a477;
-    --design-accent: #785b3e;
-    --design-background: #f4ead9;
-}
-
-body[data-template="arabic"][data-color="olive"] {
-    --design-main: #8d9470;
-    --design-accent: #586047;
-    --design-background: #edf0e4;
-}
-
-body[data-template="arabic"][data-color="terracotta"] {
-    --design-main: #b87961;
-    --design-accent: #7d4939;
-    --design-background: #f4e2da;
-}
-
-body[data-template="arabic"][data-color="emerald"] {
-    --design-main: #668675;
-    --design-accent: #3f5e4d;
-    --design-background: #e7eee9;
-}
-
-
-/* =========================================================
-   IVORY
-========================================================= */
-
-body[data-template="ivory"][data-color="cream"] {
-    --design-main: #d9c2a7;
-    --design-accent: #98765a;
-    --design-background: #fbf5eb;
-}
-
-body[data-template="ivory"][data-color="dusty-pink"] {
-    --design-main: #c79a9c;
-    --design-accent: #8f6569;
-    --design-background: #f7e9e9;
-}
-
-body[data-template="ivory"][data-color="sage"] {
-    --design-main: #a5ad91;
-    --design-accent: #687157;
-    --design-background: #eff1e8;
-}
-
-body[data-template="ivory"][data-color="powder-blue"] {
-    --design-main: #9caec1;
-    --design-accent: #5f7287;
-    --design-background: #edf2f7;
-}
-
-
-/* =========================================================
-   GOLD
-========================================================= */
-
-body[data-template="gold"][data-color="champagne"] {
-    --design-main: #d8b27c;
-    --design-accent: #9a6d3f;
-    --design-background: #f7ecdc;
-}
-
-body[data-template="gold"][data-color="rose-gold"] {
-    --design-main: #c98f82;
-    --design-accent: #8e5c53;
-    --design-background: #f7e5df;
-}
-
-body[data-template="gold"][data-color="ivory-gold"] {
-    --design-main: #c7a66b;
-    --design-accent: #86663b;
-    --design-background: #faf5ea;
-}
-
-body[data-template="gold"][data-color="olive-gold"] {
-    --design-main: #9a9a72;
-    --design-accent: #676746;
-    --design-background: #f0efe2;
-}
-
-
-/* =========================================================
-   DARK
-========================================================= */
-
-body[data-template="dark"][data-color="black-gold"] {
-    --design-main: #c5a15b;
-    --design-accent: #d7b873;
-    --design-background: #171513;
-}
-
-body[data-template="dark"][data-color="navy-gold"] {
-    --design-main: #b79b62;
-    --design-accent: #d6bb79;
-    --design-background: #151c29;
-}
-
-body[data-template="dark"][data-color="plum"] {
-    --design-main: #b78680;
-    --design-accent: #d0aaa2;
-    --design-background: #26191e;
-}
-
-body[data-template="dark"][data-color="emerald-dark"] {
-    --design-main: #8fac93;
-    --design-accent: #b9c9b5;
-    --design-background: #15221d;
-}
-
-
-/* =========================================================
-   APPLY THEME COLORS
-========================================================= */
-
-.envelope-screen {
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            #fffdf8,
-            var(--design-background) 65%,
-            var(--design-background)
-        );
-}
-
-
-/* =========================================================
-   DARK INVITATIONS
+   DARK DESIGNS
 ========================================================= */
 
 body[data-template="dark"] {
-    background:
-        #11100f;
-
     color:
-        #eee3d2;
+        var(--design-dark);
+
+    background:
+        var(--design-background);
 }
 
-body[data-template="dark"] .envelope-screen {
+
+body[data-template="dark"] .envelope-screen,
+body[data-template="dark"] .main-invitation {
     background:
         radial-gradient(
-            circle at 50% 20%,
-            #28231d,
-            var(--design-background) 70%,
-            #11100f
-        );
-}
-
-body[data-template="dark"] .envelope-paper {
-    background:
-        linear-gradient(
-            135deg,
-            #211e1a,
-            var(--design-background)
-        );
-
-    color:
-        #eee3d2;
-}
-
-body[data-template="dark"] .envelope-back {
-    background:
-        linear-gradient(
-            135deg,
-            var(--design-background),
-            #211e1a
-        );
-}
-
-body[data-template="dark"] .envelope-flap {
-    background:
-        linear-gradient(
-            135deg,
-            #24211d,
+            circle at top,
+            var(--design-light),
             var(--design-background)
         );
 }
 
-body[data-template="dark"] .envelope-front {
-    background:
-        linear-gradient(
-            135deg,
-            var(--design-background),
-            #211e1a
-        );
-}
-
-body[data-template="dark"] .envelope-paper h2,
-body[data-template="dark"] #guest-name {
-    color:
-        var(--design-accent);
-}
-
-body[data-template="dark"] .envelope-bottom p,
-body[data-template="dark"] .to-label,
-body[data-template="dark"] .special-invitation {
-    color:
-        #cbbba7;
-}
 
 body[data-template="dark"] .invitation-card {
-    background:
-        linear-gradient(
-            145deg,
-            var(--design-background),
-            #211e1a
-        );
-
-    color:
-        #eee3d2;
+    box-shadow:
+        0 25px 80px
+        rgba(0, 0, 0, 0.35);
 }
 
-body[data-template="dark"] .invitation-card::before {
-    border-color:
-        var(--design-main);
+
+body[data-template="dark"] .envelope-back,
+body[data-template="dark"] .envelope-paper,
+body[data-template="dark"] .envelope-flap,
+body[data-template="dark"] .envelope-front {
+    box-shadow:
+        inset 0 0 40px rgba(255,255,255,0.02);
 }
 
-body[data-template="dark"] .invitation-card::after {
-    border-color:
-        rgba(255,255,255,.15);
-}
 
+body[data-template="dark"] .paper-guest,
 body[data-template="dark"] #couple-names,
-body[data-template="dark"] #invitation-title,
-body[data-template="dark"] #personalized-name {
-    color:
-        var(--design-accent);
-}
-
-body[data-template="dark"] .bismillah,
-body[data-template="dark"] .intro-small,
-body[data-template="dark"] .invitation-message,
-body[data-template="dark"] .guest-section p,
-body[data-template="dark"] .detail-card small,
+body[data-template="dark"] #personalized-name,
 body[data-template="dark"] .detail-card strong,
-body[data-template="dark"] .detail-card em,
-body[data-template="dark"] .rsvp-section p,
-body[data-template="dark"] #invitation-closing {
+body[data-template="dark"] .rsvp-section h3 {
     color:
-        #d8c8b4;
+        var(--design-dark);
 }
 
-body[data-template="dark"] .detail-card {
-    background:
-        rgba(255,255,255,.04);
 
-    color:
-        #eee3d2;
-
-    border-color:
-        var(--design-main);
-}
-
-body[data-template="dark"] .map-button {
-    background:
-        rgba(255,255,255,.04);
-
+body[data-template="dark"] .paper-small,
+body[data-template="dark"] .paper-hint,
+body[data-template="dark"] #invitation-title,
+body[data-template="dark"] #invitation-message,
+body[data-template="dark"] #invitation-closing,
+body[data-template="dark"] .detail-card small,
+body[data-template="dark"] .detail-card span:last-child,
+body[data-template="dark"] .guest-section p,
+body[data-template="dark"] .allowed-guests,
+body[data-template="dark"] .rsvp-section > p,
+body[data-template="dark"] .footer-text {
     color:
         var(--design-accent);
 }
 
-body[data-template="dark"] .map-button:hover {
-    background:
-        rgba(255,255,255,.08);
-}
 
+body[data-template="dark"] .detail-card,
+body[data-template="dark"] .guest-section,
 body[data-template="dark"] .rsvp-section {
     background:
-        rgba(255,255,255,.03);
+        rgba(255,255,255,0.025);
 }
 
-body[data-template="dark"] .rsvp-button {
-    background:
-        rgba(255,255,255,.05);
 
+body[data-template="dark"] #rsvp-no {
     color:
         var(--design-accent);
 
-    border-color:
-        var(--design-main);
-}
-
-body[data-template="dark"] .rsvp-button.yes {
-    color: #fff;
+    background:
+        transparent;
 }
 
 
@@ -1867,74 +2168,157 @@ body[data-template="dark"] .rsvp-button.yes {
    MOBILE
 ========================================================= */
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
+
+    .envelope-screen {
+        padding:
+            25px 15px;
+    }
+
+
+    .envelope {
+        width:
+            min(390px, 94vw);
+    }
+
+
+    .envelope-wrapper {
+        gap: 22px;
+    }
+
+
+    .open-button {
+        padding:
+            13px 28px;
+
+        font-size: 15px;
+    }
+
 
     .main-invitation {
         padding:
-            15px
-            8px
-            50px;
+            25px 10px 55px;
     }
+
 
     .invitation-card {
         padding:
-            40px
-            15px
+            25px 17px 40px;
+    }
+
+
+    .invitation-card::before {
+        inset: 7px;
+    }
+
+
+    .invitation-card::after {
+        inset: 12px;
+    }
+
+
+    .illustration-area {
+        min-height:
+            250px;
+    }
+
+
+    .details-section {
+        grid-template-columns:
+            1fr;
+        gap: 10px;
+    }
+
+
+    .detail-card {
+        min-height:
+            95px;
+    }
+
+
+    .rsvp-buttons {
+        flex-direction:
+            column;
+    }
+
+
+    .rsvp-buttons button {
+        width:
+            100%;
+    }
+
+
+    .section-ornament span {
+        width:
             45px;
     }
 
-    .invitation-card::before {
-        inset: 9px;
+
+    .name-ornament span {
+        width:
+            45px;
     }
 
-    .invitation-card::after {
-        inset: 15px;
+}
+
+
+@media (max-width: 420px) {
+
+    #couple-names {
+        font-size:
+            39px;
     }
 
-    .event-details {
-        grid-template-columns:
-            repeat(2, 1fr);
+
+    #invitation-title {
+        font-size:
+            19px;
     }
 
-    .detail-card {
-        min-height: 105px;
+
+    .illustration-area {
+        min-height:
+            215px;
     }
 
-    .top-decoration {
-        margin-bottom: 20px;
+
+    .paper-guest {
+        font-size:
+            29px;
     }
 
-    .flower-stem {
-        width: 55px;
+
+    .wax-seal {
+        width:
+            54px;
+
+        height:
+            54px;
     }
 
-    .tiny-line {
-        width: 35px;
-    }
+}
 
-    .castle {
-        font-size: 50px;
-    }
 
-    .bride,
-    .groom {
-        font-size: 60px;
-    }
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
-    .envelope {
-        aspect-ratio: 1.35;
-    }
+@media (prefers-reduced-motion: reduce) {
 
-    .envelope-center {
-        width: 80%;
-    }
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
 
-    #guest-name {
-        font-size: 25px;
-    }
+        animation-iteration-count:
+            1 !important;
 
-    .envelope-paper h2 {
-        font-size: 30px;
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
     }
 
 }
