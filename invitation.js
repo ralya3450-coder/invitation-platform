@@ -6,6 +6,8 @@ const defaultInvitation = {
 
     template: "floral",
 
+    color: "blush",
+
     personOne: "محمد",
     personTwo: "سارة",
 
@@ -62,7 +64,9 @@ function getInvitationData() {
     try {
 
         const saved =
-            localStorage.getItem("invitationData");
+            localStorage.getItem(
+                "invitationData"
+            );
 
         if (!saved) {
 
@@ -143,6 +147,7 @@ function getEventCategory(eventType) {
         String(eventType || "")
             .toLowerCase();
 
+
     if (
         text.includes("مولود") ||
         text.includes("بيبي") ||
@@ -155,6 +160,7 @@ function getEventCategory(eventType) {
 
     }
 
+
     if (
         text.includes("ميلاد") ||
         text.includes("birthday") ||
@@ -165,6 +171,7 @@ function getEventCategory(eventType) {
 
     }
 
+
     if (
         text.includes("تخرج") ||
         text.includes("graduation") ||
@@ -174,6 +181,7 @@ function getEventCategory(eventType) {
         return "graduation";
 
     }
+
 
     if (
         text.includes("طفل") ||
@@ -186,6 +194,7 @@ function getEventCategory(eventType) {
         return "children";
 
     }
+
 
     return "wedding";
 
@@ -203,6 +212,7 @@ function showIllustration(category) {
             ".illustration"
         );
 
+
     illustrations.forEach(
         illustration => {
 
@@ -219,6 +229,7 @@ function showIllustration(category) {
             `${category}-illustration`
         );
 
+
     if (selected) {
 
         selected.classList.add(
@@ -231,13 +242,17 @@ function showIllustration(category) {
 
 
 /* =========================================================
-   APPLY TEMPLATE
+   APPLY TEMPLATE + COLOR
 ========================================================= */
 
-function applyTemplate(template) {
+function applyTemplate(template, color) {
 
     document.body.dataset.template =
         template || "floral";
+
+
+    document.body.dataset.color =
+        color || "blush";
 
 }
 
@@ -254,10 +269,12 @@ function formatDate(dateString) {
 
     }
 
+
     try {
 
         const date =
             new Date(dateString);
+
 
         return new Intl.DateTimeFormat(
             "ar-SA",
@@ -290,18 +307,22 @@ function formatTime(timeString) {
 
     }
 
+
     try {
 
         const [hours, minutes] =
             timeString.split(":");
 
+
         const date =
             new Date();
+
 
         date.setHours(
             Number(hours),
             Number(minutes)
         );
+
 
         return new Intl.DateTimeFormat(
             "ar-SA",
@@ -329,11 +350,14 @@ function populateInvitation() {
     const data =
         getInvitationData();
 
+
     const guest =
         getGuestFromURL(data);
 
 
-    /* Guest */
+    /* =====================================================
+       GUEST
+    ===================================================== */
 
     document.getElementById(
         "guest-name"
@@ -353,10 +377,13 @@ function populateInvitation() {
         guest.count || 1;
 
 
-    /* Couple */
+    /* =====================================================
+       COUPLE
+    ===================================================== */
 
     const personOne =
         data.personOne || "";
+
 
     const personTwo =
         data.personTwo || "";
@@ -364,6 +391,7 @@ function populateInvitation() {
 
     let coupleName =
         `${personOne} & ${personTwo}`;
+
 
     if (
         !personOne &&
@@ -383,7 +411,9 @@ function populateInvitation() {
         coupleName;
 
 
-    /* Text */
+    /* =====================================================
+       TEXT
+    ===================================================== */
 
     document.getElementById(
         "invitation-title"
@@ -406,7 +436,9 @@ function populateInvitation() {
         "تشرفنا حضوركم ومشاركتكم فرحتنا";
 
 
-    /* Event */
+    /* =====================================================
+       EVENT
+    ===================================================== */
 
     document.getElementById(
         "event-type"
@@ -445,12 +477,15 @@ function populateInvitation() {
         "—";
 
 
-    /* Map */
+    /* =====================================================
+       MAP
+    ===================================================== */
 
     const mapLink =
         document.getElementById(
             "map-link"
         );
+
 
     if (
         data.venueMap &&
@@ -459,6 +494,7 @@ function populateInvitation() {
 
         mapLink.href =
             data.venueMap;
+
 
         mapLink.style.display =
             "inline-flex";
@@ -471,26 +507,34 @@ function populateInvitation() {
     }
 
 
-    /* Template */
+    /* =====================================================
+       TEMPLATE + COLOR
+    ===================================================== */
 
     applyTemplate(
-        data.template
+        data.template,
+        data.color
     );
 
 
-    /* Illustration */
+    /* =====================================================
+       ILLUSTRATION
+    ===================================================== */
 
     const category =
         getEventCategory(
             data.eventType
         );
 
+
     showIllustration(
         category
     );
 
 
-    /* RSVP */
+    /* =====================================================
+       RSVP
+    ===================================================== */
 
     if (
         data.enableRSVP === false
@@ -517,10 +561,12 @@ function openInvitation() {
             "envelope"
         );
 
+
     const screen =
         document.getElementById(
             "envelope-screen"
         );
+
 
     const main =
         document.getElementById(
@@ -539,14 +585,17 @@ function openInvitation() {
             "hidden"
         );
 
+
         main.classList.add(
             "visible"
         );
+
 
         window.scrollTo({
             top: 0,
             behavior: "smooth"
         });
+
 
     }, 1000);
 
@@ -564,10 +613,12 @@ function setupRSVP() {
             "rsvp-yes"
         );
 
+
     const no =
         document.getElementById(
             "rsvp-no"
         );
+
 
     const result =
         document.getElementById(
