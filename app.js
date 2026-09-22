@@ -1,217 +1,1390 @@
-// =========================================
-// INVITATION PLATFORM
-// STEP 1 — TEMPLATE SELECTION
-// =========================================
+/* =========================================================
+   INVITATION BUILDER
+========================================================= */
 
 
-// Selected template
-let selectedTemplate = null;
+/* =========================================================
+   DATA
+========================================================= */
+
+const invitationData = {
+
+    template: "",
+
+    personOne: "",
+    personTwo: "",
+    familyName: "",
+
+    eventType: "",
+    eventDate: "",
+    eventTime: "",
+
+    venueName: "",
+    venueCity: "",
+    venueMap: "",
+
+    invitationTitle: "",
+    invitationMessage: "",
+    invitationClosing: "",
+
+    guests: [],
+
+    enableRSVP: true,
+    allowGuestCount: false,
+    allowNotes: true,
+
+    musicUrl: "",
+    musicAutoplay: false
+
+};
 
 
-// Elements
-const templateCards =
-    document.querySelectorAll(".template-card");
+/* =========================================================
+   CURRENT STEP
+========================================================= */
 
-const selectButtons =
-    document.querySelectorAll(".select-template");
-
-const continueButton =
-    document.getElementById("continue-button");
-
-const selectionMessage =
-    document.getElementById("selection-message");
-
-const categories =
-    document.querySelectorAll(".category");
-
-const searchInput =
-    document.getElementById("template-search");
+let currentStep = 1;
 
 
-// =========================================
-// SELECT TEMPLATE
-// =========================================
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
-selectButtons.forEach(button => {
+const steps =
+    document.querySelectorAll(".builder-step");
 
-    button.addEventListener("click", function () {
+const progressSteps =
+    document.querySelectorAll(".progress-step");
 
-        const templateId =
-            this.dataset.template;
 
-        selectTemplate(templateId);
+/* =========================================================
+   SHOW STEP
+========================================================= */
+
+function showStep(stepNumber) {
+
+    currentStep = stepNumber;
+
+
+    steps.forEach((step) => {
+
+        step.classList.remove("active");
 
     });
 
-});
 
-
-function selectTemplate(templateId) {
-
-    selectedTemplate = templateId;
-
-
-    // Remove previous selection
-
-    templateCards.forEach(card => {
-
-        card.classList.remove("selected");
-
-    });
-
-
-    // Select current card
-
-    const selectedCard =
-        document.querySelector(
-            `.template-card[data-template="${templateId}"]`
+    const targetStep =
+        document.getElementById(
+            `step-${stepNumber}`
         );
 
 
-    if (selectedCard) {
+    if (targetStep) {
 
-        selectedCard.classList.add("selected");
+        targetStep.classList.add("active");
 
     }
 
 
-    // Enable continue button
+    progressSteps.forEach((step) => {
 
-    continueButton.disabled = false;
+        const number =
+            Number(
+                step.dataset.step
+            );
 
 
-    selectionMessage.textContent =
-        "تم اختيار التصميم — يمكنك المتابعة";
+        step.classList.remove("active");
+
+        step.classList.remove("completed");
 
 
-    // Update buttons
+        if (number === stepNumber) {
 
-    selectButtons.forEach(button => {
+            step.classList.add("active");
 
-        if (button.dataset.template === templateId) {
+        }
 
-            button.textContent = "تم الاختيار";
 
-        } else {
+        if (number < stepNumber) {
 
-            button.textContent = "اختيار";
+            step.classList.add("completed");
 
         }
 
     });
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+
+    updatePreview();
 
 }
 
 
-// =========================================
-// CATEGORY FILTER
-// =========================================
+/* =========================================================
+   TEMPLATE SELECTION
+========================================================= */
 
-categories.forEach(category => {
-
-    category.addEventListener("click", function () {
-
-        categories.forEach(item => {
-
-            item.classList.remove("active");
-
-        });
-
-        this.classList.add("active");
+const templateCards =
+    document.querySelectorAll(
+        ".template-card"
+    );
 
 
-        const selectedCategory =
-            this.dataset.category;
+const templateButtons =
+    document.querySelectorAll(
+        ".select-template"
+    );
 
 
-        templateCards.forEach(card => {
+templateButtons.forEach((button) => {
 
-            const cardCategory =
-                card.dataset.category;
+    button.addEventListener(
+        "click",
+        function () {
+
+            const template =
+                this.dataset.template;
 
 
-            if (
-                selectedCategory === "all" ||
-                cardCategory === selectedCategory
-            ) {
+            invitationData.template =
+                template;
 
-                card.classList.remove("hidden");
 
-            } else {
+            templateCards.forEach((card) => {
 
-                card.classList.add("hidden");
+                card.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            const selectedCard =
+                document.querySelector(
+                    `.template-card[data-template="${template}"]`
+                );
+
+
+            if (selectedCard) {
+
+                selectedCard.classList.add(
+                    "selected"
+                );
 
             }
 
-        });
 
-    });
-
-});
-
-
-// =========================================
-// SEARCH
-// =========================================
-
-searchInput.addEventListener("input", function () {
-
-    const searchTerm =
-        this.value.trim().toLowerCase();
+            const nextButton =
+                document.getElementById(
+                    "next-step-1"
+                );
 
 
-    templateCards.forEach(card => {
+            if (nextButton) {
 
-        const name =
-            card.dataset.name.toLowerCase();
+                nextButton.disabled = false;
 
-        const category =
-            card.dataset.category.toLowerCase();
+            }
 
 
-        if (
-            name.includes(searchTerm) ||
-            category.includes(searchTerm)
-        ) {
-
-            card.classList.remove("hidden");
-
-        } else {
-
-            card.classList.add("hidden");
+            saveData();
 
         }
-
-    });
+    );
 
 });
 
 
-// =========================================
-// CONTINUE
-// =========================================
+/* =========================================================
+   STEP 1 NEXT
+========================================================= */
 
-continueButton.addEventListener("click", function () {
+const firstNext =
+    document.getElementById(
+        "next-step-1"
+    );
 
-    if (!selectedTemplate) {
-        return;
+
+if (firstNext) {
+
+    firstNext.addEventListener(
+        "click",
+        function () {
+
+            if (!invitationData.template) {
+
+                alert(
+                    "يرجى اختيار تصميم الدعوة أولاً."
+                );
+
+                return;
+
+            }
+
+
+            showStep(2);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   NEXT BUTTONS
+========================================================= */
+
+const nextButtons =
+    document.querySelectorAll(
+        "[data-next]"
+    );
+
+
+nextButtons.forEach((button) => {
+
+    button.addEventListener(
+        "click",
+        function () {
+
+            const nextStep =
+                Number(
+                    this.dataset.next
+                );
+
+
+            collectCurrentStepData();
+
+
+            saveData();
+
+
+            showStep(nextStep);
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   BACK BUTTONS
+========================================================= */
+
+const backButtons =
+    document.querySelectorAll(
+        "[data-back]"
+    );
+
+
+backButtons.forEach((button) => {
+
+    button.addEventListener(
+        "click",
+        function () {
+
+            const previousStep =
+                Number(
+                    this.dataset.back
+                );
+
+
+            collectCurrentStepData();
+
+
+            saveData();
+
+
+            showStep(previousStep);
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   COLLECT CURRENT STEP DATA
+========================================================= */
+
+function collectCurrentStepData() {
+
+
+    /* -----------------------------------------
+       COUPLE
+    ----------------------------------------- */
+
+    const personOne =
+        document.getElementById(
+            "person-one"
+        );
+
+    const personTwo =
+        document.getElementById(
+            "person-two"
+        );
+
+    const familyName =
+        document.getElementById(
+            "family-name"
+        );
+
+
+    if (personOne) {
+
+        invitationData.personOne =
+            personOne.value.trim();
+
     }
 
 
-    // Save selected template
+    if (personTwo) {
 
-    localStorage.setItem(
-        "selectedTemplate",
-        selectedTemplate
+        invitationData.personTwo =
+            personTwo.value.trim();
+
+    }
+
+
+    if (familyName) {
+
+        invitationData.familyName =
+            familyName.value.trim();
+
+    }
+
+
+    /* -----------------------------------------
+       EVENT
+    ----------------------------------------- */
+
+    const eventType =
+        document.getElementById(
+            "event-type"
+        );
+
+    const eventDate =
+        document.getElementById(
+            "event-date"
+        );
+
+    const eventTime =
+        document.getElementById(
+            "event-time"
+        );
+
+
+    if (eventType) {
+
+        invitationData.eventType =
+            eventType.value;
+
+    }
+
+
+    if (eventDate) {
+
+        invitationData.eventDate =
+            eventDate.value;
+
+    }
+
+
+    if (eventTime) {
+
+        invitationData.eventTime =
+            eventTime.value;
+
+    }
+
+
+    /* -----------------------------------------
+       VENUE
+    ----------------------------------------- */
+
+    const venueName =
+        document.getElementById(
+            "venue-name"
+        );
+
+    const venueCity =
+        document.getElementById(
+            "venue-city"
+        );
+
+    const venueMap =
+        document.getElementById(
+            "venue-map"
+        );
+
+
+    if (venueName) {
+
+        invitationData.venueName =
+            venueName.value.trim();
+
+    }
+
+
+    if (venueCity) {
+
+        invitationData.venueCity =
+            venueCity.value.trim();
+
+    }
+
+
+    if (venueMap) {
+
+        invitationData.venueMap =
+            venueMap.value.trim();
+
+    }
+
+
+    /* -----------------------------------------
+       INVITATION TEXT
+    ----------------------------------------- */
+
+    const invitationTitle =
+        document.getElementById(
+            "invitation-title"
+        );
+
+    const invitationMessage =
+        document.getElementById(
+            "invitation-message"
+        );
+
+    const invitationClosing =
+        document.getElementById(
+            "invitation-closing"
+        );
+
+
+    if (invitationTitle) {
+
+        invitationData.invitationTitle =
+            invitationTitle.value.trim();
+
+    }
+
+
+    if (invitationMessage) {
+
+        invitationData.invitationMessage =
+            invitationMessage.value.trim();
+
+    }
+
+
+    if (invitationClosing) {
+
+        invitationData.invitationClosing =
+            invitationClosing.value.trim();
+
+    }
+
+
+    /* -----------------------------------------
+       RSVP
+    ----------------------------------------- */
+
+    const enableRSVP =
+        document.getElementById(
+            "enable-rsvp"
+        );
+
+    const allowGuestCount =
+        document.getElementById(
+            "allow-guest-count"
+        );
+
+    const allowNotes =
+        document.getElementById(
+            "allow-notes"
+        );
+
+
+    if (enableRSVP) {
+
+        invitationData.enableRSVP =
+            enableRSVP.checked;
+
+    }
+
+
+    if (allowGuestCount) {
+
+        invitationData.allowGuestCount =
+            allowGuestCount.checked;
+
+    }
+
+
+    if (allowNotes) {
+
+        invitationData.allowNotes =
+            allowNotes.checked;
+
+    }
+
+
+    /* -----------------------------------------
+       MUSIC
+    ----------------------------------------- */
+
+    const musicUrl =
+        document.getElementById(
+            "music-url"
+        );
+
+    const musicAutoplay =
+        document.getElementById(
+            "music-autoplay"
+        );
+
+
+    if (musicUrl) {
+
+        invitationData.musicUrl =
+            musicUrl.value.trim();
+
+    }
+
+
+    if (musicAutoplay) {
+
+        invitationData.musicAutoplay =
+            musicAutoplay.checked;
+
+    }
+
+}
+
+
+/* =========================================================
+   GUEST SYSTEM
+========================================================= */
+
+const addGuestButton =
+    document.getElementById(
+        "add-guest"
     );
 
 
-    // Temporary next step
+if (addGuestButton) {
 
-    alert(
-        "تم اختيار التصميم رقم " +
-        selectedTemplate +
-        ". الخطوة التالية ستكون اختيار نوع المناسبة."
+    addGuestButton.addEventListener(
+        "click",
+        addGuest
+    );
+
+}
+
+
+function addGuest() {
+
+    const nameInput =
+        document.getElementById(
+            "guest-name"
+        );
+
+    const countInput =
+        document.getElementById(
+            "guest-count"
+        );
+
+
+    const name =
+        nameInput.value.trim();
+
+
+    const count =
+        Number(
+            countInput.value
+        );
+
+
+    if (!name) {
+
+        alert(
+            "يرجى كتابة اسم الضيف."
+        );
+
+        return;
+
+    }
+
+
+    if (!count || count < 1) {
+
+        alert(
+            "يرجى إدخال عدد الأشخاص."
+        );
+
+        return;
+
+    }
+
+
+    const guest = {
+
+        id:
+            Date.now(),
+
+        name:
+            name,
+
+        count:
+            count,
+
+        confirmed:
+            false
+
+    };
+
+
+    invitationData.guests.push(
+        guest
+    );
+
+
+    nameInput.value = "";
+
+    countInput.value = 1;
+
+
+    renderGuests();
+
+    saveData();
+
+}
+
+
+/* =========================================================
+   RENDER GUESTS
+========================================================= */
+
+function renderGuests() {
+
+    const guestList =
+        document.getElementById(
+            "guest-list"
+        );
+
+
+    if (!guestList) {
+
+        return;
+
+    }
+
+
+    guestList.innerHTML = "";
+
+
+    if (
+        invitationData.guests.length === 0
+    ) {
+
+        guestList.innerHTML = `
+            <p class="empty-guests">
+                لم تتم إضافة أي ضيوف بعد.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    invitationData.guests.forEach(
+        (guest) => {
+
+            const guestElement =
+                document.createElement(
+                    "div"
+                );
+
+
+            guestElement.className =
+                "guest-item";
+
+
+            guestElement.innerHTML = `
+
+                <div class="guest-info">
+
+                    <strong>
+                        ${escapeHTML(guest.name)}
+                    </strong>
+
+                    <span>
+                        ${guest.count} شخص
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="remove-guest"
+                    data-id="${guest.id}"
+                >
+                    حذف
+                </button>
+
+            `;
+
+
+            guestList.appendChild(
+                guestElement
+            );
+
+        }
+    );
+
+
+    const removeButtons =
+        document.querySelectorAll(
+            ".remove-guest"
+        );
+
+
+    removeButtons.forEach(
+        (button) => {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const id =
+                        Number(
+                            this.dataset.id
+                        );
+
+
+                    invitationData.guests =
+                        invitationData.guests.filter(
+                            (guest) =>
+                                guest.id !== id
+                        );
+
+
+                    renderGuests();
+
+                    saveData();
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value;
+
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function updatePreview() {
+
+    const personOne =
+        document.getElementById(
+            "person-one"
+        )?.value.trim();
+
+
+    const personTwo =
+        document.getElementById(
+            "person-two"
+        )?.value.trim();
+
+
+    const familyName =
+        document.getElementById(
+            "family-name"
+        )?.value.trim();
+
+
+    const eventType =
+        document.getElementById(
+            "event-type"
+        )?.value;
+
+
+    const eventDate =
+        document.getElementById(
+            "event-date"
+        )?.value;
+
+
+    const eventTime =
+        document.getElementById(
+            "event-time"
+        )?.value;
+
+
+    const venueName =
+        document.getElementById(
+            "venue-name"
+        )?.value.trim();
+
+
+    const venueCity =
+        document.getElementById(
+            "venue-city"
+        )?.value.trim();
+
+
+    const couplePreview =
+        document.getElementById(
+            "preview-couple"
+        );
+
+
+    const eventPreview =
+        document.getElementById(
+            "preview-event"
+        );
+
+
+    const datePreview =
+        document.getElementById(
+            "preview-date"
+        );
+
+
+    const venuePreview =
+        document.getElementById(
+            "preview-venue"
+        );
+
+
+    if (couplePreview) {
+
+        let coupleText =
+            "الاسم الأول & الاسم الثاني";
+
+
+        if (personOne && personTwo) {
+
+            coupleText =
+                `${personOne} & ${personTwo}`;
+
+        }
+
+
+        if (
+            familyName &&
+            personOne &&
+            personTwo
+        ) {
+
+            coupleText =
+                `${personOne} & ${personTwo} ${familyName}`;
+
+        }
+
+
+        couplePreview.textContent =
+            coupleText;
+
+    }
+
+
+    if (eventPreview) {
+
+        eventPreview.textContent =
+            eventType ||
+            "نوع المناسبة";
+
+    }
+
+
+    if (datePreview) {
+
+        let dateText =
+            "التاريخ والوقت";
+
+
+        if (eventDate) {
+
+            dateText =
+                formatDate(eventDate);
+
+        }
+
+
+        if (eventTime) {
+
+            dateText +=
+                ` — ${eventTime}`;
+
+        }
+
+
+        datePreview.textContent =
+            dateText;
+
+    }
+
+
+    if (venuePreview) {
+
+        let venueText =
+            "المكان";
+
+
+        if (venueName) {
+
+            venueText =
+                venueName;
+
+        }
+
+
+        if (venueCity) {
+
+            venueText +=
+                ` — ${venueCity}`;
+
+        }
+
+
+        venuePreview.textContent =
+            venueText;
+
+    }
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(dateString) {
+
+    if (!dateString) {
+
+        return "التاريخ";
+
+    }
+
+
+    const date =
+        new Date(
+            `${dateString}T00:00:00`
+        );
+
+
+    return date.toLocaleDateString(
+        "ar-SA",
+        {
+
+            weekday: "long",
+
+            year: "numeric",
+
+            month: "long",
+
+            day: "numeric"
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INPUT LISTENERS
+========================================================= */
+
+const allInputs =
+    document.querySelectorAll(
+        "input, textarea, select"
+    );
+
+
+allInputs.forEach((input) => {
+
+    input.addEventListener(
+        "input",
+        function () {
+
+            collectCurrentStepData();
+
+            saveData();
+
+            updatePreview();
+
+        }
+    );
+
+
+    input.addEventListener(
+        "change",
+        function () {
+
+            collectCurrentStepData();
+
+            saveData();
+
+            updatePreview();
+
+        }
     );
 
 });
+
+
+/* =========================================================
+   SAVE DATA
+========================================================= */
+
+function saveData() {
+
+    localStorage.setItem(
+
+        "invitationData",
+
+        JSON.stringify(
+            invitationData
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+function loadData() {
+
+    const saved =
+        localStorage.getItem(
+            "invitationData"
+        );
+
+
+    if (!saved) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const parsed =
+            JSON.parse(saved);
+
+
+        Object.assign(
+            invitationData,
+            parsed
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Could not load invitation data.",
+            error
+        );
+
+        return;
+
+    }
+
+
+    populateInputs();
+
+    renderGuests();
+
+    updateTemplateSelection();
+
+}
+
+
+/* =========================================================
+   POPULATE INPUTS
+========================================================= */
+
+function populateInputs() {
+
+    setValue(
+        "person-one",
+        invitationData.personOne
+    );
+
+
+    setValue(
+        "person-two",
+        invitationData.personTwo
+    );
+
+
+    setValue(
+        "family-name",
+        invitationData.familyName
+    );
+
+
+    setValue(
+        "event-type",
+        invitationData.eventType
+    );
+
+
+    setValue(
+        "event-date",
+        invitationData.eventDate
+    );
+
+
+    setValue(
+        "event-time",
+        invitationData.eventTime
+    );
+
+
+    setValue(
+        "venue-name",
+        invitationData.venueName
+    );
+
+
+    setValue(
+        "venue-city",
+        invitationData.venueCity
+    );
+
+
+    setValue(
+        "venue-map",
+        invitationData.venueMap
+    );
+
+
+    setValue(
+        "invitation-title",
+        invitationData.invitationTitle
+    );
+
+
+    setValue(
+        "invitation-message",
+        invitationData.invitationMessage
+    );
+
+
+    setValue(
+        "invitation-closing",
+        invitationData.invitationClosing
+    );
+
+
+    setValue(
+        "music-url",
+        invitationData.musicUrl
+    );
+
+
+    setChecked(
+        "enable-rsvp",
+        invitationData.enableRSVP
+    );
+
+
+    setChecked(
+        "allow-guest-count",
+        invitationData.allowGuestCount
+    );
+
+
+    setChecked(
+        "allow-notes",
+        invitationData.allowNotes
+    );
+
+
+    setChecked(
+        "music-autoplay",
+        invitationData.musicAutoplay
+    );
+
+}
+
+
+/* =========================================================
+   SET VALUE
+========================================================= */
+
+function setValue(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.value =
+            value || "";
+
+    }
+
+}
+
+
+/* =========================================================
+   SET CHECKED
+========================================================= */
+
+function setChecked(
+    id,
+    value
+) {
+
+    const element =
+        document.getElementById(id);
+
+
+    if (element) {
+
+        element.checked =
+            Boolean(value);
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE TEMPLATE SELECTION
+========================================================= */
+
+function updateTemplateSelection() {
+
+    if (!invitationData.template) {
+
+        return;
+
+    }
+
+
+    templateCards.forEach(
+        (card) => {
+
+            card.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    const selected =
+        document.querySelector(
+            `.template-card[data-template="${invitationData.template}"]`
+        );
+
+
+    if (selected) {
+
+        selected.classList.add(
+            "selected"
+        );
+
+    }
+
+
+    const nextButton =
+        document.getElementById(
+            "next-step-1"
+        );
+
+
+    if (nextButton) {
+
+        nextButton.disabled = false;
+
+    }
+
+}
+
+
+/* =========================================================
+   PUBLISH
+========================================================= */
+
+const publishButton =
+    document.getElementById(
+        "publish-invitation"
+    );
+
+
+if (publishButton) {
+
+    publishButton.addEventListener(
+        "click",
+        function () {
+
+            collectCurrentStepData();
+
+            saveData();
+
+
+            alert(
+                "تم حفظ الدعوة بنجاح! ✨\n\nنظام نشر الدعوة والرابط الخاص بالضيوف سنضيفه في الخطوة القادمة."
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadData();
+
+showStep(1);
