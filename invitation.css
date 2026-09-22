@@ -12,6 +12,7 @@ html {
 
 body {
     margin: 0;
+
     background:
         radial-gradient(
             circle at top,
@@ -19,12 +20,18 @@ body {
             #f5eadc 45%,
             #eadbc9 100%
         );
+
     color: #70543d;
+
     font-family:
         "Noto Naskh Arabic",
         "Amiri",
         Georgia,
         serif;
+
+    --design-main: #b87967;
+    --design-accent: #8d604d;
+    --design-background: #f7e9dd;
 }
 
 button,
@@ -43,7 +50,9 @@ button {
 
 body::before {
     content: "";
+
     position: fixed;
+
     inset: 0;
 
     pointer-events: none;
@@ -71,9 +80,11 @@ body::before {
     min-height: 100vh;
 
     display: flex;
+
     flex-direction: column;
 
     justify-content: center;
+
     align-items: center;
 
     padding: 40px 20px;
@@ -86,7 +97,7 @@ body::before {
         radial-gradient(
             circle at 50% 20%,
             #fffdf8,
-            #f5e7d6 65%,
+            var(--design-background) 65%,
             #ead6c1
         );
 
@@ -97,7 +108,9 @@ body::before {
 
 .envelope-screen.hidden {
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
 }
 
@@ -110,20 +123,25 @@ body::before {
     position: absolute;
 
     width: 180px;
+
     height: 180px;
 
-    border: 2px dashed rgba(166, 113, 78, 0.35);
+    border:
+        2px dashed
+        rgba(166, 113, 78, 0.35);
 
     border-radius: 50%;
 }
 
 .thread-one {
     top: -90px;
+
     left: -80px;
 }
 
 .thread-two {
     right: -90px;
+
     bottom: -80px;
 }
 
@@ -138,6 +156,7 @@ body::before {
 
 .envelope {
     width: 100%;
+
     aspect-ratio: 1.5;
 
     position: relative;
@@ -155,14 +174,18 @@ body::before {
 }
 
 .envelope.open {
-    transform: translateY(-15px);
+    transform:
+        translateY(-15px);
 }
 
 
-/* Back */
+/* =========================================================
+   ENVELOPE BACK
+========================================================= */
 
 .envelope-back {
     position: absolute;
+
     inset: 0;
 
     border-radius: 8px;
@@ -170,61 +193,75 @@ body::before {
     background:
         linear-gradient(
             135deg,
-            #ead0bd,
-            #f8e9db
+            var(--design-background),
+            #fffaf4
         );
 
-    border: 1px solid #cda989;
+    border:
+        1px solid
+        var(--design-main);
 }
 
 
-/* Paper */
+/* =========================================================
+   ENVELOPE PAPER
+========================================================= */
 
 .envelope-paper {
     position: absolute;
 
     width: 72%;
+
     height: 80%;
 
     left: 14%;
+
     top: 10%;
 
     background:
         linear-gradient(
             135deg,
             #fffdf8,
-            #f7eee3
+            var(--design-background)
         );
 
-    border: 1px solid #d8b997;
+    border:
+        1px solid
+        var(--design-main);
 
     z-index: 2;
 
     display: flex;
+
     flex-direction: column;
 
     align-items: center;
+
     justify-content: center;
 
     box-shadow:
-        0 10px 20px rgba(70, 43, 28, 0.12);
+        0 10px 20px
+        rgba(70, 43, 28, 0.12);
 
     transition:
         transform 1s cubic-bezier(.2,.8,.2,1);
-
 }
 
 .paper-border {
     position: absolute;
+
     inset: 9px;
 
-    border: 1px solid #d2a77f;
+    border:
+        1px solid
+        var(--design-main);
 
     pointer-events: none;
 }
 
 .paper-small {
     margin: 0 0 5px;
+
     font-size: 15px;
 }
 
@@ -233,7 +270,8 @@ body::before {
 
     font-size: 38px;
 
-    color: #8b5d3c;
+    color:
+        var(--design-accent);
 }
 
 .envelope-paper p:last-child {
@@ -242,29 +280,37 @@ body::before {
 
 .mini-flower {
     position: absolute;
-    color: #b87969;
+
+    color:
+        var(--design-main);
 }
 
 .flower-paper-one {
     top: 12px;
+
     right: 18px;
 }
 
 .flower-paper-two {
     bottom: 12px;
+
     left: 18px;
 }
 
 
-/* Flap */
+/* =========================================================
+   ENVELOPE FLAP
+========================================================= */
 
 .envelope-flap {
     position: absolute;
 
     top: 0;
+
     left: 0;
 
     width: 100%;
+
     height: 55%;
 
     z-index: 5;
@@ -272,28 +318,34 @@ body::before {
     background:
         linear-gradient(
             135deg,
-            #f9eadc,
-            #e9cdb9
+            #fffaf5,
+            var(--design-background)
         );
 
-    clip-path: polygon(
-        0 0,
-        100% 0,
-        50% 100%
-    );
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            50% 100%
+        );
 
-    transform-origin: top center;
+    transform-origin:
+        top center;
 
     transition:
         transform 1s cubic-bezier(.2,.8,.2,1);
 
     backface-visibility: hidden;
 
-    border-top: 1px solid #c99f7b;
+    border-top:
+        1px solid
+        var(--design-main);
 }
 
 
-/* Front */
+/* =========================================================
+   ENVELOPE FRONT
+========================================================= */
 
 .envelope-front {
     position: absolute;
@@ -307,31 +359,39 @@ body::before {
     background:
         linear-gradient(
             135deg,
-            #f7e5d6,
-            #f1d8c4
+            var(--design-background),
+            #fffaf5
         );
 
-    clip-path: polygon(
-        0 30%,
-        50% 70%,
-        100% 30%,
-        100% 100%,
-        0 100%
-    );
+    clip-path:
+        polygon(
+            0 30%,
+            50% 70%,
+            100% 30%,
+            100% 100%,
+            0 100%
+        );
 
-    border: 1px solid #cba27f;
+    border:
+        1px solid
+        var(--design-main);
 }
 
 
-/* Open animation */
+/* =========================================================
+   OPEN ANIMATION
+========================================================= */
 
 .envelope.open .envelope-flap {
-    transform: rotateX(180deg);
+    transform:
+        rotateX(180deg);
+
     z-index: 1;
 }
 
 .envelope.open .envelope-paper {
-    transform: translateY(-100px);
+    transform:
+        translateY(-100px);
 }
 
 
@@ -343,20 +403,24 @@ body::before {
     position: absolute;
 
     top: 25px;
+
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     display: flex;
+
     gap: 16px;
 
-    color: #a97052;
+    color:
+        var(--design-main);
 
     font-size: 22px;
 
     text-shadow:
         1px 1px 0 #fff,
-        -1px -1px 0 #c99576;
+        -1px -1px 0 var(--design-accent);
 }
 
 .embroidered-corner {
@@ -368,22 +432,26 @@ body::before {
 
     gap: 0;
 
-    color: #a66b50;
+    color:
+        var(--design-main);
 
     font-size: 26px;
 
     text-shadow:
         1px 1px 0 #fff1e7,
-        2px 2px 0 rgba(139, 93, 60, 0.25);
+        2px 2px 0
+        rgba(139, 93, 60, 0.25);
 }
 
 .top-right {
     top: 34%;
+
     right: 25px;
 }
 
 .bottom-left {
     bottom: 15px;
+
     left: 25px;
 }
 
@@ -399,7 +467,8 @@ body::before {
 
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     width: 70%;
 
@@ -408,29 +477,36 @@ body::before {
 
 .wax-seal {
     width: 62px;
+
     height: 62px;
 
-    margin: 0 auto 8px;
+    margin:
+        0 auto 8px;
 
     border-radius: 50%;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     background:
         radial-gradient(
             circle,
-            #c88778,
-            #a45f52
+            var(--design-main),
+            var(--design-accent)
         );
 
     color: #fff7ef;
 
-    border: 3px double #e8b7a5;
+    border:
+        3px double
+        var(--design-main);
 
     box-shadow:
-        0 7px 14px rgba(77, 45, 34, 0.2);
+        0 7px 14px
+        rgba(77, 45, 34, 0.2);
 }
 
 .to-label {
@@ -442,9 +518,11 @@ body::before {
 #guest-name {
     margin: 2px 0;
 
-    font-size: clamp(24px, 4vw, 34px);
+    font-size:
+        clamp(24px, 4vw, 34px);
 
-    color: #754c36;
+    color:
+        var(--design-accent);
 }
 
 .special-invitation {
@@ -468,11 +546,14 @@ body::before {
 .thread-divider span {
     width: 50px;
 
-    border-top: 1px dashed #b77b5d;
+    border-top:
+        1px dashed
+        var(--design-main);
 }
 
 .thread-divider b {
-    color: #b77b5d;
+    color:
+        var(--design-main);
 }
 
 
@@ -487,7 +568,8 @@ body::before {
 }
 
 .envelope-bottom p {
-    margin: 0 0 15px;
+    margin:
+        0 0 15px;
 
     font-size: 14px;
 
@@ -495,17 +577,20 @@ body::before {
 }
 
 .open-button {
-    border: 1px solid #b98464;
+    border:
+        1px solid
+        var(--design-main);
 
-    padding: 13px 45px;
+    padding:
+        13px 45px;
 
     border-radius: 999px;
 
     background:
         linear-gradient(
             135deg,
-            #b87967,
-            #9d5e50
+            var(--design-main),
+            var(--design-accent)
         );
 
     color: white;
@@ -513,7 +598,8 @@ body::before {
     font-size: 16px;
 
     box-shadow:
-        0 10px 22px rgba(126, 78, 59, 0.22);
+        0 10px 22px
+        rgba(126, 78, 59, 0.22);
 
     transition:
         transform .25s ease,
@@ -521,10 +607,12 @@ body::before {
 }
 
 .open-button:hover {
-    transform: translateY(-3px);
+    transform:
+        translateY(-3px);
 
     box-shadow:
-        0 14px 28px rgba(126, 78, 59, 0.28);
+        0 14px 28px
+        rgba(126, 78, 59, 0.28);
 }
 
 
@@ -556,12 +644,16 @@ body::before {
 
     from {
         opacity: 0;
-        transform: translateY(40px);
+
+        transform:
+            translateY(40px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+
+        transform:
+            translateY(0);
     }
 
 }
@@ -587,10 +679,12 @@ body::before {
         linear-gradient(
             145deg,
             #fffdf8,
-            #f7ecdf
+            var(--design-background)
         );
 
-    border: 1px solid #cda57e;
+    border:
+        1px solid
+        var(--design-main);
 
     box-shadow:
         0 30px 70px
@@ -600,7 +694,9 @@ body::before {
 }
 
 
-/* Double stitched border */
+/* =========================================================
+   DOUBLE STITCHED BORDER
+========================================================= */
 
 .invitation-card::before {
     content: "";
@@ -609,7 +705,9 @@ body::before {
 
     inset: 14px;
 
-    border: 1px dashed #bd8d67;
+    border:
+        1px dashed
+        var(--design-main);
 
     pointer-events: none;
 }
@@ -621,7 +719,13 @@ body::before {
 
     inset: 21px;
 
-    border: 1px solid rgba(191, 145, 108, 0.45);
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--design-main),
+            transparent 55%
+        );
 
     pointer-events: none;
 }
@@ -635,6 +739,7 @@ body::before {
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     margin-bottom: 35px;
@@ -651,13 +756,16 @@ body::before {
 .tiny-line {
     width: 60px;
 
-    border-top: 1px solid #bb8964;
+    border-top:
+        1px solid
+        var(--design-main);
 }
 
 .ornament {
     font-size: 25px;
 
-    color: #b67758;
+    color:
+        var(--design-main);
 }
 
 .flower-stem {
@@ -665,40 +773,53 @@ body::before {
 
     position: relative;
 
-    color: #a66e52;
+    color:
+        var(--design-main);
 }
 
 .embroidered-flower {
     font-size: 30px;
 
+    color:
+        var(--design-main);
+
     text-shadow:
         1px 1px 0 white,
-        2px 2px 0 #c18c70;
+        2px 2px 0
+        var(--design-accent);
 }
 
 .leaf {
     position: absolute;
 
     width: 18px;
+
     height: 9px;
 
-    border-radius: 100% 0;
+    border-radius:
+        100% 0;
 
-    border: 2px solid #78916d;
+    border:
+        2px solid
+        var(--design-accent);
 
-    transform: rotate(-30deg);
+    transform:
+        rotate(-30deg);
 }
 
 .leaf-one {
     top: 15px;
+
     left: 15px;
 }
 
 .leaf-two {
     top: 28px;
+
     left: 45px;
 
-    transform: rotate(25deg);
+    transform:
+        rotate(25deg);
 }
 
 
@@ -717,7 +838,8 @@ body::before {
 .bismillah {
     font-size: 19px;
 
-    color: #8d674b;
+    color:
+        var(--design-accent);
 
     margin-bottom: 25px;
 }
@@ -725,7 +847,8 @@ body::before {
 .intro-small {
     margin: 0;
 
-    color: #a17759;
+    color:
+        var(--design-accent);
 
     font-size: 15px;
 }
@@ -736,11 +859,13 @@ body::before {
         0
         10px;
 
-    font-size: clamp(42px, 8vw, 72px);
+    font-size:
+        clamp(42px, 8vw, 72px);
 
     font-weight: 500;
 
-    color: #835b41;
+    color:
+        var(--design-accent);
 
     line-height: 1.25;
 }
@@ -749,21 +874,26 @@ body::before {
     display: flex;
 
     justify-content: center;
+
     align-items: center;
 
     gap: 10px;
 
-    margin: 10px 0 20px;
+    margin:
+        10px 0 20px;
 }
 
 .gold-thread-line span {
     width: 80px;
 
-    border-top: 1px dashed #bb8964;
+    border-top:
+        1px dashed
+        var(--design-main);
 }
 
 .gold-thread-line i {
-    color: #b46f52;
+    color:
+        var(--design-main);
 
     font-style: normal;
 
@@ -777,20 +907,20 @@ body::before {
 
     font-weight: 500;
 
-    color: #76523d;
+    color:
+        var(--design-accent);
 }
 
 .invitation-message {
     max-width: 500px;
 
     margin:
-        15px
-        auto
-        0;
+        15px auto 0;
 
     line-height: 2;
 
-    color: #856d5a;
+    color:
+        var(--design-accent);
 }
 
 
@@ -804,11 +934,11 @@ body::before {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     margin:
-        25px
-        0;
+        25px 0;
 
     position: relative;
 }
@@ -821,6 +951,7 @@ body::before {
     min-height: 250px;
 
     align-items: center;
+
     justify-content: center;
 
     position: relative;
@@ -837,18 +968,26 @@ body::before {
 
     from {
         opacity: 0;
-        transform: translateY(20px) scale(.96);
+
+        transform:
+            translateY(20px)
+            scale(.96);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+
+        transform:
+            translateY(0)
+            scale(1);
     }
 
 }
 
 
-/* Wedding */
+/* =========================================================
+   WEDDING
+========================================================= */
 
 .wedding-illustration {
     gap: 20px;
@@ -888,7 +1027,9 @@ body::before {
 }
 
 
-/* Baby */
+/* =========================================================
+   BABY
+========================================================= */
 
 .baby-illustration {
     flex-direction: column;
@@ -903,13 +1044,16 @@ body::before {
 }
 
 .baby-stars {
-    color: #b87991;
+    color:
+        var(--design-main);
 
     font-size: 20px;
 }
 
 
-/* Birthday */
+/* =========================================================
+   BIRTHDAY
+========================================================= */
 
 .birthday-illustration {
     flex-direction: column;
@@ -924,13 +1068,16 @@ body::before {
 }
 
 .birthday-stars {
-    color: #b87958;
+    color:
+        var(--design-main);
 
     margin-top: 10px;
 }
 
 
-/* Graduation */
+/* =========================================================
+   GRADUATION
+========================================================= */
 
 .graduation-illustration {
     flex-direction: column;
@@ -945,11 +1092,14 @@ body::before {
 }
 
 .graduation-stars {
-    color: #8c715b;
+    color:
+        var(--design-accent);
 }
 
 
-/* Children */
+/* =========================================================
+   CHILDREN
+========================================================= */
 
 .children-illustration {
     flex-direction: column;
@@ -966,7 +1116,8 @@ body::before {
 }
 
 .castle-stars {
-    color: #bd8c4f;
+    color:
+        var(--design-main);
 }
 
 
@@ -983,8 +1134,7 @@ body::before {
     gap: 10px;
 
     margin:
-        25px
-        0;
+        25px 0;
 
     position: relative;
 
@@ -994,11 +1144,12 @@ body::before {
 .detail-card {
     text-align: center;
 
-    padding: 15px 8px;
+    padding:
+        15px 8px;
 
     border:
         1px dashed
-        #c9a27e;
+        var(--design-main);
 
     background:
         rgba(255,255,255,.38);
@@ -1015,7 +1166,8 @@ body::before {
 }
 
 .detail-icon {
-    color: #b27658;
+    color:
+        var(--design-main);
 
     font-size: 22px;
 }
@@ -1023,7 +1175,8 @@ body::before {
 .detail-card small {
     font-size: 12px;
 
-    color: #9a7b63;
+    color:
+        var(--design-accent);
 }
 
 .detail-card strong {
@@ -1031,13 +1184,15 @@ body::before {
 
     font-weight: 600;
 
-    color: #72523c;
+    color:
+        var(--design-accent);
 }
 
 .detail-card em {
     font-size: 11px;
 
-    color: #9b806b;
+    color:
+        var(--design-accent);
 
     font-style: normal;
 }
@@ -1049,42 +1204,45 @@ body::before {
 
 .guest-section {
     margin:
-        35px
-        0;
+        35px 0;
 
     text-align: center;
 
     padding:
-        25px
-        15px;
+        25px 15px;
 
     border-top:
-        1px dashed #bd8d68;
+        1px dashed
+        var(--design-main);
 
     border-bottom:
-        1px dashed #bd8d68;
+        1px dashed
+        var(--design-main);
 
     position: relative;
 }
 
 .guest-flower {
-    color: #b57859;
+    color:
+        var(--design-main);
 
     font-size: 28px;
 }
 
 .guest-section p {
     margin:
-        5px
-        0;
+        5px 0;
 
-    color: #8c705b;
+    color:
+        var(--design-accent);
 }
 
 #personalized-name {
-    margin: 3px 0;
+    margin:
+        3px 0;
 
-    color: #79543d;
+    color:
+        var(--design-accent);
 
     font-size: 31px;
 
@@ -1096,7 +1254,8 @@ body::before {
 }
 
 .guest-count strong {
-    color: #a8664e;
+    color:
+        var(--design-main);
 
     font-size: 18px;
 }
@@ -1116,13 +1275,16 @@ body::before {
 .guest-thread span {
     width: 70px;
 
-    border-top: 1px dashed #bd8d68;
+    border-top:
+        1px dashed
+        var(--design-main);
 }
 
 .guest-thread i {
     font-style: normal;
 
-    color: #b8795c;
+    color:
+        var(--design-main);
 }
 
 
@@ -1134,8 +1296,7 @@ body::before {
     text-align: center;
 
     margin:
-        30px
-        0;
+        30px 0;
 }
 
 .map-button {
@@ -1146,16 +1307,18 @@ body::before {
     gap: 8px;
 
     padding:
-        11px
-        28px;
+        11px 28px;
 
     border-radius: 999px;
 
     text-decoration: none;
 
-    color: #805a42;
+    color:
+        var(--design-accent);
 
-    border: 1px solid #bb8967;
+    border:
+        1px solid
+        var(--design-main);
 
     background:
         rgba(255,255,255,.55);
@@ -1165,9 +1328,11 @@ body::before {
 }
 
 .map-button:hover {
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 
-    background: #fffaf4;
+    background:
+        #fffaf4;
 }
 
 
@@ -1181,32 +1346,33 @@ body::before {
     margin-top: 40px;
 
     padding:
-        25px
-        15px;
+        25px 15px;
 
     border:
-        1px dashed #c59a75;
+        1px dashed
+        var(--design-main);
 
     background:
         rgba(255,255,255,.35);
 }
 
 .rsvp-decoration {
-    color: #b57659;
+    color:
+        var(--design-main);
 
     font-size: 25px;
 }
 
 .rsvp-section h2 {
     margin:
-        3px
-        0;
+        3px 0;
 
     font-weight: 500;
 }
 
 .rsvp-section p {
-    color: #8f7460;
+    color:
+        var(--design-accent);
 
     font-size: 14px;
 }
@@ -1222,31 +1388,35 @@ body::before {
 }
 
 .rsvp-button {
-    border: 1px solid #b98565;
+    border:
+        1px solid
+        var(--design-main);
 
     border-radius: 999px;
 
     padding:
-        10px
-        24px;
+        10px 24px;
 
     background: white;
 
-    color: #77543e;
+    color:
+        var(--design-accent);
 
-    transition: .25s ease;
+    transition:
+        .25s ease;
 }
 
 .rsvp-button:hover {
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 }
 
 .rsvp-button.yes {
     background:
         linear-gradient(
             135deg,
-            #a77764,
-            #8d5b4e
+            var(--design-main),
+            var(--design-accent)
         );
 
     color: white;
@@ -1255,7 +1425,8 @@ body::before {
 .rsvp-result {
     min-height: 20px;
 
-    color: #a4664e !important;
+    color:
+        var(--design-accent) !important;
 
     font-weight: 600;
 }
@@ -1274,7 +1445,8 @@ body::before {
 }
 
 .closing-flower {
-    color: #b77859;
+    color:
+        var(--design-main);
 
     font-size: 28px;
 }
@@ -1282,11 +1454,13 @@ body::before {
 #invitation-closing {
     font-size: 17px;
 
-    color: #795a44;
+    color:
+        var(--design-accent);
 }
 
 .closing-heart {
-    color: #b87865;
+    color:
+        var(--design-main);
 
     font-size: 25px;
 }
@@ -1319,6 +1493,373 @@ body::before {
         drop-shadow(
             1px 1px 0 white
         );
+
+    color:
+        var(--design-main);
+}
+
+
+/* =========================================================
+   COLOR THEMES
+========================================================= */
+
+
+/* =========================================================
+   FLORAL — BLUSH
+========================================================= */
+
+body[data-template="floral"][data-color="blush"] {
+    --design-main: #d69c9d;
+    --design-accent: #965d62;
+    --design-background: #faeaea;
+}
+
+
+/* FLORAL — SAGE */
+
+body[data-template="floral"][data-color="sage-floral"] {
+    --design-main: #9da98d;
+    --design-accent: #5f6f54;
+    --design-background: #edf1e8;
+}
+
+
+/* FLORAL — BLUE */
+
+body[data-template="floral"][data-color="blue-floral"] {
+    --design-main: #91a9c0;
+    --design-accent: #566d84;
+    --design-background: #eaf0f6;
+}
+
+
+/* FLORAL — LAVENDER */
+
+body[data-template="floral"][data-color="lavender"] {
+    --design-main: #b3a0bb;
+    --design-accent: #745e7c;
+    --design-background: #f1ebf4;
+}
+
+
+/* =========================================================
+   ROMANTIC
+========================================================= */
+
+body[data-template="romantic"][data-color="dusty-rose"] {
+    --design-main: #c99599;
+    --design-accent: #8d5d62;
+    --design-background: #f7e8e8;
+}
+
+body[data-template="romantic"][data-color="mauve"] {
+    --design-main: #aa8f9f;
+    --design-accent: #715b6a;
+    --design-background: #f0e9ef;
+}
+
+body[data-template="romantic"][data-color="peach"] {
+    --design-main: #d9a58c;
+    --design-accent: #9a684e;
+    --design-background: #faebe1;
+}
+
+body[data-template="romantic"][data-color="champagne-rose"] {
+    --design-main: #c9a27f;
+    --design-accent: #89664b;
+    --design-background: #f8eee3;
+}
+
+
+/* =========================================================
+   ARABIC
+========================================================= */
+
+body[data-template="arabic"][data-color="sand"] {
+    --design-main: #c8a477;
+    --design-accent: #785b3e;
+    --design-background: #f4ead9;
+}
+
+body[data-template="arabic"][data-color="olive"] {
+    --design-main: #8d9470;
+    --design-accent: #586047;
+    --design-background: #edf0e4;
+}
+
+body[data-template="arabic"][data-color="terracotta"] {
+    --design-main: #b87961;
+    --design-accent: #7d4939;
+    --design-background: #f4e2da;
+}
+
+body[data-template="arabic"][data-color="emerald"] {
+    --design-main: #668675;
+    --design-accent: #3f5e4d;
+    --design-background: #e7eee9;
+}
+
+
+/* =========================================================
+   IVORY
+========================================================= */
+
+body[data-template="ivory"][data-color="cream"] {
+    --design-main: #d9c2a7;
+    --design-accent: #98765a;
+    --design-background: #fbf5eb;
+}
+
+body[data-template="ivory"][data-color="dusty-pink"] {
+    --design-main: #c79a9c;
+    --design-accent: #8f6569;
+    --design-background: #f7e9e9;
+}
+
+body[data-template="ivory"][data-color="sage"] {
+    --design-main: #a5ad91;
+    --design-accent: #687157;
+    --design-background: #eff1e8;
+}
+
+body[data-template="ivory"][data-color="powder-blue"] {
+    --design-main: #9caec1;
+    --design-accent: #5f7287;
+    --design-background: #edf2f7;
+}
+
+
+/* =========================================================
+   GOLD
+========================================================= */
+
+body[data-template="gold"][data-color="champagne"] {
+    --design-main: #d8b27c;
+    --design-accent: #9a6d3f;
+    --design-background: #f7ecdc;
+}
+
+body[data-template="gold"][data-color="rose-gold"] {
+    --design-main: #c98f82;
+    --design-accent: #8e5c53;
+    --design-background: #f7e5df;
+}
+
+body[data-template="gold"][data-color="ivory-gold"] {
+    --design-main: #c7a66b;
+    --design-accent: #86663b;
+    --design-background: #faf5ea;
+}
+
+body[data-template="gold"][data-color="olive-gold"] {
+    --design-main: #9a9a72;
+    --design-accent: #676746;
+    --design-background: #f0efe2;
+}
+
+
+/* =========================================================
+   DARK
+========================================================= */
+
+body[data-template="dark"][data-color="black-gold"] {
+    --design-main: #c5a15b;
+    --design-accent: #d7b873;
+    --design-background: #171513;
+}
+
+body[data-template="dark"][data-color="navy-gold"] {
+    --design-main: #b79b62;
+    --design-accent: #d6bb79;
+    --design-background: #151c29;
+}
+
+body[data-template="dark"][data-color="plum"] {
+    --design-main: #b78680;
+    --design-accent: #d0aaa2;
+    --design-background: #26191e;
+}
+
+body[data-template="dark"][data-color="emerald-dark"] {
+    --design-main: #8fac93;
+    --design-accent: #b9c9b5;
+    --design-background: #15221d;
+}
+
+
+/* =========================================================
+   APPLY THEME COLORS
+========================================================= */
+
+.envelope-screen {
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #fffdf8,
+            var(--design-background) 65%,
+            var(--design-background)
+        );
+}
+
+
+/* =========================================================
+   DARK INVITATIONS
+========================================================= */
+
+body[data-template="dark"] {
+    background:
+        #11100f;
+
+    color:
+        #eee3d2;
+}
+
+body[data-template="dark"] .envelope-screen {
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #28231d,
+            var(--design-background) 70%,
+            #11100f
+        );
+}
+
+body[data-template="dark"] .envelope-paper {
+    background:
+        linear-gradient(
+            135deg,
+            #211e1a,
+            var(--design-background)
+        );
+
+    color:
+        #eee3d2;
+}
+
+body[data-template="dark"] .envelope-back {
+    background:
+        linear-gradient(
+            135deg,
+            var(--design-background),
+            #211e1a
+        );
+}
+
+body[data-template="dark"] .envelope-flap {
+    background:
+        linear-gradient(
+            135deg,
+            #24211d,
+            var(--design-background)
+        );
+}
+
+body[data-template="dark"] .envelope-front {
+    background:
+        linear-gradient(
+            135deg,
+            var(--design-background),
+            #211e1a
+        );
+}
+
+body[data-template="dark"] .envelope-paper h2,
+body[data-template="dark"] #guest-name {
+    color:
+        var(--design-accent);
+}
+
+body[data-template="dark"] .envelope-bottom p,
+body[data-template="dark"] .to-label,
+body[data-template="dark"] .special-invitation {
+    color:
+        #cbbba7;
+}
+
+body[data-template="dark"] .invitation-card {
+    background:
+        linear-gradient(
+            145deg,
+            var(--design-background),
+            #211e1a
+        );
+
+    color:
+        #eee3d2;
+}
+
+body[data-template="dark"] .invitation-card::before {
+    border-color:
+        var(--design-main);
+}
+
+body[data-template="dark"] .invitation-card::after {
+    border-color:
+        rgba(255,255,255,.15);
+}
+
+body[data-template="dark"] #couple-names,
+body[data-template="dark"] #invitation-title,
+body[data-template="dark"] #personalized-name {
+    color:
+        var(--design-accent);
+}
+
+body[data-template="dark"] .bismillah,
+body[data-template="dark"] .intro-small,
+body[data-template="dark"] .invitation-message,
+body[data-template="dark"] .guest-section p,
+body[data-template="dark"] .detail-card small,
+body[data-template="dark"] .detail-card strong,
+body[data-template="dark"] .detail-card em,
+body[data-template="dark"] .rsvp-section p,
+body[data-template="dark"] #invitation-closing {
+    color:
+        #d8c8b4;
+}
+
+body[data-template="dark"] .detail-card {
+    background:
+        rgba(255,255,255,.04);
+
+    color:
+        #eee3d2;
+
+    border-color:
+        var(--design-main);
+}
+
+body[data-template="dark"] .map-button {
+    background:
+        rgba(255,255,255,.04);
+
+    color:
+        var(--design-accent);
+}
+
+body[data-template="dark"] .map-button:hover {
+    background:
+        rgba(255,255,255,.08);
+}
+
+body[data-template="dark"] .rsvp-section {
+    background:
+        rgba(255,255,255,.03);
+}
+
+body[data-template="dark"] .rsvp-button {
+    background:
+        rgba(255,255,255,.05);
+
+    color:
+        var(--design-accent);
+
+    border-color:
+        var(--design-main);
+}
+
+body[data-template="dark"] .rsvp-button.yes {
+    color: #fff;
 }
 
 
