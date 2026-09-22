@@ -8,6 +8,8 @@ const defaultInvitation = {
 
     color: "blush",
 
+    colorData: null,
+
     personOne: "محمد",
 
     personTwo: "سارة",
@@ -53,7 +55,13 @@ const defaultInvitation = {
 
     enableRSVP: true,
 
-    allowGuestCount: false
+    allowGuestCount: false,
+
+    allowNotes: true,
+
+    musicUrl: "",
+
+    musicAutoplay: false
 
 };
 
@@ -72,6 +80,7 @@ function getInvitationData() {
                 "invitationData"
             );
 
+
         if (!saved) {
 
             return {
@@ -80,10 +89,12 @@ function getInvitationData() {
 
         }
 
+
         const parsed =
             JSON.parse(saved);
 
-        return {
+
+        const data = {
 
             ...defaultInvitation,
 
@@ -96,12 +107,54 @@ function getInvitationData() {
 
         };
 
+
+        /*
+            Some versions of the builder save
+            the selected color inside colorData.
+
+            If color is missing, recover it.
+        */
+
+        if (
+            !data.color &&
+            data.colorData
+        ) {
+
+            if (
+                typeof data.colorData === "string"
+            ) {
+
+                data.color =
+                    data.colorData;
+
+            } else if (
+                data.colorData.key
+            ) {
+
+                data.color =
+                    data.colorData.key;
+
+            } else if (
+                data.colorData.id
+            ) {
+
+                data.color =
+                    data.colorData.id;
+
+            }
+
+        }
+
+
+        return data;
+
     } catch (error) {
 
         console.error(
             "Could not load invitation data:",
             error
         );
+
 
         return {
             ...defaultInvitation
@@ -114,7 +167,7 @@ function getInvitationData() {
 
 
 /* =========================================================
-   TEMPLATE + COLOR
+   APPLY DESIGN
 ========================================================= */
 
 function applyTemplate(
@@ -122,12 +175,70 @@ function applyTemplate(
     color
 ) {
 
+    /*
+        Always make sure we have valid values.
+    */
+
+    const selectedTemplate =
+        String(
+            template || "floral"
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const selectedColor =
+        String(
+            color || "blush"
+        )
+        .trim()
+        .toLowerCase();
+
+
+    /*
+        Apply them directly to BODY.
+
+        The invitation.css uses these
+        data attributes to change:
+
+        - envelope
+        - embroidery
+        - background
+        - flowers
+        - illustrations
+        - borders
+        - colors
+    */
+
     document.body.dataset.template =
-        template || "floral";
+        selectedTemplate;
 
 
     document.body.dataset.color =
-        color || "blush";
+        selectedColor;
+
+
+    /*
+        Also set CSS variables as a backup.
+    */
+
+    document.documentElement.style.setProperty(
+        "--active-template",
+        selectedTemplate
+    );
+
+
+    document.documentElement.style.setProperty(
+        "--active-color",
+        selectedColor
+    );
+
+
+    console.log(
+        "Invitation design:",
+        selectedTemplate,
+        selectedColor
+    );
 
 }
 
@@ -400,18 +511,6 @@ function getGuestFromURL(
     }
 
 
-    /*
-        Supports:
-
-        ?guest=1
-        ?guest=2
-
-        and also:
-
-        ?guest=guest-id
-    */
-
-
     const numericID =
         Number(
             guestParameter
@@ -531,19 +630,72 @@ function populateInvitation() {
         getInvitationData();
 
 
-    /* -------------------------------
-       DESIGN
-    -------------------------------- */
-
-    applyTemplate(
-        data.template,
-        data.color
+    console.log(
+        "FULL INVITATION DATA:",
+        data
     );
 
 
-    /* -------------------------------
+    /* =====================================================
+       DESIGN
+    ===================================================== */
+
+    let template =
+        data.template ||
+        "floral";
+
+
+    let color =
+        data.color ||
+        "";
+
+
+    /*
+        Recover color from colorData
+        if necessary.
+    */
+
+    if (
+        !color &&
+        data.colorData
+    ) {
+
+        if (
+            typeof data.colorData === "string"
+        ) {
+
+            color =
+                data.colorData;
+
+        } else {
+
+            color =
+                data.colorData.key ||
+                data.colorData.id ||
+                data.colorData.name ||
+                "";
+
+        }
+
+    }
+
+
+    if (!color) {
+
+        color = "blush";
+
+    }
+
+
+    applyTemplate(
+        template,
+        color
+    );
+
+
+    /* =====================================================
        CATEGORY
-    -------------------------------- */
+    ===================================================== */
 
     const category =
         getEventCategory(
@@ -556,9 +708,9 @@ function populateInvitation() {
     );
 
 
-    /* -------------------------------
+    /* =====================================================
        COUPLE
-    -------------------------------- */
+    ===================================================== */
 
     const coupleNames =
         document.getElementById(
@@ -583,7 +735,7 @@ function populateInvitation() {
 
         if (
             data.familyName &&
-            data.familyName.trim()
+            String(data.familyName).trim()
         ) {
 
             names +=
@@ -593,14 +745,16 @@ function populateInvitation() {
 
 
         coupleNames.textContent =
-            names || "محمد & سارة";
+            names ||
+            "محمد & سارة";
 
     }
 
 
-    /* -------------------------------
+
+    /* =====================================================
        TITLE
-    -------------------------------- */
+    ===================================================== */
 
     const title =
         document.getElementById(
@@ -617,9 +771,10 @@ function populateInvitation() {
     }
 
 
-    /* -------------------------------
+
+    /* =====================================================
        MESSAGE
-    -------------------------------- */
+    ===================================================== */
 
     const message =
         document.getElementById(
@@ -636,9 +791,10 @@ function populateInvitation() {
     }
 
 
-    /* -------------------------------
+
+    /* =====================================================
        CLOSING
-    -------------------------------- */
+    ===================================================== */
 
     const closing =
         document.getElementById(
@@ -655,9 +811,10 @@ function populateInvitation() {
     }
 
 
-    /* -------------------------------
+
+    /* =====================================================
        DATE
-    -------------------------------- */
+    ===================================================== */
 
     const eventDate =
         document.getElementById(
@@ -675,9 +832,10 @@ function populateInvitation() {
     }
 
 
-    /* -------------------------------
+
+    /* =====================================================
        TIME
-    -------------------------------- */
+    ===================================================== */
 
     const eventTime =
         document.getElementById(
@@ -695,9 +853,10 @@ function populateInvitation() {
     }
 
 
-    /* -------------------------------
+
+    /* =====================================================
        VENUE
-    -------------------------------- */
+    ===================================================== */
 
     const venueName =
         document.getElementById(
@@ -729,9 +888,10 @@ function populateInvitation() {
     }
 
 
-    /* -------------------------------
+
+    /* =====================================================
        MAP
-    -------------------------------- */
+    ===================================================== */
 
     const mapLink =
         document.getElementById(
@@ -762,9 +922,10 @@ function populateInvitation() {
     }
 
 
-    /* -------------------------------
+
+    /* =====================================================
        GUEST
-    -------------------------------- */
+    ===================================================== */
 
     const guest =
         getGuestFromURL(
@@ -777,9 +938,10 @@ function populateInvitation() {
     );
 
 
-    /* -------------------------------
+
+    /* =====================================================
        RSVP
-    -------------------------------- */
+    ===================================================== */
 
     const rsvpSection =
         document.getElementById(
@@ -840,6 +1002,10 @@ function openInvitation() {
 
 
     if (!envelope) {
+
+        console.error(
+            "Envelope element not found."
+        );
 
         return;
 
@@ -993,11 +1159,14 @@ function setupMusic() {
     audio.id =
         "invitation-music";
 
+
     audio.src =
         data.musicUrl;
 
+
     audio.loop =
         true;
+
 
     audio.preload =
         "auto";
@@ -1006,13 +1175,6 @@ function setupMusic() {
     document.body.appendChild(
         audio
     );
-
-
-    /*
-       Browsers may block autoplay.
-       We therefore start the music
-       after the visitor opens the envelope.
-    */
 
 
     const openButton =
@@ -1058,9 +1220,16 @@ document.addEventListener(
     "DOMContentLoaded",
     () => {
 
+        console.log(
+            "Invitation page loaded."
+        );
+
+
         populateInvitation();
 
+
         setupRSVP();
+
 
         setupMusic();
 
@@ -1076,6 +1245,12 @@ document.addEventListener(
             openButton.addEventListener(
                 "click",
                 openInvitation
+            );
+
+        } else {
+
+            console.error(
+                "Open invitation button not found."
             );
 
         }
